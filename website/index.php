@@ -3,7 +3,7 @@ session_start();
 date_default_timezone_set("America/Los_Angeles");
 ini_set("memory_limit","512M");
 // change the following paths if necessary
-$yii=dirname(__FILE__).'/../../framework/yii.php';
+$yii=dirname(__FILE__).'/../framework/yii.php';
 $configMain=dirname(__FILE__).'/protected/config/main.php';
 $configLocal=dirname(__FILE__).'/protected/config/local.php';
 
