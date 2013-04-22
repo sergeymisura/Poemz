@@ -13,5 +13,16 @@ class SiteController extends PageController
 	 */
 	public function actionIndex()
 	{
+		$this->render('index');
+	}
+
+	public function actionWelcome()
+	{
+		$this->render('welcome');
+	}
+
+	public function actionSubmit()
+	{
+		$this->render('submit');
 	}
 }

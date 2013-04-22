@@ -13,6 +13,8 @@ abstract class BaseController extends CController
 	 */
 	protected $request;
 
+	protected $user;
+
 	/**
 	 * ApiController constructor
 	 * 
@@ -61,6 +63,10 @@ abstract class BaseController extends CController
 	 */
 	private function verifySession()
 	{
+		if (isset($_SESSION['user']))
+		{
+			$this->user = User::model()->findByPk($_SESSION['user']);
+		}
 	}
 
 	/**

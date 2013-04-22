@@ -1,5 +1,5 @@
 
-var app = {}
+var app = {};
 
 (function($) {
 

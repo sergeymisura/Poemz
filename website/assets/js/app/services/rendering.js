@@ -10,7 +10,10 @@
 			return $new;
 		};
 
-		return {
+		var rendering = function(name, data, filters) {
+			return rendering.render(name, data,filters);
+		};
+		$.extend(rendering, {
 			render: function(name, data, filters) {
 				filters = filters || {};
 				var template = $element[0].templates[name];
@@ -44,6 +47,7 @@
 			container: function($el) {
 				return $el.hasClass('rendered') ? $el : $el.parents('.rendered');
 			}
-		}
+		});
+		return rendering;
 	});
 })(jQuery, app);

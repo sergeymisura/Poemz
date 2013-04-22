@@ -1,4 +1,20 @@
 (function() {
+	var _errorCallback = function(result) {
+		var callback = result.errorCallback();
+		return function(xhr, textStatus, errorThrown) {
+			var data = null;
+			if (xhr.getResponseHeader('Content-Type') == 'application/json') {
+				try {
+					data = $.parseJSON(xhr.responseText);
+				}
+				catch(ex) {
+					data = null;
+				}
+			}
+			return callback(xhr.status, data);
+		}
+	}
+
 	app.service('api', function($element, services) {
 		return {
 			get: function(uri, data) {
@@ -11,7 +27,7 @@
 					{
 						data: data,
 						success: result.successCallback(),
-						error: result.errorCallback()
+						error: _errorCallback(result)
 					}
 				);
 				return result;
@@ -30,7 +46,7 @@
 						dataType: 'json',
 						data: JSON.stringify(data),
 						success: result.successCallback(),
-						error: result.errorCallback()
+						error: _errorCallback(result)
 					}
 				);
 				return result;

@@ -1,3 +1,9 @@
 {
-	"GET:/" : "site/index"
+	"GET:/" : "site/index",
+	"GET:welcome" : "site/welcome",
+	"GET:submit" : "site/submit",
+	
+	"POST:api/auth/register" : "api/auth/register",
+	"GET:api/search/author" : "api/search/author",
+	"GET:api/search/poem" : "api/search/poem"
 }

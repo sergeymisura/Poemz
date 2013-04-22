@@ -49,8 +49,6 @@ class PageController extends BaseController
 		$assets = Yii::app()->baseUrl . '/assets/';
 		$clientScript = Yii::app()->getClientScript();
 
-		$clientScript->registerCssFile($assets . 'cupertino/jquery-ui-1.10.2.custom.min.css');
-
 		if (Yii::app()->params['mode'] == 'debug')
 		{
 			$clientScript->registerLinkTag('stylesheet/less', 'text/css', $assets . 'less/app.less');
@@ -66,12 +64,18 @@ class PageController extends BaseController
 			$clientScript->registerScriptFile($assets . 'js/app/services/api.js');
 			$clientScript->registerScriptFile($assets . 'js/app/services/dereferred.js');
 			$clientScript->registerScriptFile($assets . 'js/app/services/validation.js');
+			$clientScript->registerScriptFile($assets . 'js/app/controllers/navbar.js');
 		}
 		else
 		{
 			$clientScript->registerScriptFile($assets . 'js/compiled/lib.js?v=1');
 			$clientScript->registerScriptFile($assets . 'js/compiled/app.js?v=1');
 			$clientScript->registerCssFile($assets . 'css/app.css?v=1');
+		}
+
+		if ($this->user)
+		{
+			$this->setPageData('user', $this->user);
 		}
 		return true;
 	}
