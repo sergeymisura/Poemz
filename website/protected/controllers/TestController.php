@@ -52,4 +52,18 @@ Thy looks should nothing thence but sweetness tell.
    If thy sweet virtue answer not thy show!";
 		$poem->save();*/
 	}
+	
+	public function actionRecord($id)
+	{
+		$wav_path = Yii::app()->basePath . '/../assets/media/' . $id . '.wav';
+		$mp3_path = Yii::app()->basePath . '/../assets/media/' . $id . '.mp3';
+		file_put_contents(Yii::app()->basePath . '/../assets/media/' . $id . '.wav', file_get_contents('php://input'));
+		$output = array();
+		exec('normalize-audio ' . $wav_path, $output);
+		var_dump($output);
+		exec('avconv -y -i ' . $wav_path . ' ' . $mp3_path, $output);
+		var_dump($output);
+		Yii::app()->db->createCommand('delete from recital where poem_id = :id and performer_id = 3')->execute(array(':id' => $id));
+		Yii::app()->db->createCommand('insert into recital values (null, :id, 3, now())')->execute(array(':id' => $id));
+	}
 }

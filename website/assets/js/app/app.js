@@ -2,6 +2,7 @@
 var app = {};
 
 (function($) {
+	
 
 	var _controllers = {};
 	var _services = {};
@@ -58,5 +59,6 @@ var app = {};
 		$("[data-toggle='tooltip']").tooltip();
 
 		app.bindControllers($('body'));
+		
 	});
 })(jQuery);

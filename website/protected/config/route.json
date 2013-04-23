@@ -1,7 +1,9 @@
 {
+	"POST:test/record/<id>" : "test/record",
 	"GET:/" : "site/index",
 	"GET:welcome" : "site/welcome",
 	"GET:submit" : "site/submit",
+	"GET:poem/<id>" : "pages/poem",
 	
 	"POST:api/auth/register" : "api/auth/register",
 	"GET:api/search/author" : "api/search/author",

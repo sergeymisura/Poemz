@@ -16,13 +16,13 @@
 						<div class="popover-content">
 							<h5>Authors</h5>
 							<div data-template="search-author" class="search-result">
-								<a href="">${ name }</a>
+								<a href="" class="name">${ name }</a>
 							</div>
 							<hr/>
 							<h5>Poems</h5>
 							<div data-template="search-poem" class="search-result">
-								<div>${weight} <a href="">${ title }</a> by <a href="">${ author_name }</a></div>
-								<div class="first-line"><a href="">${ first_line }</a></div>
+								<div><a class="title" href="<?= $this->createUrl('/poem') ?>/${ id }">${ title }</a> by <a class="name" href="">${ author_name }</a></div>
+								<div><a href="<?= $this->createUrl('/poem') ?>/${ id }" class="first-line">"${ first_line }"</a></div>
 							</div>
 						</div>
 					</div>

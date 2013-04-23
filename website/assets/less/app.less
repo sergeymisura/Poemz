@@ -1,5 +1,11 @@
 
 @import "bootstrap/bootstrap.less";
+@import "navbar.less";
+@import "poem.less";
+
+body {
+	color: @gray;
+}
 
 input.invalid, select.invalid, textarea.invalid {
 	border-color: #ee5f5b;
@@ -7,27 +13,6 @@ input.invalid, select.invalid, textarea.invalid {
 		border-color: darken(#ee5f5b, 10%);
 		@shadow: 0 0 6px lighten(#ee5f5b, 20%);
 		.box-shadow(@shadow);
-	}
-}
-
-.popover-login {
-	top: 40px;
-	left: -40px;
-	width: 246px;
-
-	.errors {
-		margin-bottom: 5px;
-		margin-top: -5px;
-		display: none;
-	}
-}
-
-.popover-search {
-	top: 30px;
-	width: 600px;
-	
-	.arrow {
-		left: 10% !important;
 	}
 }
 
@@ -39,26 +24,6 @@ input.invalid, select.invalid, textarea.invalid {
 	background-color: white;
 }
 
-.modal-footer {
-	.progress {
-		width: 300px;
-		float: left;
-		margin-top: 5px;
-		margin-bottom: 0px;
-	}
-}
-
-.dropdown-button {
-	display: inline-block;
-}
-
-h4 {
-	.label {
-		position: relative;
-		top: -4px;
-	}
-}
-
 .form-horizontal {
 	.buttons-row {
 		text-align: center;
@@ -66,21 +31,5 @@ h4 {
 	}
 	.errors {
 		margin-top: 5px;
-	}
-}
-
-.nav-tabs.nav-stacked {
-	.icon-chevron-right {
-		float: right;
-		margin-top: 12px;
-		margin-right: 7px;
-		opacity: 0.33;
-		display: none;
-	}
-	
-	.active {
-		.icon-chevron-right {
-			display: inline-block;
-		}
 	}
 }

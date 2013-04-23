@@ -1,4 +1,6 @@
 /.settings
 /.project
 /.buildpath
-protected/runtime/
+/website/protected/runtime/
+/website/assets/media/
+/website/assets/test-audio.mp3

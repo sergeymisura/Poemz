@@ -52,11 +52,16 @@ class PageController extends BaseController
 		if (Yii::app()->params['mode'] == 'debug')
 		{
 			$clientScript->registerLinkTag('stylesheet/less', 'text/css', $assets . 'less/app.less');
+			$clientScript->registerCssFile($assets . 'mediaelement/mediaelementplayer.min.css');
 
 			$clientScript->registerScriptFile($assets . 'js/lib/jquery/jquery-1.9.1.js');
 			$clientScript->registerScriptFile($assets . 'js/lib/jquery/jquery.tmpl.min.js');
 			$clientScript->registerScriptFile($assets . 'js/lib/less/less-1.3.1.min.js');
 			$clientScript->registerScriptFile($assets . 'js/lib/bootstrap/bootstrap.min.js');
+			$clientScript->registerScriptFile($assets . 'mediaelement/mediaelement-and-player.min.js');
+				
+			$clientScript->registerScriptFile($assets . 'js/lib/swfobject.js');
+			$clientScript->registerScriptFile($assets . 'js/lib/recorder.js');
 
 			$clientScript->registerScriptFile($assets . 'js/app/app.js?v1.2');
 			$clientScript->registerScriptFile($assets . 'js/app/services/rendering.js');
@@ -65,6 +70,7 @@ class PageController extends BaseController
 			$clientScript->registerScriptFile($assets . 'js/app/services/dereferred.js');
 			$clientScript->registerScriptFile($assets . 'js/app/services/validation.js');
 			$clientScript->registerScriptFile($assets . 'js/app/controllers/navbar.js');
+			$clientScript->registerScriptFile($assets . 'js/app/controllers/poem.js');
 		}
 		else
 		{

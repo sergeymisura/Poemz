@@ -5,8 +5,8 @@
 		return {
 			init: function() {
 				services.bind({
-					'.login': {
-						click: 'displayLoginBox'
+					'.login-box': {
+						click: 'displayLoginBox',
 					},
 					'.switch-to-create': {
 						click: 'switchToCreateAccount'
@@ -38,9 +38,14 @@
 			},
 			
 			displayLoginBox: function() {
-				$element.find('.popover-login').fadeIn();
+				if ($element.find('.popover-login').is(':visible')) {
+					$element.find('.popover-login').fadeOut();
+				}
+				else {
+					$element.find('.popover-login').fadeIn();
+				}
 			},
-			
+						
 			switchToCreateAccount: function() {
 				$element.find('.log-in-controls').hide();
 				$element.find('.create-account-controls').fadeIn();
@@ -130,7 +135,7 @@
 				}
 			},
 			
-			closeSearch: function() {
+			closeSearch: function() {return;
 				setTimeout(function() { $element.find('.popover-search').hide() }, 500);
 			}
 		}
