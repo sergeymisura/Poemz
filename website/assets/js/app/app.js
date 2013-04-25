@@ -20,6 +20,14 @@ var app = {};
 			_controllers[name] = controller;
 		},
 
+		get: function(selector) {
+			var $el = $('body').find(selector);
+			if ($el.length) {
+				return $el.get(0).controller;
+			}
+			return null;
+		},
+
 		service: function(name, service) {
 			_services[name] = service;
 		},
@@ -59,6 +67,6 @@ var app = {};
 		$("[data-toggle='tooltip']").tooltip();
 
 		app.bindControllers($('body'));
-		
+		$('a[href="#"]').attr('href', 'javascript:void(0);');
 	});
 })(jQuery);

@@ -56,7 +56,7 @@ class PageController extends BaseController
 
 			$clientScript->registerScriptFile($assets . 'js/lib/jquery/jquery-1.9.1.js');
 			$clientScript->registerScriptFile($assets . 'js/lib/jquery/jquery.tmpl.min.js');
-			$clientScript->registerScriptFile($assets . 'js/lib/less/less-1.3.1.min.js');
+			$clientScript->registerScriptFile($assets . 'js/lib/less/less-1.3.3.min.js');
 			$clientScript->registerScriptFile($assets . 'js/lib/bootstrap/bootstrap.min.js');
 			$clientScript->registerScriptFile($assets . 'mediaelement/mediaelement-and-player.min.js');
 				

@@ -2,10 +2,12 @@
 
 	app.controller('navbar', function($element, services) {
 		var _searchProgress = 0;
+		var _loginCallback = $.noop;
+
 		return {
 			init: function() {
 				services.bind({
-					'.login-box': {
+					'.login': {
 						click: 'displayLoginBox',
 					},
 					'.switch-to-create': {
@@ -26,6 +28,10 @@
 						blur: 'closeSearch'
 					}
 				});
+				this.renderUserBox();
+			},
+
+			renderUserBox: function() {
 				if (app.data.user) {
 					services.rendering('user-box', app.data.user);
 					$element.find('.login-box').hide();
@@ -37,12 +43,23 @@
 				}
 			},
 			
-			displayLoginBox: function() {
+			displayLoginBox: function(callback) {
+				if (typeof callback == 'function') {
+					_loginCallback = callback;
+				}
+				else {
+					_loginCallback = $.noop;
+				}
+				if (app.data.user) {
+					_loginCallback(app.data.user);
+					return;
+				}
 				if ($element.find('.popover-login').is(':visible')) {
 					$element.find('.popover-login').fadeOut();
 				}
 				else {
 					$element.find('.popover-login').fadeIn();
+					$element.find('.auth-email').focus();
 				}
 			},
 						
@@ -65,9 +82,14 @@
 							email: $element.find('.auth-email').val(),
 							password: $element.find('.auth-password').val()
 						}
-					).success(function(data) {
-						document.location = document.location.href;
-					}).error(function(status, data) {
+					).success(
+						function(data) {
+							app.data.user = data.user;
+							this.renderUserBox();
+							_loginCallback();
+						},
+						this
+					).error(function(status, data) {
 						$element.find('.login-error').fadeIn();
 					});
 				}
@@ -90,9 +112,14 @@
 							password: password,
 							username: $element.find('.auth-username').val()
 						}
-					).success(function() {
-						document.location = app.config.baseUrl + '/welcome';
-					}).error(function(status, data) {
+					).success(
+						function() {
+							app.data.user = data.user;
+							this.renderUserBox();
+							_loginCallback();
+						},
+						this
+					).error(function(status, data) {
 						if (status == 401) {
 							services.validation.displayError(
 								$element.find(data.error == 'ERR_EMAIL_EXISTS' ? '.auth-email' : '.auth-username'),

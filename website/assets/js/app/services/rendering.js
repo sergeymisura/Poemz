@@ -5,6 +5,7 @@
 			$new.data('data', data);
 			$new.data('template', template);
 			$new.data('filters', filters);
+			$new.find('a[href="#"]').attr('href', 'javascript:void(0);');
 			app.bindControllers($new);
 			app.bindTemplates($new, $element);
 			return $new;

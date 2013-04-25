@@ -7,9 +7,6 @@
 					'.record-yours': {
 						click: 'recordPoem'
 					},
-					'.stop-recording': {
-						click: 'stopRecording'
-					}
 				});
 				services.rendering('poem', app.data.poem, {
 					audioUrl: function($index) {
@@ -22,17 +19,11 @@
 			},
 			
 			recordPoem: function() {
-				Wami.setup({
-					id: 'poem-page-record',
-					swfUrl: app.config.baseUrl + '/assets/Wami.swf',
-					onReady: function() {
-						Wami.startRecording(app.config.baseUrl + '/test/record/' + app.data.poem.id);
-					}
-				});
+				app.get('.navbar').displayLoginBox($.proxy(this.displayRecorder, this));
 			},
 			
-			stopRecording: function() {
-				Wami.stopRecording();
+			displayRecorder: function() {
+				$element.find('.popover-recorder').fadeIn();
 			}
 		};
 	});
