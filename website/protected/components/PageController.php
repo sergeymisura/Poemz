@@ -63,12 +63,12 @@ class PageController extends BaseController
 			$clientScript->registerScriptFile($assets . 'js/lib/swfobject.js');
 			$clientScript->registerScriptFile($assets . 'js/lib/recorder.js');
 
-			$clientScript->registerScriptFile($assets . 'js/app/app.js?v1.2');
-			$clientScript->registerScriptFile($assets . 'js/app/services/rendering.js');
-			$clientScript->registerScriptFile($assets . 'js/app/services/bind.js');
-			$clientScript->registerScriptFile($assets . 'js/app/services/api.js');
-			$clientScript->registerScriptFile($assets . 'js/app/services/dereferred.js');
-			$clientScript->registerScriptFile($assets . 'js/app/services/validation.js');
+			$clientScript->registerScriptFile($assets . 'js/js-tools/app.js?v1.2');
+			$clientScript->registerScriptFile($assets . 'js/js-tools/services/rendering.js');
+			$clientScript->registerScriptFile($assets . 'js/js-tools/services/bind.js');
+			$clientScript->registerScriptFile($assets . 'js/js-tools/services/api.js');
+			$clientScript->registerScriptFile($assets . 'js/js-tools/services/dereferred.js');
+			$clientScript->registerScriptFile($assets . 'js/js-tools/services/form.js');
 			$clientScript->registerScriptFile($assets . 'js/app/controllers/navbar.js');
 			$clientScript->registerScriptFile($assets . 'js/app/controllers/poem.js');
 		}

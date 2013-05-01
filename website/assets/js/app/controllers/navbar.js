@@ -75,7 +75,7 @@
 
 			login: function() {
 				$element.find('.login-error').hide();
-				if (services.validation($element.find('.popover-login'))) {
+				if (services.form('.popover-login').validate()) {
 					services.api.post(
 						'auth/login',
 						{
@@ -97,11 +97,11 @@
 
 			register: function() {
 				$element.find('.create-error').hide();
-				if (services.validation($element.find('.popover-login'))) {
+				if (services.form('.popover-login').validate()) {
 					var password = $element.find('.auth-password').val();
 					var confirmation = $element.find('.auth-confirm').val();
 					if (password != confirmation) {
-						services.validation.displayError($element.find('.auth-confirm'), 'Please re-type confirmation.');
+						services.form('.popover-login').displayError($element.find('.auth-confirm'), 'Please re-type confirmation.');
 						return;
 					}
 
@@ -121,7 +121,7 @@
 						this
 					).error(function(status, data) {
 						if (status == 401) {
-							services.validation.displayError(
+							services.form('.popover-login').displayError(
 								$element.find(data.error == 'ERR_EMAIL_EXISTS' ? '.auth-email' : '.auth-username'),
 								data.message
 							);
