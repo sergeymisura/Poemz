@@ -1,0 +1,3 @@
+[submodule "website/assets/js/js-tools"]
+	path = website/assets/js/js-tools
+	url = ../js-tools.git
