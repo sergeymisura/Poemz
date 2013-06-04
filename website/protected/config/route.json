@@ -7,5 +7,8 @@
 	
 	"POST:api/auth/register" : "api/auth/register",
 	"GET:api/search/author" : "api/search/author",
-	"GET:api/search/poem" : "api/search/poem"
+	"GET:api/search/poem" : "api/search/poem",
+	"POST:api/recording" : "api/recording/save",
+	"GET:api/recording/ready" : "api/recording/previewReady",
+	"POST:api/recording/submit/<poem>" : "api/recording/submit"
 }

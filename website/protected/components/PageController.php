@@ -69,6 +69,9 @@ class PageController extends BaseController
 			$clientScript->registerScriptFile($assets . 'js/js-tools/services/api.js');
 			$clientScript->registerScriptFile($assets . 'js/js-tools/services/dereferred.js');
 			$clientScript->registerScriptFile($assets . 'js/js-tools/services/form.js');
+			$clientScript->registerScriptFile($assets . 'js/js-tools/transformations/defaults.js');
+			$clientScript->registerScriptFile($assets . 'js/js-tools/transformations/templates.js');
+			$clientScript->registerScriptFile($assets . 'js/js-tools/transformations/tiny.js');
 			$clientScript->registerScriptFile($assets . 'js/app/controllers/navbar.js');
 			$clientScript->registerScriptFile($assets . 'js/app/controllers/poem.js');
 		}

@@ -42,7 +42,7 @@
 				<ul class="nav pull-right login-box hide">
 					<li>
 						<a href="#" class="login">Log in or create account</a>
-						<div class="popover bottom popover-login">
+						<div class="popover bottom popover-login" data-close="auto">
 							<div class="arrow"></div>
 							<div class="popover-content">
 								<div class="validation-group">
