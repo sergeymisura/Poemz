@@ -37,7 +37,8 @@ class Poem extends Model
 	{
 		return array(
 			'author' => array(self::BELONGS_TO, 'Author', 'author_id'),
-			'recitals' => array(self::HAS_MANY, 'Recital', 'poem_id', 'with' => 'performer')
+			'recitals' => array(self::HAS_MANY, 'Recital', 'poem_id', 'with' => 'performer'),
+			'latest' => array(self::HAS_MANY, 'Recital', 'poem_id', 'with' => 'performer', 'condition' => 'latest = 1', 'limit' => 20)
 		);
 	}
 

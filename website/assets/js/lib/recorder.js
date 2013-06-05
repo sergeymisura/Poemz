@@ -50,6 +50,11 @@ Wami.nameCallback = function(cb, cleanup) {
 //
 // Wami.startListening()
 //
+Wami.reset = function() {
+	Wami.startRecording = null;
+	Wami._callbacks = {};
+}
+
 Wami.setup = function(options) {
 	if (Wami.startRecording) {
 		// Wami's already defined.

@@ -68,6 +68,7 @@
 			},
 
 			startCountdown: function() {
+				$element.find('.wami-placeholder object').attr('height', '10');
 				_countdown = 5;
 				this.displayRecordingStep('step2');
 				this.continueCountdown();
@@ -88,6 +89,7 @@
 
 			stopCountdown: function() {
 				_countdown = 0;
+				this.resetRecorder();
 				$element.find('.popover-recorder').fadeOut();
 			},
 
@@ -113,7 +115,7 @@
 			
 			resetRecorder: function() {
 				$element.find('.popover-recorder .wami-placeholder').html('');
-				Wami.startRecording = null; // Ugly hack to make it re-initialize itself next time
+				Wami.reset();
 			},
 			
 			cancelRecording: function() {

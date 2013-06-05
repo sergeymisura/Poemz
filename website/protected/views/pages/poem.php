@@ -43,7 +43,7 @@
 				</div>
 			</div>
 			<h4>Poem recitations</h4>
-			{{each recitals }}
+			{{each latest }}
 			<div class="recital">
 				<div class="pull-left index">${ $index + 1 }</div>
 				<div class="pull-left">
