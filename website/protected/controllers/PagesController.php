@@ -15,7 +15,7 @@ class PagesController extends PageController
 	{
 		$poem = Poem::model()->findByPk($id);
 		$poem->getRelated('author');
-		$poem->getRelated('recitals');
+		$poem->getRelated('latest');
 		$this->setPageData('poem', $poem);
 		$this->render('poem');
 	}
