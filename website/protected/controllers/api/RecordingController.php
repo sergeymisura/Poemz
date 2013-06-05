@@ -56,6 +56,14 @@ class RecordingController extends ApiController
 			$mp3_path = Yii::app()->basePath . '/../assets/media/' . $this->user->id . '.preview.mp3';
 			if (file_exists($mp3_path))
 			{
+				$recital = Recital::model()->updateAll(
+					array('latest' => 0),
+					'poem_id = :poem and performer_id = :performer and latest = 1',
+					array(
+						':poem' => $poem,
+						':performer' => $this->user->id
+					)
+				);
 				$recital = new Recital();
 				$recital->poem_id = $poem;
 				$recital->performer_id = $this->user->id;
