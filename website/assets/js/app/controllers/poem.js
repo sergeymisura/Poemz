@@ -154,7 +154,7 @@
 			submitRecording: function() {
 				services.api.post('recording/submit/' + app.data.poem.id)
 					.success(function(data) {
-						app.data.poem.recitals.push(data.recital);
+						app.data.poem.latest.push(data.recital);
 						this.renderPoem();
 					}, this)
 			}

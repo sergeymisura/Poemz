@@ -74,6 +74,7 @@ class PageController extends BaseController
 			$clientScript->registerScriptFile($assets . 'js/js-tools/transformations/tiny.js');
 			$clientScript->registerScriptFile($assets . 'js/app/controllers/navbar.js');
 			$clientScript->registerScriptFile($assets . 'js/app/controllers/poem.js');
+			$clientScript->registerScriptFile($assets . 'js/app/controllers/submit-poem.js');
 		}
 		else
 		{

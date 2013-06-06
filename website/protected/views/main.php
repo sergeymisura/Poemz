@@ -11,9 +11,12 @@
 				<a href="<?= $this->createUrl('/') ?>" class="brand span2">Poemz.org</a>
 				<form class="navbar-search pull-left">
 					<input type="text" class="search-query input-xlarge" placeholder="Search for a poem" />
-					<div class="popover bottom popover-search">
+					<div class="popover bottom popover-search" data-close="auto">
 						<div class="arrow"></div>
 						<div class="popover-content">
+							<div class="alert alert-info">
+								Can't find your favorite poem? <a href="<?= $this->createUrl('/submit') ?>">Submit it</a> and somebody will read it!
+							</div>
 							<h5>Authors</h5>
 							<div data-template="search-author" class="search-result">
 								<a href="" class="name">${ name }</a>

@@ -4,7 +4,7 @@
 			<div class="title">${ title }</div>
 			<div class="author">by <a href="">${ author.name }</a></div>
 			<div class="poem-text"><pre>${ text }</pre></div>
-			<div class="record"><button class="btn record-yours">Create your own version</button></div>
+			<div class="record"><button class="btn btn-large btn-primary record-yours">Create your own version</button></div>
 		</div>
 		<div class="span5">
 			<div class="popover popover-recorder">
