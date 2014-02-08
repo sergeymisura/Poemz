@@ -17,11 +17,6 @@ class BaseController extends CController
 	public $session = null;
 
 	/**
-	 * @var  string  Name of the action that should be enabled in order for the user to access the controller's actions.
-	 */
-	protected $access_action = null;
-
-	/**
 	 * @param CAction $action
 	 *
 	 * @return bool
@@ -36,6 +31,7 @@ class BaseController extends CController
 
 		$this->request = Yii::app()->request;
 
+		/*
 		if (isset($this->request->cookies['lv_session_id']))
 		{
 			$this->session = UserSession::model()->findByPk($this->request->cookies['lv_session_id']->value);
@@ -50,6 +46,8 @@ class BaseController extends CController
 			$this->authFailed();
 		}
 
+
+		 */
 		return parent::beforeAction($action);
 	}
 }

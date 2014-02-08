@@ -5,85 +5,44 @@
 
 		"lib": {
 			"files": [
-				"js/lib/jquery/jquery-1.10.2.min.js",
+				"js/lib/jquery/jquery-1.11.0.min.js",
 				"js/lib/jquery/jquery.tmpl.min.js",
-				"js/lib/jquery/jquery-ui-1.10.3.custom.min.js",
-				"js/lib/jquery/plugins/jquery.fileupload.js",
-				"js/lib/jquery/plugins/jquery.iframe-transport.js",
-				"js/lib/bootstrap/bootstrap.min.js",
-				"js/lib/md5.js",
-				"js/lib/redactor/redactor.js"
+				"bootstrap/js/bootstrap.min.js"
 			],
 			"level": "WHITESPACE_ONLY"
 		},
 
 		"js-tools": {
-			"path": "common:assets",
-			"url": "common",
 			"files": [
-				"js-tools/app.js",
-				"js-tools/services/api.js",
-				"js-tools/services/bind.js",
-				"js-tools/services/dereferred.js",
-				"js-tools/services/rendering.js",
-				"js-tools/services/form.js",
-				"js-tools/transformations/templates.js",
-				"js-tools/transformations/defaults.js",
-				"js-tools/transformations/tiny.js"
+				"js/js-tools/app.js",
+				"js/js-tools/services/api.js",
+				"js/js-tools/services/bind.js",
+				"js/js-tools/services/dereferred.js",
+				"js/js-tools/services/rendering.js",
+				"js/js-tools/services/form.js",
+				"js/js-tools/services/hash.js",
+				"js/js-tools/transformations/templates.js",
+				"js/js-tools/transformations/defaults.js",
+				"js/js-tools/transformations/tiny.js",
+				"js/js-tools/helpers/mobile.js"
 			],
 			"level": "WHITESPACE_ONLY"
 		},
 
 		"app": {
 			"files": [
-				"js/app/index.js",
-				"js/app/navbar.js",
-				"js/app/install.js",
-				"js/app/auth/login.js",
-				"js/app/auth/registration.js",
-				"js/app/auth/reset-password.js",
-				"js/app/auth/activate-password.js",
-				"js/app/accounts/users.js",
-				"js/app/accounts/user.js",
-				"js/app/accounts/roles.js",
-				"js/app/accounts/role.js",
-				"js/app/accounts/edit.js",
-				"js/app/accounts/password.js",
-				"js/app/message/inbox.js",
-				"js/app/message/create.js",
-				"js/app/message/view.js",
-				"js/app/categories/list.js",
-				"js/app/courses/list.js",
-				"js/app/courses/view.js",
-				"js/app/courses/view/syllabus.js",
-				"js/app/courses/view/students.js",
-				"js/app/courses/view/units.js",
-				"js/app/courses/view/settings.js",
-				"js/app/courses/view/documents.js",
-				"js/app/discussions/view/inappropriate.js",
-				"js/app/units/view.js",
-				"js/app/activities/view.js",
-				"js/app/activities/article.js",
-				"js/app/activities/quiz.js",
-				"js/app/activities/video.js",
-				"js/app/quiz/variant.js",
-				"js/app/quiz/problem.js",
-				"js/app/widgets/user-selector.js",
-				"js/app/widgets/sorting-widget.js",
-				"js/app/widgets/settings-field.js",
-				"js/app/grades/grades-view.js"
+				"js/app/index.js"
 			],
 			"level": "WHITESPACE_ONLY"
 		}
 
 	},
 
-	"css": {
-		"files": [
-			"css/bootstrap.min.css",
-			"css/jquery.fileupload.css",
-			"css/redactor.css",
-			"css/application.css"
-		]
+	"less": {
+		"application": {
+			"files": [
+				"less/application.less"
+			]
+		}
 	}
 }

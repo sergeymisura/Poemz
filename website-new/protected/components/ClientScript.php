@@ -44,8 +44,23 @@ class ClientScript extends CClientScript
 					$this->registerScriptFile($url . $file);
 				}
 			}
-			foreach ($resources['css']['files'] as $file) {
-				$this->registerCssFile($assets . $file);
+			if (isset($resources['css']))
+			{
+				foreach ($resources['css']['files'] as $file)
+				{
+					$this->registerCssFile($assets . $file);
+				}
+			}
+			if (isset($resources['less']))
+			{
+				$this->registerScriptFile($assets . 'js/lib/less-1.6.2.min.js');
+				foreach ($resources['less'] as $name => $options)
+				{
+					foreach ($options['files'] as $file)
+					{
+						$this->registerLinkTag('stylesheet/less', 'text/css', $assets . $file);
+					}
+				}
 			}
 		}
 		else
