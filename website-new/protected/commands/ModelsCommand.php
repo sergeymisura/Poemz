@@ -15,7 +15,7 @@ class ModelsCommand extends CConsoleCommand
 		$modelClassTemplate = file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'models' . DIRECTORY_SEPARATOR . 'class_template.txt');
 		$serializerClassTemplate = file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'models' . DIRECTORY_SEPARATOR . 'serializer_class_template.txt');
 
-		$modelOutputPath = Yii::getPathOfAlias('common') . DIRECTORY_SEPARATOR . 'protected' . DIRECTORY_SEPARATOR . 'models' . DIRECTORY_SEPARATOR;
+		$modelOutputPath = Yii::getPathOfAlias('application') . DIRECTORY_SEPARATOR . 'models' . DIRECTORY_SEPARATOR;
 		$baseOutputPath = $modelOutputPath . 'base' . DIRECTORY_SEPARATOR;
 		$serializerOutputPath = $modelOutputPath . 'serialization' . DIRECTORY_SEPARATOR;
 
