@@ -1,0 +1,10 @@
+<?php
+/**
+ * Base class for {name} model
+ * 
+ * @package Regent.Common.Models
+ *
+ */
+class {name} extends {name}Base
+{
+}
