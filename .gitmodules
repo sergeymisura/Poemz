@@ -1,3 +1,6 @@
 [submodule "website/assets/js/js-tools"]
 	path = website/assets/js/js-tools
 	url = ../js-tools.git
+[submodule "website-new/assets/js/js-tools"]
+	path = website-new/assets/js/js-tools
+	url = git@github.com:sergeymisura/js-tools.git
