@@ -4,4 +4,56 @@
     margin-top: 0;
   }
 
+  .poem-info {
+    height: 120px;
+    overflow-y: hidden;
+
+    .title {
+      margin-bottom: 0;
+    }
+
+    .first-line {
+      margin-top: 10px;
+      font-size: 12px;
+      font-family: arial;
+      font-style: italic;
+    }
+  }
+
+  .read-by {
+    margin: 10px 0;
+    padding: 5px 0;
+    border-top: dashed 1px #c8c8c8;
+    border-bottom: dashed 1px #c8c8c8;
+  }
+
+  .record-own {
+    width: 100%;
+  }
+
+  .more {
+    border-top: solid 1px @brand-primary;
+
+    span {
+      cursor: pointer;
+      float: right;
+      background: @brand-primary url(../img/icon_more.png) no-repeat 50px 6px;
+      font: 11px arial bold;
+      padding: 2px 25px 3px 15px;
+      color: white;
+
+      &:hover {
+        background-color: darken(@brand-primary, 8%);
+      }
+    }
+  }
+
+  .record-now {
+    padding-right: 45px;
+    background: @brand-primary url(../img/icon_record_now.png) no-repeat 277px 8px;
+
+    &:hover, &:active {
+      background-color: darken(@brand-primary, 8%);
+    }
+  }
 }
