@@ -1,0 +1,67 @@
+.navbar {
+  background-image: url(../img/header_bg_gradient.png);
+  background-repeat: repeat-x;
+  height: 80px;
+  border: none;
+  padding-top: 15px;
+
+  .navbar-brand {
+    margin-top: -15px;
+
+    .navbar-logo {
+      padding-top: 3px;
+      width: 180px;
+      height: 47px;
+    }
+  }
+
+  input[type=search] {
+    border-radius: 20px;
+    border: solid 2px @brand-primary;
+    padding-left: 40px;
+    background: white url(../img/icon_search.png) no-repeat 10px 5px;
+    height: 40px;
+    margin-top: -3px;
+    width: 500px;
+  }
+}
+
+::-webkit-input-placeholder {
+  font-family: Arial;
+  font-style: italic;
+}
+:-moz-placeholder {
+  font-family: Arial;
+  font-style: italic;
+}
+::-moz-placeholder {
+  font-family: Arial;
+  font-style: italic;
+}
+:-ms-input-placeholder {
+  font-family: Arial;
+  font-style: italic;
+}
+
+.nav-tabs {
+  border-color: @brand-primary;
+
+  > li {
+
+    > a {
+      &:hover, &:focus {
+        background-color: @brand-primary;
+        border-color: @brand-primary;
+        color: white;
+      }
+    }
+
+    &.active > a {
+      &, &:hover, &:focus {
+        color: white;
+        background-color: @brand-primary;
+        border-color: @brand-primary;
+      }
+    }
+  }
+}
