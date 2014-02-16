@@ -7,6 +7,13 @@ return array(
 
 	'basePath' => __DIR__ . DIRECTORY_SEPARATOR . '..',
 
+	'import' => array(
+		'application.components.*',
+		'application.models.*',
+		'application.models.base.*',
+		'application.models.serialization.*'
+	),
+
 	'components' => array(
 		'format' => array(
 			'class' => 'Formatter'

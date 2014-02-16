@@ -10,10 +10,6 @@ return CMap::mergeArray(
 			'name' => 'Regent Online Classes Frontend',
 			'runtimePath' => '/tmp',
 
-			'import' => array(
-				'application.components.*'
-			),
-
 			'preload' => array('log'),
 
 			'components' => array(

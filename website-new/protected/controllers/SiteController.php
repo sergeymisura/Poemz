@@ -15,4 +15,13 @@ class SiteController extends PageController
 	{
 		$this->render('index');
 	}
+
+	public function actionLogout()
+	{
+		if ($this->session != null)
+		{
+			$this->session->delete();
+		}
+		$this->redirect($this->createUrl('site/index'));
+	}
 }

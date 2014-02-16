@@ -31,23 +31,11 @@ class BaseController extends CController
 
 		$this->request = Yii::app()->request;
 
-		/*
-		if (isset($this->request->cookies['lv_session_id']))
+		if (isset($this->request->cookies['poemz_session_id']))
 		{
-			$this->session = UserSession::model()->findByPk($this->request->cookies['lv_session_id']->value);
-			if ($this->session != null)
-			{
-				$this->session->renew();
-			}
+			$this->session = UserSession::getSession($this->request->cookies['poemz_session_id']->value);
 		}
 
-		if ($this->session == null && $this->access_action != null)
-		{
-			$this->authFailed();
-		}
-
-
-		 */
 		return parent::beforeAction($action);
 	}
 }

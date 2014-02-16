@@ -1,3 +1,7 @@
 {
-	"GET:" : "site/index"
+	"GET:/" : "site/index",
+	"GET:logout" : "site/logout",
+
+	"POST:api/auth": "api/authApi/db",
+	"POST:api/auth/facebook": "api/authApi/facebook"
 }

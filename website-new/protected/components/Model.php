@@ -9,17 +9,17 @@ abstract class Model extends CActiveRecord implements ISerializable
 	/**
 	 * Returns the current date in mysql-compatible format (YYYY-MM-DD)
 	 *
-	 * @param   int  $time  Unix timestamp
+	 * @param   int  $value  Unix timestamp
 	 *
 	 * @return  string  Date in YYYY-MM-DD format
 	 */
-	public static function getDbDate($time = null)
+	public static function getDbDate($value = null, $include_time = false)
 	{
-		if ($time === null)
+		if ($value === null)
 		{
-			$time = time();
+			$value = time();
 		}
-		return date('Y-m-d', $time);
+		return date('Y-m-d' . ($include_time ? ' H:i:s' : ''), $value);
 	}
 
 	abstract public function getSerializer();
