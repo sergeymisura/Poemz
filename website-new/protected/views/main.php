@@ -58,7 +58,7 @@
 		</div>
 	</div>
 
-	<div class="navbar navbar-default">
+	<div class="navbar navbar-default" data-controller="navbar">
 		<div class="container">
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -83,9 +83,9 @@
 						<span class="small">(<a href="<?= $this->createUrl('site/logout') ?>">not you?</a>)</span>
 					</p>
 				<? endif; ?>
-				<form class="navbar-form navbar-right">
+				<form class="navbar-form text-center">
 					<div class="form-group">
-						<input type="search" class="form-control" placeholder="Find your favorite poem" />
+						<input type="search" class="form-control search-field" placeholder="Find your favorite poem" />
 					</div>
 				</form>
 			</div>

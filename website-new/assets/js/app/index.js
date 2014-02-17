@@ -53,4 +53,25 @@
 		};
 	});
 
+	app.controller('navbar', function($element, services) {
+		return {
+			init: function() {
+				services.bind({
+					'.search-field': {
+						'focus': this.searchFocus,
+						'blur': this.searchBlur
+					}
+				});
+			},
+
+			searchFocus: function($source) {
+				$source.animate({ width: '500px' });
+			},
+
+			searchBlur: function($source) {
+				$source.animate({ width: '220px' });
+			}
+		};
+	});
+
 })(jQuery, app);
