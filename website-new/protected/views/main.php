@@ -24,6 +24,9 @@
 					<div class="row">
 						<div class="col-sm-6">
 							<form data-controller="login-form">
+								<div class="alert alert-danger hide-light login-error">
+									Please try again...
+								</div>
 								<div class="form-group">
 									<input type="text" name="email" class="form-control" placeholder="Email" data-required="email" />
 									<div class="errors"></div>

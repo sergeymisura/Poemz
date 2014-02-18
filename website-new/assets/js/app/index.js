@@ -37,6 +37,7 @@
 			},
 
 			login: function() {
+				$element.find('.login-error').hide();
 				var form = services.form($element);
 				if (form.validate()) {
 					services.api.post(
@@ -46,8 +47,17 @@
 						function(response) {
 							$.cookie('poemz_session_id', response.data.session.id);
 							document.location.reload();
-						}
-					);
+						},
+						this
+					).error(
+						function(code) {
+							if (code == 403) {
+								$element.find('.login-error').fadeIn();
+								return true;
+							}
+						},
+						this
+					)
 				}
 			}
 		};
