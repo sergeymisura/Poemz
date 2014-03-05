@@ -12,20 +12,31 @@
 		fjs.parentNode.insertBefore(js, fjs);
 	}(document, 'script', 'facebook-jssdk'));</script>
 
-	<div class="modal fade" id="modal-sign-in">
+	<div class="modal fade" id="modal-sign-in" data-controller="login-form">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-					<h4 class="modal-title">Sign In</h4>
+					<h4 class="modal-title sign-in-only">Sign In</h4>
+					<h4 class="modal-title create-account-only">Create Account</h4>
 				</div>
 				<div class="modal-body">
-					<h4>Please enter your email and password or use your Facebook account</h4>
+					<h4 class="sign-in-only">Please enter your email and password or use your Facebook account</h4>
+					<h4 class="create-account-only">Please fill out the form below or simply use your Facebook account</h4>
 					<div class="row">
 						<div class="col-sm-6">
-							<form data-controller="login-form">
+							<form>
 								<div class="alert alert-danger hide-light login-error">
 									Please try again...
+								</div>
+								<div class="checkbox">
+									<label>
+										<input type="checkbox" class="have-account" /> I already have an account
+									</label>
+								</div>
+								<div class="form-group create-account-only">
+									<input type="text" name="username" class="form-control" placeholder="Your 'stage name'" data-required="value" />
+									<div class="errors"></div>
 								</div>
 								<div class="form-group">
 									<input type="text" name="email" class="form-control" placeholder="Email" data-required="email" />
@@ -35,9 +46,18 @@
 									<input type="password" name="password" class="form-control" placeholder="Password" data-required="value" />
 									<div class="errors"></div>
 								</div>
-								<button type="button" class="btn btn-primary">Log in</button>
-								&nbsp;&nbsp;&nbsp;
-								<a href="#">I forgot my password...</a>
+								<div class="form-group create-account-only">
+									<input type="password" name="confirmation" class="form-control" placeholder="Retype your password" data-required="value" />
+									<div class="errors"></div>
+								</div>
+								<div class="sign-in-only">
+									<button type="button" class="btn btn-primary login-button">Log in</button>
+									&nbsp;&nbsp;&nbsp;
+									<a href="#">I forgot my password...</a>
+								</div>
+								<div class="create-account-only">
+									<button type="button" class="btn btn-primary create-account-button">Create account</button>
+								</div>
 							</form>
 						</div>
 						<div class="col-sm-6">
@@ -53,9 +73,6 @@
 							</div>
 						</div>
 					</div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 				</div>
 			</div>
 		</div>
@@ -77,8 +94,8 @@
 			<div class="collapse navbar-collapse">
 				<? if ($this->session == null): ?>
 					<form class="navbar-form navbar-right">
-						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-sign-in">Sign in</button>
-						<a href="#">or create account</a>
+						<button type="button" class="btn btn-primary sign-in" data-toggle="modal" data-target="#modal-sign-in">Sign in</button>
+						<a href="#" class="create-account" data-toggle="modal" data-target="#modal-sign-in">or create account</a>
 					</form>
 				<? else: ?>
 					<p class="navbar-text navbar-right">

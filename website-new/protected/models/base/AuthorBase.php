@@ -7,9 +7,11 @@
  *
  * @property  integer id Database column
  * @property  string  name Database column
- * @property  integer submitted_by Database column
- * @property  User submitted_by Relation
- * @property  AuthorFulltext[] author_fulltexts Relation
+ * @property  integer submitter_id Database column
+ * @property  integer avatar_id Database column
+ * @property  string  slug Database column
+ * @property  User submitter Relation
+ * @property  Image avatar Relation
  * @property  Poem[] poems Relation
  */
 abstract class AuthorBase extends Model
@@ -44,8 +46,8 @@ abstract class AuthorBase extends Model
 	public function relations()
 	{
 		return array(
-			'submitted_by' => array(self::BELONGS_TO, 'User', 'submitted_by'),
-			'author_fulltexts' => array(self::HAS_MANY, 'AuthorFulltext', 'author_id'),
+			'submitter' => array(self::BELONGS_TO, 'User', 'submitter_id'),
+			'avatar' => array(self::BELONGS_TO, 'Image', 'avatar_id'),
 			'poems' => array(self::HAS_MANY, 'Poem', 'author_id')
 		);
 	}

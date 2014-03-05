@@ -11,9 +11,9 @@
  * @property  integer submitted_by Database column
  * @property  mixed   text Database column
  * @property  string  first_line Database column
+ * @property  string  slug Database column
  * @property  User submitted_by Relation
  * @property  Author author Relation
- * @property  PoemFulltext[] poem_fulltexts Relation
  * @property  Recital[] recitals Relation
  */
 abstract class PoemBase extends Model
@@ -50,7 +50,6 @@ abstract class PoemBase extends Model
 		return array(
 			'submitted_by' => array(self::BELONGS_TO, 'User', 'submitted_by'),
 			'author' => array(self::BELONGS_TO, 'Author', 'author_id'),
-			'poem_fulltexts' => array(self::HAS_MANY, 'PoemFulltext', 'poem_id'),
 			'recitals' => array(self::HAS_MANY, 'Recital', 'poem_id')
 		);
 	}

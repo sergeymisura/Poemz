@@ -1,11 +1,11 @@
 <?php
 /**
- * Serializer class for AuthorFulltext model
+ * Serializer class for Image model
  * 
  * @package Regent.Common.Models.Base
  *
  */
-class AuthorFulltextSerializer extends ModelSerializer
+class ImageSerializer extends ModelSerializer
 {
 	/**
 	 * Processes the collected attributes before they are serialized.

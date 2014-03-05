@@ -17,6 +17,7 @@
  * @property  string  facebook_token Database column
  * @property  string  password_salt Database column
  * @property  Author[] authors Relation
+ * @property  Image[] images Relation
  * @property  Poem[] poems Relation
  * @property  Recital[] recitals Relation
  * @property  RecitalVote[] recital_votes Relation
@@ -54,7 +55,8 @@ abstract class UserBase extends Model
 	public function relations()
 	{
 		return array(
-			'authors' => array(self::HAS_MANY, 'Author', 'submitted_by'),
+			'authors' => array(self::HAS_MANY, 'Author', 'submitter_id'),
+			'images' => array(self::HAS_MANY, 'Image', 'author_id'),
 			'poems' => array(self::HAS_MANY, 'Poem', 'submitted_by'),
 			'recitals' => array(self::HAS_MANY, 'Recital', 'performer_id'),
 			'recital_votes' => array(self::HAS_MANY, 'RecitalVote', 'voter_id'),

@@ -32,8 +32,30 @@
 		return {
 			init: function() {
 				services.bind({
-					'.btn-primary': this.login
+					'.login-button': this.login,
+					'.have-account': this.modeChange
 				});
+			},
+
+			modeChange: function($source) {
+				if ($source.prop('checked')) {
+					this.signInMode();
+				}
+				else {
+					this.createAccountMode();
+				}
+			},
+
+			signInMode: function() {
+				$element.find('.have-account').prop('checked', true);
+				$element.find('.sign-in-only').show();
+				$element.find('.create-account-only').hide();
+			},
+
+			createAccountMode: function() {
+				$element.find('.have-account').prop('checked', false);
+				$element.find('.sign-in-only').hide();
+				$element.find('.create-account-only').show();
 			},
 
 			login: function() {
@@ -70,7 +92,9 @@
 					'.search-field': {
 						'focus': this.searchFocus,
 						'blur': this.searchBlur
-					}
+					},
+					'.sign-in': this.signIn,
+					'.create-account': this.createAccount
 				});
 			},
 
@@ -80,8 +104,30 @@
 
 			searchBlur: function($source) {
 				$source.animate({ width: '220px' });
+			},
+
+			signIn: function() {
+				app.get('#modal-sign-in').signInMode();
+			},
+
+			createAccount: function() {
+				app.get('#modal-sign-in').createAccountMode();
 			}
 		};
 	});
+
+	app.urls = {
+		image: function(id) {
+			return app.config.baseUrl + '/images/' + id + '.jpg';
+		},
+
+		author: function(author) {
+			return app.config.baseUrl + '/' + author.slug;
+		},
+
+		poem: function(poem) {
+			return app.config.baseUrl + '/' + poem.author.slug + '/' + poem.slug;
+		}
+	};
 
 })(jQuery, app);
