@@ -23,7 +23,7 @@
 				<div>#2 read by <a href="#">bobert</a></div>
 			</div>
 			<h6 class="text-center"><a href="#">Hear more versions</a></h6>
-			<div><button class="btn btn-primary btn-xs record-own">Record your version</button> </div>
+			<div><button class="btn btn-primary btn-xs record-own">Record your version</button></div>
 		</div>
 	</div>
 

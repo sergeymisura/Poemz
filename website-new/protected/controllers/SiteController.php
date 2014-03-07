@@ -39,7 +39,8 @@ class SiteController extends PageController
 		 */
 		$author = Author::model()->findByAttributes(array('slug' => $author_slug));
 		$poem = Poem::model()->findByAttributes(array('author_id' => $author->id, 'slug' => $poem_slug));
-		var_dump($poem->getAttributes());
+
+		$this->render('poem', array('poem' => $poem));
 	}
 
 	public function actionLogout()

@@ -87,7 +87,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand">
+				<a class="navbar-brand" href="<?= $this->createUrl('site/index') ?>">
 					<img class="navbar-logo" src="<?= Yii::app()->baseUrl ?>/assets/img/poemz_logo.png" />
 				</a>
 			</div>

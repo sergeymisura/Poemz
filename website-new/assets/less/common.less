@@ -70,11 +70,25 @@
   }
 }
 
-h5, h6 {
+h3, h4, h5, h6 {
   font-family: arial;
   font-weight: bold;
 }
 
+h3 {
+  margin-bottom: 0;
+}
+
 .facebook-button {
   margin-top: 40px;
+}
+
+
+.record-now {
+  padding-right: 45px;
+  background: @brand-primary url(../img/icon_record_now.png) no-repeat right center;
+
+  &:hover, &:active {
+    background-color: darken(@brand-primary, 8%);
+  }
 }
