@@ -32,15 +32,19 @@
 					<div class="col-sm-2">
 						<button type="button" class="btn btn-default listen">Listen</button>
 					</div>
-					<div class="col-sm-6">
+					<div class="col-sm-8">
 						<img class="thumbnail pull-left" src="<?= Yii::app()->baseUrl ?>/assets/img/portrait_placeholder_3.jpg" />
 						<div class="info pull-left">
 							<div class="username"><a href="#">robratterman</a></div>
-							<div><img src="<?= Yii::app()->baseUrl ?>/assets/img/rating_4.png"/> (42 votes)</div>
+							<div class="row">
+								<div class="col-sm-6">
+									<nobr><img src="<?= Yii::app()->baseUrl ?>/assets/img/thumb_up.png"/> 42 votes</nobr>
+								</div>
+								<div class="col-sm-6">
+									<nobr><img src="<?= Yii::app()->baseUrl ?>/assets/img/comments_sm.png"/> 30 comments</nobr>
+								</div>
+							</div>
 						</div>
-					</div>
-					<div class="col-sm-2">
-						<a href="#" class="comments-count pull-right">32</a>
 					</div>
 				</div>
 				<div class="row">
@@ -50,15 +54,19 @@
 					<div class="col-sm-2">
 						<button type="button" class="btn btn-default listen">Listen</button>
 					</div>
-					<div class="col-sm-6">
+					<div class="col-sm-8">
 						<img class="thumbnail pull-left" src="<?= Yii::app()->baseUrl ?>/assets/img/portrait_placeholder_4.jpg" />
 						<div class="info pull-left">
 							<div class="username"><a href="#">robert-bobert</a></div>
-							<div><img src="<?= Yii::app()->baseUrl ?>/assets/img/rating_4.png"/> (42 votes)</div>
+							<div class="row">
+								<div class="col-sm-6">
+									<nobr><img src="<?= Yii::app()->baseUrl ?>/assets/img/thumb_up.png"/> 42 votes</nobr>
+								</div>
+								<div class="col-sm-6">
+									<nobr><img src="<?= Yii::app()->baseUrl ?>/assets/img/comments_sm.png"/> 30 comments</nobr>
+								</div>
+							</div>
 						</div>
-					</div>
-					<div class="col-sm-2">
-						<a href="#" class="comments-count pull-right">15</a>
 					</div>
 				</div>
 				<div class="row">
@@ -68,15 +76,19 @@
 					<div class="col-sm-2">
 						<button type="button" class="btn btn-default listen">Listen</button>
 					</div>
-					<div class="col-sm-6">
+					<div class="col-sm-8">
 						<img class="thumbnail pull-left" src="<?= Yii::app()->baseUrl ?>/assets/img/portrait_placeholder_5.jpg" />
 						<div class="info pull-left">
 							<div class="username"><a href="#">sergey</a></div>
-							<div><img src="<?= Yii::app()->baseUrl ?>/assets/img/rating_4.png"/> (42 votes)</div>
+							<div class="row">
+								<div class="col-sm-6">
+									<nobr><img src="<?= Yii::app()->baseUrl ?>/assets/img/thumb_up.png"/> 42 votes</nobr>
+								</div>
+								<div class="col-sm-6">
+									<nobr><img src="<?= Yii::app()->baseUrl ?>/assets/img/comments_sm.png"/> 30 comments</nobr>
+								</div>
+							</div>
 						</div>
-					</div>
-					<div class="col-sm-2">
-						<a href="#" class="comments-count pull-right">7</a>
 					</div>
 				</div>
 			</div>
