@@ -33,7 +33,8 @@
 		"app": {
 			"files": [
 				"js/app/index.js",
-				"js/app/front/poems.js"
+				"js/app/front/poems.js",
+				"js/app/poem/poem.js"
 			],
 			"level": "WHITESPACE_ONLY"
 		}
