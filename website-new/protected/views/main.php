@@ -112,7 +112,9 @@
 		</div>
 	</div>
 
-	<?php echo $content ?>
+	<div class="<?= $this->contentClass ?>">
+		<?php echo $content ?>
+	</div>
 
 	<script type="text/javascript" language="JavaScript">
 		app = app || {};

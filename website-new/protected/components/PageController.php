@@ -11,6 +11,8 @@ abstract class PageController extends BaseController
 	 */
 	public $layout = '//main';
 
+	public $contentClass = '';
+
 	/**
 	 * @var  array  Data to pass to the javascript
 	 */

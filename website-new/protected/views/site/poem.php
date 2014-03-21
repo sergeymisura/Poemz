@@ -120,21 +120,23 @@
 			<div class="recitations">
 				<div class="recitation">
 					<div class="row">
-						<div class="col-sm-2 text-center">
+						<div class="col-sm-1">
 							<h5 class="index">1</h5>
 						</div>
 						<div class="col-sm-2">
 							<button type="button" class="btn btn-default active listen">Playing...</button>
 						</div>
-						<div class="col-sm-8">
-							<img class="thumbnail pull-left" src="<?= Yii::app()->baseUrl ?>/assets/img/portrait_placeholder_3.jpg" />
-							<div class="info pull-left">
+						<div class="col-sm-2">
+							<img class="thumbnail" src="<?= Yii::app()->baseUrl ?>/assets/img/portrait_placeholder_3.jpg" />
+						</div>
+						<div class="col-sm-7">
+							<div class="info">
 								<div class="username"><a href="#">robratterman</a></div>
 								<div class="row">
 									<div class="col-sm-6">
 										<nobr><img src="<?= Yii::app()->baseUrl ?>/assets/img/thumb_up.png"/> 42 votes</nobr>
 									</div>
-									<div class="col-sm-6">
+									<div class="col-sm-6 text-right">
 										<nobr>
 											<img src="<?= Yii::app()->baseUrl ?>/assets/img/comments_sm.png"/>
 											<a href="#" data-count="3" class="toggle-comments">3 comments</a>
@@ -182,21 +184,23 @@
 				</div>
 				<div class="recitation">
 					<div class="row">
-						<div class="col-sm-2 text-center">
+						<div class="col-sm-1">
 							<h5 class="index">2</h5>
 						</div>
 						<div class="col-sm-2">
 							<button type="button" class="btn btn-default listen">Listen</button>
 						</div>
-						<div class="col-sm-8">
-							<img class="thumbnail pull-left" src="<?= Yii::app()->baseUrl ?>/assets/img/portrait_placeholder_4.jpg" />
-							<div class="info pull-left">
+						<div class="col-sm-2">
+							<img class="thumbnail" src="<?= Yii::app()->baseUrl ?>/assets/img/portrait_placeholder_4.jpg" />
+						</div>
+						<div class="col-sm-7">
+							<div class="info">
 								<div class="username"><a href="#">robert-bobert</a></div>
 								<div class="row">
 									<div class="col-sm-6">
 										<nobr><img src="<?= Yii::app()->baseUrl ?>/assets/img/thumb_up.png"/> 42 votes</nobr>
 									</div>
-									<div class="col-sm-6">
+									<div class="col-sm-6 text-right">
 										<nobr>
 											<img src="<?= Yii::app()->baseUrl ?>/assets/img/comments_sm.png"/>
 											<a href="#" class="toggle-comments" data-count="3">3 comments</a>
@@ -244,21 +248,23 @@
 				</div>
 				<div class="recitation">
 					<div class="row">
-						<div class="col-sm-2 text-center">
+						<div class="col-sm-1">
 							<h5 class="index">3</h5>
 						</div>
 						<div class="col-sm-2">
 							<button type="button" class="btn btn-default listen">Listen</button>
 						</div>
-						<div class="col-sm-8">
-							<img class="thumbnail pull-left" src="<?= Yii::app()->baseUrl ?>/assets/img/portrait_placeholder_5.jpg" />
-							<div class="info pull-left">
+						<div class="col-sm-2">
+							<img class="thumbnail" src="<?= Yii::app()->baseUrl ?>/assets/img/portrait_placeholder_5.jpg" />
+						</div>
+						<div class="col-sm-7">
+							<div class="info">
 								<div class="username"><a href="#">sergey</a></div>
 								<div class="row">
 									<div class="col-sm-6">
 										<nobr><img src="<?= Yii::app()->baseUrl ?>/assets/img/thumb_up.png"/> 42 votes</nobr>
 									</div>
-									<div class="col-sm-6">
+									<div class="col-sm-6 text-right">
 										<nobr>
 											<img src="<?= Yii::app()->baseUrl ?>/assets/img/comments_sm.png"/>
 											<a href="#" class="toggle-comments" data-count="3">3 comments</a>
