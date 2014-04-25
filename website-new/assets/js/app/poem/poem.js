@@ -4,7 +4,7 @@
 		return {
 
 			init: function() {
-				services.bind({
+				services.events({
 					'.toggle-comments': this.toggleComments
 				});
 			},

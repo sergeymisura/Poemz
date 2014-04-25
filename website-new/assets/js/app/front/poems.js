@@ -4,10 +4,6 @@
 		return {
 
 			init: function() {
-				services.bind({
-
-				});
-
 				services.rendering('poem', app.data.poems);
 			}
 

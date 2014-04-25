@@ -17,7 +17,7 @@
 			"files": [
 				"js/js-tools/app.js",
 				"js/js-tools/services/api.js",
-				"js/js-tools/services/bind.js",
+				"js/js-tools/services/events.js",
 				"js/js-tools/services/dereferred.js",
 				"js/js-tools/services/rendering.js",
 				"js/js-tools/services/form.js",

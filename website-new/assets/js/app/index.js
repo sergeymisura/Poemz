@@ -31,7 +31,7 @@
 	app.controller('login-form', function($element, services) {
 		return {
 			init: function() {
-				services.bind({
+				services.events({
 					'.login-button': this.login,
 					'.have-account': this.modeChange
 				});
@@ -88,7 +88,7 @@
 	app.controller('navbar', function($element, services) {
 		return {
 			init: function() {
-				services.bind({
+				services.events({
 					'.search-field': {
 						'focus': this.searchFocus,
 						'blur': this.searchBlur
