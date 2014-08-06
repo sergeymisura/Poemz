@@ -316,19 +316,19 @@
 				</div>
 			</div>
 
-			<div class="recorder panel panel-default hide-light">
+			<div class="recorder panel panel-default hide-light" data-controller="recorder">
 				<div class="panel-body">
-					<div class="step1 hide-light text-center">
-						<button type="button" class="btn btn-primary btn-lg">Start recording</button>
+					<div class="step1 text-center">
+						<button type="button" class="btn btn-primary btn-lg start-recording">Start recording</button>
 						<h3 class="recorder-separator">or</h3>
 						<button type="button" class="btn btn-default btn-lg">Upload a file</button>
 					</div>
 					<div class="step2 hide-light text-center">
 						<h4>Recording will start in</h4>
-						<div class="big-number">10</div>
+						<div class="big-number countdown">10</div>
 						<button type="button" class="btn btn-default btn-lg">Cancel recording</button>
 					</div>
-					<div class="step3 h ide-light text-center">
+					<div class="step3 hide-light text-center">
 						<h4>Recording in progress</h4>
 						<div class="big-number">00:00</div>
 						<div>

@@ -35,7 +35,9 @@
 			"files": [
 				"js/app/index.js",
 				"js/app/front/poems.js",
-				"js/app/poem/poem.js"
+				"js/app/poem/poem.js",
+				"js/app/poem/recorder.js",
+				"js/app/services/recording.js"
 			],
 			"level": "WHITESPACE_ONLY"
 		}

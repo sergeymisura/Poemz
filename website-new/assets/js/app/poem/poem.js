@@ -44,11 +44,8 @@
 
 			displayRecorder: function() {
 				$element.find('.recording-fade').animate({opacity: 0.3});
-				$element.find('.recorder').css({
-					width: ($element.find('.now-playing').width() + 40) + 'px'
-				}).show();
+				app.get('.recorder').display($element.find('.now-playing').width() + 40);
 			}
-
 		};
 	});
 })(jQuery, app);
