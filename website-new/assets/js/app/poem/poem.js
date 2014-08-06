@@ -5,8 +5,15 @@
 
 			init: function() {
 				services.events({
-					'.toggle-comments': this.toggleComments
+					'.toggle-comments': this.toggleComments,
+					'.record-now': this.displayRecorder
 				});
+
+				$element.find('.nice-scroll').niceScroll({
+					cursorcolor: '#e3e3e3'
+				});
+
+				//this.displayRecorder();
 			},
 
 			toggleComments: function($source) {
@@ -33,6 +40,13 @@
 						$source.html('hide comments');
 					}
 				}
+			},
+
+			displayRecorder: function() {
+				$element.find('.recording-fade').animate({opacity: 0.3});
+				$element.find('.recorder').css({
+					width: ($element.find('.now-playing').width() + 40) + 'px'
+				}).show();
 			}
 
 		};

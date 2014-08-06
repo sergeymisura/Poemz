@@ -1,6 +1,11 @@
 <!doctype html>
 <html>
 <head>
+	<script type="text/javascript">
+		var less = {
+			env: 'development'
+		};
+	</script>
 </head>
 <body>
 	<div id="fb-root"></div>

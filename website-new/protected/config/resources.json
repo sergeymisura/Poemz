@@ -8,6 +8,7 @@
 				"js/lib/jquery/jquery-1.11.0.min.js",
 				"js/lib/jquery/jquery.tmpl.min.js",
 				"js/lib/jquery/jquery.cookie.js",
+				"js/lib/jquery/jquery.nicescroll.min.js",
 				"bootstrap/js/bootstrap.min.js"
 			],
 			"level": "WHITESPACE_ONLY"
