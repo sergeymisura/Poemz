@@ -324,15 +324,13 @@
 						<button type="button" class="btn btn-default btn-lg">Upload a file</button>
 					</div>
 					<div class="step2 hide-light text-center">
-						<h4>Recording will start in</h4>
-						<div class="big-number countdown">10</div>
-						<button type="button" class="btn btn-default btn-lg">Cancel recording</button>
+						<h4>Please allow us to use your microphone...</h4>
 					</div>
 					<div class="step3 hide-light text-center">
 						<h4>Recording in progress</h4>
 						<div class="big-number">00:00</div>
 						<div>
-							<button type="button" class="btn btn-primary btn-lg">Finish &amp; Save</button>
+							<button type="button" class="btn btn-primary btn-lg finish-recording">Finish &amp; Save</button>
 							<button type="button" class="btn btn-default btn-lg">Cancel &amp; Discard</button>
 						</div>
 					</div>

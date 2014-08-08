@@ -9,6 +9,7 @@
 				"js/lib/jquery/jquery.tmpl.min.js",
 				"js/lib/jquery/jquery.cookie.js",
 				"js/lib/jquery/jquery.nicescroll.min.js",
+				"js/lib/html5-recorder/recorder.js",
 				"bootstrap/js/bootstrap.min.js"
 			],
 			"level": "WHITESPACE_ONLY"
@@ -19,7 +20,7 @@
 				"js/js-tools/app.js",
 				"js/js-tools/services/api.js",
 				"js/js-tools/services/events.js",
-				"js/js-tools/services/dereferred.js",
+				"js/js-tools/services/deferred.js",
 				"js/js-tools/services/rendering.js",
 				"js/js-tools/services/form.js",
 				"js/js-tools/services/hash.js",
@@ -37,7 +38,9 @@
 				"js/app/front/poems.js",
 				"js/app/poem/poem.js",
 				"js/app/poem/recorder.js",
-				"js/app/services/recording.js"
+				"js/app/services/recording.js",
+				"js/app/services/recording-html5.js",
+				"js/app/services/recording-swf.js"
 			],
 			"level": "WHITESPACE_ONLY"
 		}

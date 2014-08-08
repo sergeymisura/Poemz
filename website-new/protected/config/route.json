@@ -6,6 +6,8 @@
 	"POST:api/auth": "api/authApi/db",
 	"POST:api/auth/facebook": "api/authApi/facebook",
 
+	"POST:api/recording/upload": "api/recording/upload",
+
 	"GET:<author_slug>/<poem_slug>" : "site/poem",
 	"GET:<author_slug>" : "site/author"
 }
