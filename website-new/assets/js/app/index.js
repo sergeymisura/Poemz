@@ -20,7 +20,7 @@
 					}
 				).success(
 					function(response) {
-						$.cookie('poemz_session_id', response.data.session.id);
+						$.cookie('poemz_session_id', response.data.session.id, { path: app.config.baseUrl });
 						document.location.reload();
 					}
 				);
@@ -29,6 +29,9 @@
 	});
 
 	app.controller('login-form', function($element, services) {
+
+		var _callback;
+
 		return {
 			init: function() {
 				services.events({
@@ -46,16 +49,20 @@
 				}
 			},
 
-			signInMode: function() {
+			signInMode: function(callback) {
+				_callback = callback || null;
 				$element.find('.have-account').prop('checked', true);
 				$element.find('.sign-in-only').show();
 				$element.find('.create-account-only').hide();
+				$element.modal();
 			},
 
-			createAccountMode: function() {
+			createAccountMode: function(callback) {
+				_callback = callback || null;
 				$element.find('.have-account').prop('checked', false);
 				$element.find('.sign-in-only').hide();
 				$element.find('.create-account-only').show();
+				$element.modal();
 			},
 
 			login: function() {
@@ -67,8 +74,13 @@
 						form.collect()
 					).success(
 						function(response) {
-							$.cookie('poemz_session_id', response.data.session.id);
-							document.location.reload();
+							$.cookie('poemz_session_id', response.data.session.id, { path: app.config.baseUrl });
+							if (_callback) {
+								_callback(response.data.session);
+							}
+							else {
+								document.location.reload();
+							}
 						},
 						this
 					).error(

@@ -99,8 +99,8 @@
 			<div class="collapse navbar-collapse">
 				<? if ($this->session == null): ?>
 					<form class="navbar-form navbar-right">
-						<button type="button" class="btn btn-primary sign-in" data-toggle="modal" data-target="#modal-sign-in">Sign in</button>
-						<a href="#" class="create-account" data-toggle="modal" data-target="#modal-sign-in">or create account</a>
+						<button type="button" class="btn btn-primary sign-in">Sign in</button>
+						<a href="#" class="create-account">or create account</a>
 					</form>
 				<? else: ?>
 					<p class="navbar-text navbar-right">

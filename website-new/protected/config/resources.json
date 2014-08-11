@@ -38,6 +38,7 @@
 				"js/app/front/poems.js",
 				"js/app/poem/poem.js",
 				"js/app/poem/recorder.js",
+				"js/app/services/auth.js",
 				"js/app/services/recording.js",
 				"js/app/services/recording-html5.js",
 				"js/app/services/recording-swf.js"

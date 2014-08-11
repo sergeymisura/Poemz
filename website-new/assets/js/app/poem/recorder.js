@@ -14,9 +14,11 @@
 			},
 
 			display: function(width) {
-				$element.css({
-					width: width + 'px'
-				}).fadeIn();
+				services.auth.session(function() {
+					$element.css({
+						width: width + 'px'
+					}).fadeIn();
+				})
 			},
 
 			initRecording: function() {

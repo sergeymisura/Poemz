@@ -11,7 +11,7 @@ class RecordingController extends ApiController
 		{
 			move_uploaded_file(
 				$_FILES['content']['tmp_name'],
-				Yii::app()->baseUrl . '/assets/previews/' . $this->session->user_id . '.wav'
+				Yii::app()->basePath . '/../assets/previews/' . $this->session->user_id . '.wav'
 			);
 		}
 		$this->sendError(400, 'ERR_INVALID', 'Invalid request');

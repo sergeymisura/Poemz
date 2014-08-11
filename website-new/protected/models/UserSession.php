@@ -30,6 +30,7 @@ class UserSession extends UserSessionBase
 	{
 		self::cleanup();
 		$session = UserSession::model()->findByPk($session_id);
+
 		if ($session != null)
 		{
 			$session->expires = Model::getDbDate(time() + self::SESSION_LIFETIME * 60, true);
