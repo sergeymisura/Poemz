@@ -20,8 +20,7 @@
 					}
 				).success(
 					function(response) {
-						$.cookie('poemz_session_id', response.data.session.id, { path: app.config.baseUrl });
-						document.location.reload();
+						services.auth.loginCompleted(response.data.session);
 					}
 				);
 			}
@@ -38,6 +37,14 @@
 					'.login-button': this.login,
 					'.have-account': this.modeChange
 				});
+
+				services.events(app, {
+					'loginCompleted': this.hide
+				});
+			},
+
+			hide: function() {
+				$element.modal('hide');
 			},
 
 			modeChange: function($source) {
@@ -74,13 +81,7 @@
 						form.collect()
 					).success(
 						function(response) {
-							$.cookie('poemz_session_id', response.data.session.id, { path: app.config.baseUrl });
-							if (_callback) {
-								_callback(response.data.session);
-							}
-							else {
-								document.location.reload();
-							}
+							services.auth.loginCompleted(response.data.session);
 						},
 						this
 					).error(
@@ -108,6 +109,16 @@
 					'.sign-in': this.signIn,
 					'.create-account': this.createAccount
 				});
+
+				services.events(app, {
+					'loginCompleted': this.render
+				});
+
+				this.render();
+			},
+
+			render: function() {
+				services.rendering('login-area', app.data.session || {});
 			},
 
 			searchFocus: function($source) {

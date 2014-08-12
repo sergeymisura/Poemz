@@ -1,31 +1,26 @@
 (function($, app) {
 
-	var _session = null;
+	var _callback = null;
 
 	app.service('auth', function($element, services) {
 
 		return {
 
-			session: function(callback) {
-				if (_session != null) {
-					callback(_session);
+			login: function(callback) {
+				if (app.data.session != null) {
+					callback(app.data.session);
 					return;
 				}
-				if ($.cookie('poemz_session_id')) {
-					_session = {
-						id: $.cookie('poemz_session_id')
-					};
-					callback(_session);
-					return;
+				_callback = callback;
+				app.get('#modal-sign-in').signInMode();
+			},
+
+			loginCompleted: function(session) {
+				app.data.session = session;
+				if (_callback) {
+					_callback(session);
 				}
-				else {
-					app.get('#modal-sign-in').signInMode(
-						function(session) {
-							_session = session;
-							callback(_session);
-						}
-					);
-				}
+				$(app).triggerHandler('loginCompleted');
 			}
 
 		};

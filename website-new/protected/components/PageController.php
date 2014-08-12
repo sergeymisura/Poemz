@@ -43,7 +43,13 @@ abstract class PageController extends BaseController
 			Yii::app()->params['mode'] == 'debug'
 		);
 
-		return parent::beforeAction($action);
+		if (parent::beforeAction($action))
+		{
+			$this->setPageData('session', $this->session);
+			return true;
+		}
+
+		return false;
 	}
 
 	/**

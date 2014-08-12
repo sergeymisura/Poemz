@@ -14,7 +14,7 @@
 			},
 
 			display: function(width) {
-				services.auth.session(function() {
+				services.auth.login(function() {
 					$element.css({
 						width: width + 'px'
 					}).fadeIn();

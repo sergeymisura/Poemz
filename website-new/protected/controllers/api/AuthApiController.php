@@ -76,7 +76,7 @@ class AuthApiController extends ApiController
 		$user->save();
 
 		$session = UserSession::createSession($user);
-
+		$this->createAuthCookie($session);
 		$this->send(array('session' => $session));
 	}
 
@@ -112,7 +112,13 @@ class AuthApiController extends ApiController
 		}
 
 		$session = UserSession::createSession($user);
-
+		$this->createAuthCookie($session);
 		$this->send(array('session' => $session));
+	}
+
+	private function createAuthCookie($session)
+	{
+		$cookie_name = Yii::app()->params['auth_cookie'];
+		$this->request->cookies[$cookie_name] = new CHttpCookie($cookie_name, $session->id, array('path' => Yii::app()->baseUrl));
 	}
 }

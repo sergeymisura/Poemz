@@ -96,18 +96,18 @@
 					<img class="navbar-logo" src="<?= Yii::app()->baseUrl ?>/assets/img/poemz_logo.png" />
 				</a>
 			</div>
-			<div class="collapse navbar-collapse">
-				<? if ($this->session == null): ?>
+			<div class="collapse navbar-collapse" data-template="login-area">
+				{{if user }}
+					<p class="navbar-text navbar-right">
+						Welcome, <a href="#"><b>${ user.username }</b></a>
+						<span class="small">(<a href="<?= $this->createUrl('site/logout') ?>">not you?</a>)</span>
+					</p>
+				{{else}}
 					<form class="navbar-form navbar-right">
 						<button type="button" class="btn btn-primary sign-in">Sign in</button>
 						<a href="#" class="create-account">or create account</a>
 					</form>
-				<? else: ?>
-					<p class="navbar-text navbar-right">
-						Welcome, <a href="#"><b><?= $this->text($this->session->user->username) ?></b></a>
-						<span class="small">(<a href="<?= $this->createUrl('site/logout') ?>">not you?</a>)</span>
-					</p>
-				<? endif; ?>
+				{{/if}}
 				<form class="navbar-form text-center">
 					<div class="form-group">
 						<input type="search" class="form-control search-field" placeholder="Find your favorite poem" />

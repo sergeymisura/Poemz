@@ -30,6 +30,10 @@ return CMap::mergeArray(
 				),
 			),
 
+			'params' => array(
+				'auth_cookie' => 'poemz_new_auth'
+			),
+
 		),
 		require_once(__DIR__ . DIRECTORY_SEPARATOR . 'common.php')
 	),
