@@ -31,9 +31,10 @@ class BaseController extends CController
 
 		$this->request = Yii::app()->request;
 
-		if (isset($this->request->cookies['poemz_session_id']))
+		$cookie_name = Yii::app()->params['auth_cookie'];
+		if (isset($this->request->cookies[$cookie_name]))
 		{
-			$this->session = UserSession::getSession($this->request->cookies['poemz_session_id']->value);
+			$this->session = UserSession::getSession($this->request->cookies[$cookie_name]->value);
 		}
 
 		return parent::beforeAction($action);
