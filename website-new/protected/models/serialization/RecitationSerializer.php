@@ -1,11 +1,11 @@
 <?php
 /**
- * Serializer class for Recital model
+ * Serializer class for Recitation model
  * 
  * @package Regent.Common.Models.Base
  *
  */
-class RecitalSerializer extends ModelSerializer
+class RecitationSerializer extends ModelSerializer
 {
 	/**
 	 * Processes the collected attributes before they are serialized.

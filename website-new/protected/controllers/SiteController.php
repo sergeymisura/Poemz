@@ -41,6 +41,7 @@ class SiteController extends PageController
 		$poem = Poem::model()->findByAttributes(array('author_id' => $author->id, 'slug' => $poem_slug));
 
 		$this->contentClass = 'column-container';
+		$this->setPageData('poem', $poem);
 		$this->render('poem', array('poem' => $poem));
 	}
 

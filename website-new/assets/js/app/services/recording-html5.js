@@ -4,7 +4,7 @@
 
 	app.service('recordingHtml5', function($element, services) {
 		return {
-			init: function(success, error) {
+			_init: function(success, error) {
 				navigator.getUserMedia(
 					{ audio: true },
 					this.mediaReceivedCallback(success),
@@ -35,20 +35,37 @@
 
 			stop: function() {
 				_recorder.stop();
-				_recorder.exportWAV($.proxy(this.received, this));
 			},
 
-			received: function(blob) {
-				var data = new FormData;
-				data.append('content', blob);
-				$.ajax(
-					app.config.baseUrl + '/api/recording/upload',
-					{
-						type: 'POST',
-						data: data,
-						processData: false,
-						contentType: false
-					}
+			upload: function() {
+				var result = services.deferred.create();
+				_recorder.exportWAV(this.receivedCallback(result));
+				return result;
+			},
+
+			cancel: function() {
+				_recorder.stop();
+				_recorder.clear();
+			},
+
+			receivedCallback: function(result) {
+				return $.proxy(
+					function(blob) {
+						var data = new FormData;
+						data.append('content', blob);
+						$.ajax(
+							app.config.baseUrl + '/api/recording/upload',
+							{
+								type: 'POST',
+								data: data,
+								processData: false,
+								contentType: false,
+								success: result.successCallback(),
+								error: result.errorCallback()
+							}
+						);
+					},
+					this
 				);
 			}
 		};

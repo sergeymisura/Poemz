@@ -1,28 +1,28 @@
 <?php
 /**
- * WARNING: This is an automatically generated file. Do not modify it, use RecitalVote instead.
- * Base class for RecitalVote model
+ * WARNING: This is an automatically generated file. Do not modify it, use RecitationVote instead.
+ * Base class for RecitationVote model
  *
  * @package Regent.Common.Models.Base
  *
  * @property  integer id Database column
- * @property  integer recital_id Database column
+ * @property  integer recitation_id Database column
  * @property  integer voter_id Database column
  * @property  mixed   voted Database column
  * @property  integer direction Database column
- * @property  Recital recital Relation
  * @property  User voter Relation
+ * @property  Recitation recitation Relation
  */
-abstract class RecitalVoteBase extends Model
+abstract class RecitationVoteBase extends Model
 {
 	/**
 	 * Returns an instance of the model class
 	 *
 	 * @param   string  $className  Name of the class
 	 *
-	 * @return  RecitalVote  An instance of Model class
+	 * @return  RecitationVote  An instance of Model class
 	 */
-	public static function model($className = 'RecitalVote')
+	public static function model($className = 'RecitationVote')
 	{
 		return parent::model($className);
 	}
@@ -34,7 +34,7 @@ abstract class RecitalVoteBase extends Model
 	 */
 	public function tableName()
 	{
-		return 'recital_vote';
+		return 'recitation_vote';
 	}
 
 	/**
@@ -45,18 +45,18 @@ abstract class RecitalVoteBase extends Model
 	public function relations()
 	{
 		return array(
-			'recital' => array(self::BELONGS_TO, 'Recital', 'recital_id'),
-			'voter' => array(self::BELONGS_TO, 'User', 'voter_id')
+			'voter' => array(self::BELONGS_TO, 'User', 'voter_id'),
+			'recitation' => array(self::BELONGS_TO, 'Recitation', 'recitation_id')
 		);
 	}
 
 	/**
 	 * Returns the model's serializer
 	 *
-	 * @return  RecitalVoteSerializer  An instance of the model serializer
+	 * @return  RecitationVoteSerializer  An instance of the model serializer
 	 */
 	public function getSerializer()
 	{
-		return new RecitalVoteSerializer($this);
+		return new RecitationVoteSerializer($this);
 	}
 }

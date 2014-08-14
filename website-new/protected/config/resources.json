@@ -10,7 +10,8 @@
 				"js/lib/jquery/jquery.cookie.js",
 				"js/lib/jquery/jquery.nicescroll.min.js",
 				"js/lib/html5-recorder/recorder.js",
-				"bootstrap/js/bootstrap.min.js"
+				"bootstrap/js/bootstrap.min.js",
+				"mediaelement/mediaelement-and-player.min.js"
 			],
 			"level": "WHITESPACE_ONLY"
 		},
@@ -38,6 +39,7 @@
 				"js/app/front/poems.js",
 				"js/app/poem/poem.js",
 				"js/app/poem/recorder.js",
+				"js/app/poem/recitations.js",
 				"js/app/services/auth.js",
 				"js/app/services/recording.js",
 				"js/app/services/recording-html5.js",
@@ -54,5 +56,11 @@
 				"less/application.less"
 			]
 		}
+	},
+
+	"css": {
+		"files": [
+			"mediaelement/mediaelementplayer.css"
+		]
 	}
 }

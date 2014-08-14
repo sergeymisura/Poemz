@@ -6,7 +6,10 @@
 			init: function() {
 				services.events({
 					'.toggle-comments': this.toggleComments,
-					'.record-now': this.displayRecorder
+					'.record-now': this.displayRecorder,
+					'.recorder': {
+						'created': this.recitationCreated
+					}
 				});
 
 				$element.find('.nice-scroll').niceScroll({
@@ -43,8 +46,12 @@
 			},
 
 			displayRecorder: function() {
-				$element.find('.recording-fade').animate({opacity: 0.3});
 				app.get('.recorder').display($element.find('.now-playing').width() + 40);
+			},
+
+			recitationCreated: function() {
+				$element.find('.now-playing').hide();
+				$element.find('.recitation-created').fadeIn();
 			}
 		};
 	});

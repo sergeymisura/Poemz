@@ -59,6 +59,10 @@
 		<div class="col-sm-6 nice-scroll">
 			<div class="recording-fade">
 
+				<div class="alert alert-success hide-light recitation-created">
+					Congratulations! Your recitation has been created. Let's wait and see what others think of your performance.
+				</div>
+
 				<div class="well now-playing">
 					<h4>Now playing</h4>
 					<div  class="row">
@@ -120,8 +124,8 @@
 					</div>
 				</div>
 				<h4 class="recitations-header">poemz recitations</h4>
-				<div class="recitations">
-					<div class="recitation">
+				<div class="recitations" data-controller="poem-recitations">
+					<div class="recitation" data-template="recitation">
 						<div class="row">
 							<div class="col-sm-1">
 								<h5 class="index">1</h5>
@@ -185,6 +189,8 @@
 							</div>
 						</div>
 					</div>
+					<div class="loading"></div>
+					<!--
 					<div class="recitation">
 						<div class="row">
 							<div class="col-sm-1">
@@ -313,6 +319,7 @@
 							</div>
 						</div>
 					</div>
+					-->
 				</div>
 			</div>
 
@@ -328,10 +335,23 @@
 					</div>
 					<div class="step3 hide-light text-center">
 						<h4>Recording in progress</h4>
-						<div class="big-number">00:00</div>
+						<div class="big-number timer">00:00</div>
 						<div>
 							<button type="button" class="btn btn-primary btn-lg finish-recording">Finish &amp; Save</button>
-							<button type="button" class="btn btn-default btn-lg">Cancel &amp; Discard</button>
+							<button type="button" class="btn btn-default btn-lg cancel-recording">Cancel &amp; Discard</button>
+						</div>
+					</div>
+					<div class="step4 hide-light text-center">
+						<h4>Please wait while we are uploading your record...</h4>
+					</div>
+					<div class="step5 hide-light text-center">
+						<h4>Review your performance</h4>
+						<br/>
+						<div class="preview-container"></div>
+						<br/>
+						<div>
+							<button type="button" class="btn btn-primary btn-lg keep-recording">Perfect, keep it!</button>
+							<button type="button" class="btn btn-default btn-lg try-again-recording">Discard &amp; try again...</button>
 						</div>
 					</div>
 				</div>

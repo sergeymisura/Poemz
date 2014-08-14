@@ -13,7 +13,7 @@
 				else {
 					$.extend(this, services.recordingSwf);
 				}
-				this.init(
+				this._init(
 					result.successCallback(),
 					result.errorCallback()
 				);

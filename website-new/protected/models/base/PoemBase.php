@@ -14,7 +14,7 @@
  * @property  string  slug Database column
  * @property  User submitted_by Relation
  * @property  Author author Relation
- * @property  Recital[] recitals Relation
+ * @property  Recitation[] recitations Relation
  */
 abstract class PoemBase extends Model
 {
@@ -50,7 +50,7 @@ abstract class PoemBase extends Model
 		return array(
 			'submitted_by' => array(self::BELONGS_TO, 'User', 'submitted_by'),
 			'author' => array(self::BELONGS_TO, 'Author', 'author_id'),
-			'recitals' => array(self::HAS_MANY, 'Recital', 'poem_id')
+			'recitations' => array(self::HAS_MANY, 'Recitation', 'poem_id')
 		);
 	}
 
