@@ -12,17 +12,25 @@
 
 				});
 
-				this.load('votes');
+				this.load('created desc');
 			},
 
 			load: function(order) {
 				_order = order;
 				_index = 0;
+				app.data.recitations = [];
 				this.loadMore();
 			},
 
 			loadMore: function() {
 				$element.find('.loading').show();
+				services.api.get(
+					'poems/' + app.data.poem.id + '/recitations',
+					{
+						index: _index,
+						order: _order
+					}
+				);
 			}
 
 		};

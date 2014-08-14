@@ -1,5 +1,5 @@
 <?php
-class RecordingController extends ApiController
+class RecordingApiController extends ApiController
 {
 	public function actionUpload()
 	{
@@ -89,7 +89,7 @@ class RecordingController extends ApiController
 		$recitation = new Recitation;
 		$recitation->performer_id = $this->session->user_id;
 		$recitation->poem_id = $poem->id;
-		$recitation->created = Model::getDbDate();
+		$recitation->created = Model::getDbDate(null, true);
 		$recitation->save();
 
 		$data = new RecitationData;

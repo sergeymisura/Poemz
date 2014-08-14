@@ -6,9 +6,11 @@
 	"POST:api/auth": "api/authApi/db",
 	"POST:api/auth/facebook": "api/authApi/facebook",
 
-	"POST:api/recording/upload": "api/recording/upload",
-	"POST:api/recording/keep": "api/recording/keep",
-	"POST:api/recording/discard": "api/recording/discard",
+	"POST:api/recording/upload": "api/recordingApi/upload",
+	"POST:api/recording/keep": "api/recordingApi/keep",
+	"POST:api/recording/discard": "api/recordingApi/discard",
+
+	"RESOURCE:api/poems/<poem_id>/recitations": "api/resources/recitationsResource",
 
 	"GET:<author_slug>/<poem_slug>" : "site/poem",
 	"GET:<author_slug>" : "site/author"
