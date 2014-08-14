@@ -23,4 +23,13 @@ class User extends UserBase
 
 		return $hash;
 	}
+
+	public function getAvatar()
+	{
+		if ($this->facebook_user_id != null)
+		{
+			return 'https://graph.facebook.com/' . $this->facebook_user_id . '/picture';
+		}
+		return 'http://www.gravatar.com/avatar/' . md5(strtolower($this->email)) . '?d=mm';
+	}
 }

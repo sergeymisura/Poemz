@@ -19,6 +19,7 @@
 				_order = order;
 				_index = 0;
 				app.data.recitations = [];
+				$element.find('.recitation-list').html('');
 				this.loadMore();
 			},
 
@@ -30,7 +31,22 @@
 						index: _index,
 						order: _order
 					}
-				);
+				).success(
+					function(response) {
+						app.data.recitations = app.data.recitations.concat(response.data.recitations);
+						var idx = 0;
+						services.rendering(
+							'recitation',
+							response.data.recitations,
+							{
+								index: function() { return _index + (++idx); }
+							}
+						);
+						$element.find('.recitation-list').append($element.find('.recitation-template>div').removeClass('rendered'));
+						$element.find('.loading').hide();
+					},
+					this
+				)
 			}
 
 		};

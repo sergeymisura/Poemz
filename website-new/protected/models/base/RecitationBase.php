@@ -10,8 +10,9 @@
  * @property  integer performer_id Database column
  * @property  mixed   created Database column
  * @property  integer latest Database column
- * @property  Poem poem Relation
+ * @property  integer votes Database column
  * @property  User performer Relation
+ * @property  Poem poem Relation
  * @property  RecitationData recitation_data Relation
  * @property  RecitationVote[] recitation_votes Relation
  */
@@ -47,8 +48,8 @@ abstract class RecitationBase extends Model
 	public function relations()
 	{
 		return array(
-			'poem' => array(self::BELONGS_TO, 'Poem', 'poem_id'),
 			'performer' => array(self::BELONGS_TO, 'User', 'performer_id'),
+			'poem' => array(self::BELONGS_TO, 'Poem', 'poem_id'),
 			'recitation_data' => array(self::HAS_ONE, 'RecitationData', 'recitation_id'),
 			'recitation_votes' => array(self::HAS_MANY, 'RecitationVote', 'recitation_id')
 		);

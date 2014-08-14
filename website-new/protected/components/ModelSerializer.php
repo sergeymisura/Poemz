@@ -1,21 +1,21 @@
 <?php
 abstract class ModelSerializer
 {
-	private $_model;
+	protected $model;
 
 	public function __construct(Model $model)
 	{
-		$this->_model = $model;
+		$this->model = $model;
 	}
 
 	public function collectAttributes()
 	{
-		$attributes = $this->_model->getAttributes();
-		foreach ($this->_model->metaData->relations as $name => $relation)
+		$attributes = $this->model->getAttributes();
+		foreach ($this->model->metaData->relations as $name => $relation)
 		{
-			if ($this->_model->hasRelated($name))
+			if ($this->model->hasRelated($name))
 			{
-				$attributes[$name] = $this->_model->$name;
+				$attributes[$name] = $this->model->$name;
 			}
 		}
 		$this->process($attributes);

@@ -23,5 +23,7 @@ class UserSerializer extends ModelSerializer
 		unset($attributes['activation_code']);
 		unset($attributes['facebook_user_id']);
 		unset($attributes['facebook_token']);
+
+		$attributes['avatar'] = $this->model->getAvatar();
 	}
 }
