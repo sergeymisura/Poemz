@@ -9,7 +9,8 @@
 					'.record-now': this.displayRecorder,
 					'.recorder': {
 						'created': this.recitationCreated
-					}
+					},
+					'.listen': this.listen
 				});
 
 				$element.find('.nice-scroll').niceScroll({
@@ -52,6 +53,11 @@
 			recitationCreated: function() {
 				$element.find('.now-playing').hide();
 				$element.find('.recitation-created').fadeIn();
+			},
+
+			listen: function($source) {
+				var recitation = app.data.recitations[$source.data('index')];
+				app.get('.now-playing').display(recitation);
 			}
 		};
 	});

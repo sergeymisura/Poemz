@@ -12,6 +12,8 @@
  * @property  mixed   text Database column
  * @property  string  first_line Database column
  * @property  string  slug Database column
+ * @property  integer topic_id Database column
+ * @property  Topic topic Relation
  * @property  User submitted_by Relation
  * @property  Author author Relation
  * @property  Recitation[] recitations Relation
@@ -48,6 +50,7 @@ abstract class PoemBase extends Model
 	public function relations()
 	{
 		return array(
+			'topic' => array(self::BELONGS_TO, 'Topic', 'topic_id'),
 			'submitted_by' => array(self::BELONGS_TO, 'User', 'submitted_by'),
 			'author' => array(self::BELONGS_TO, 'Author', 'author_id'),
 			'recitations' => array(self::HAS_MANY, 'Recitation', 'poem_id')

@@ -34,12 +34,13 @@
 				).success(
 					function(response) {
 						app.data.recitations = app.data.recitations.concat(response.data.recitations);
-						var idx = 0;
 						services.rendering(
 							'recitation',
 							response.data.recitations,
 							{
-								index: function() { return _index + (++idx); }
+								index: function(recitation) {
+									return app.data.recitations.indexOf(recitation);
+								}
 							}
 						);
 						$element.find('.recitation-list').append($element.find('.recitation-template>div').removeClass('rendered'));

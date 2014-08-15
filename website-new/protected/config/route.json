@@ -3,6 +3,8 @@
 	"GET:images/<image_id>.jpg" : "images/index",
 	"GET:logout" : "site/logout",
 
+	"GET:media/<id>" : "site/media",
+
 	"POST:api/auth": "api/authApi/db",
 	"POST:api/auth/facebook": "api/authApi/facebook",
 
@@ -11,6 +13,7 @@
 	"POST:api/recording/discard": "api/recordingApi/discard",
 
 	"RESOURCE:api/poems/<poem_id>/recitations": "api/resources/recitationsResource",
+	"POST:api/poems/<poem_id>/recitations/<id>/prepare": "api/resources/recitationsResource/prepare",
 
 	"GET:<author_slug>/<poem_slug>" : "site/poem",
 	"GET:<author_slug>" : "site/author"

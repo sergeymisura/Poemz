@@ -63,62 +63,68 @@
 					Congratulations! Your recitation has been created. Let's wait and see what others think of your performance.
 				</div>
 
-				<div class="well now-playing hide-light">
-					<h4>Now playing</h4>
-					<div  class="row">
-						<div class="col-sm-3">
-							<img class="thumbnail" src="<?= Yii::app()->baseUrl ?>/assets/img/portrait_placeholder_3.jpg" />
-						</div>
-						<div class="col-sm-9 recited-by">
-							<div>recited by</div>
-							<h4><a href="#">robratterman</a></h4>
-						</div>
-					</div>
-					<div class="player"><img src="<?= Yii::app()->baseUrl ?>/assets/img/player_stub.png" width="100%" height="30px" /></div>
-					<div class="row">
-						<div class="col-sm-6">
-							<h5><a href="#">Vote!</a></h5>
-						</div>
-						<div class="col-sm-6">
-							<div class="pull-right">
-								<img src="<?= Yii::app()->baseUrl ?>/assets/img/comments.png" class="pull-left" />
-								<h5 class="pull-left comments-toggle"><a href="#" class="toggle-comments" data-count="3">3 comments</a></h5>
+				<div class="now-playing hide-light" data-controller="poem-now-playing">
+					<div class="well" data-template="now-playing">
+						<h4>Now playing</h4>
+						<div  class="row">
+							<div class="col-sm-3">
+								<img class="thumbnail" data-src="${ performer.avatar }" />
+							</div>
+							<div class="col-sm-9 recited-by">
+								<div>recited by</div>
+								<h4><a href="#">${ performer.username }</a></h4>
 							</div>
 						</div>
-					</div>
-
-					<div class="comments hide-light">
-						<div class="row comment">
-							<div class="col-sm-2 text-center">
-								<img class="thumbnail" src="<?= Yii::app()->baseUrl ?>/assets/img/portrait_placeholder_5.jpg" />
-							</div>
-							<div class="col-sm-10 comment-text">
-								<p><a class="username" href="#">sergey</a> <span class="text-muted small pull-right">May 20, 2013 at 7:45am</span></p>
-								<p class="small">This is awful and robratterman sucks!</p>
-								<p class="small"><a href="#">Reply</a></p>
-							</div>
-						</div>
-						<div class="row comment">
-							<div class="col-sm-2 col-sm-offset-2">
-								<img class="thumbnail" src="<?= Yii::app()->baseUrl ?>/assets/img/portrait_placeholder_4.jpg" />
-							</div>
-							<div class="col-sm-8 comment-text">
-								<p><a class="username" href="#">robert-bobert</a> <span class="text-muted small pull-right">May 21, 2013 at 3:10am</span></p>
-								<p class="small">Yeah, this guy is just nuts!</p>
-							</div>
-						</div>
-						<div class="row comment">
-							<div class="col-sm-2 col-sm-offset-2">
-								<img class="thumbnail" src="<?= Yii::app()->baseUrl ?>/assets/img/portrait_placeholder_3.jpg" />
-							</div>
-							<div class="col-sm-8 comment-text">
-								<p><a class="username" href="#">robratterman</a> <span class="text-muted small pull-right">May 21, 2013 at 3:12am</span></p>
-								<p class="small">YOU BOTH ARE FIRED!!!</p>
-							</div>
-						</div>
+						<div class="player"><audio data-src="${ media }" style="width: 100%"/></div>
 						<div class="row">
-							<div class="col-sm-12">
-								<input type="text" placeholder="Post your comment here" class="form-control" />
+							<div class="col-sm-6">
+								<h5><a href="#">Vote!</a></h5>
+							</div>
+							<div class="col-sm-6">
+								<div class="pull-right">
+									<img src="<?= Yii::app()->baseUrl ?>/assets/img/comments.png" class="pull-left" />
+									<h5 class="pull-left comments-toggle">
+										<a href="#" class="toggle-comments" data-count="${ topic ? topic.comments_count : 0 }">
+											${ topic ? topic.comments_count : 0 } comments
+										</a>
+									</h5>
+								</div>
+							</div>
+						</div>
+
+						<div class="comments hide-light">
+							<div class="row comment">
+								<div class="col-sm-2 text-center">
+									<img class="thumbnail" src="<?= Yii::app()->baseUrl ?>/assets/img/portrait_placeholder_5.jpg" />
+								</div>
+								<div class="col-sm-10 comment-text">
+									<p><a class="username" href="#">sergey</a> <span class="text-muted small pull-right">May 20, 2013 at 7:45am</span></p>
+									<p class="small">This is awful and robratterman sucks!</p>
+									<p class="small"><a href="#">Reply</a></p>
+								</div>
+							</div>
+							<div class="row comment">
+								<div class="col-sm-2 col-sm-offset-2">
+									<img class="thumbnail" src="<?= Yii::app()->baseUrl ?>/assets/img/portrait_placeholder_4.jpg" />
+								</div>
+								<div class="col-sm-8 comment-text">
+									<p><a class="username" href="#">robert-bobert</a> <span class="text-muted small pull-right">May 21, 2013 at 3:10am</span></p>
+									<p class="small">Yeah, this guy is just nuts!</p>
+								</div>
+							</div>
+							<div class="row comment">
+								<div class="col-sm-2 col-sm-offset-2">
+									<img class="thumbnail" src="<?= Yii::app()->baseUrl ?>/assets/img/portrait_placeholder_3.jpg" />
+								</div>
+								<div class="col-sm-8 comment-text">
+									<p><a class="username" href="#">robratterman</a> <span class="text-muted small pull-right">May 21, 2013 at 3:12am</span></p>
+									<p class="small">YOU BOTH ARE FIRED!!!</p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-12">
+									<input type="text" placeholder="Post your comment here" class="form-control" />
+								</div>
 							</div>
 						</div>
 					</div>
@@ -129,13 +135,13 @@
 						<div class="recitation" data-template="recitation">
 							<div class="row">
 								<div class="col-sm-1">
-									<h5 class="index">${ index() }</h5>
+									<h5 class="index">${ index($data) + 1 }</h5>
 								</div>
 								<div class="col-sm-2">
-									<button type="button" class="btn btn-default listen">Listen</button>
+									<button type="button" class="btn btn-default listen" data-index="${ index($data) }">Listen</button>
 								</div>
 								<div class="col-sm-2">
-									<img class="thumbnail" src="${ performer.avatar }" />
+									<img class="thumbnail" data-src="${ performer.avatar }" />
 								</div>
 								<div class="col-sm-7">
 									<div class="info">
@@ -147,7 +153,7 @@
 											<div class="col-sm-6 text-right">
 												<nobr>
 													<img src="<?= Yii::app()->baseUrl ?>/assets/img/comments_sm.png"/>
-													<a href="#" data-count="3" class="toggle-comments">3 comments</a>
+													<a href="#" data-count="${ (topic ? topic.comments_count : 0) }" class="toggle-comments">${ (topic ? topic.comments_count : 0) } comments</a>
 												</nobr>
 											</div>
 										</div>

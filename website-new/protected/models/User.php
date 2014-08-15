@@ -28,7 +28,7 @@ class User extends UserBase
 	{
 		if ($this->facebook_user_id != null)
 		{
-			return 'https://graph.facebook.com/' . $this->facebook_user_id . '/picture';
+			return 'https://graph.facebook.com/' . $this->facebook_user_id . '/picture?type=large';
 		}
 		return 'http://www.gravatar.com/avatar/' . md5(strtolower($this->email)) . '?d=mm';
 	}

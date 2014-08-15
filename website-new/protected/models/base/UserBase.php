@@ -19,6 +19,7 @@
  * @property  Author[] authors Relation
  * @property  Image[] images Relation
  * @property  Poem[] poems Relation
+ * @property  Post[] posts Relation
  * @property  Recitation[] recitations Relation
  * @property  RecitationVote[] recitation_votes Relation
  * @property  UserSession[] user_sessions Relation
@@ -58,6 +59,7 @@ abstract class UserBase extends Model
 			'authors' => array(self::HAS_MANY, 'Author', 'submitter_id'),
 			'images' => array(self::HAS_MANY, 'Image', 'author_id'),
 			'poems' => array(self::HAS_MANY, 'Poem', 'submitted_by'),
+			'posts' => array(self::HAS_MANY, 'Post', 'author_id'),
 			'recitations' => array(self::HAS_MANY, 'Recitation', 'performer_id'),
 			'recitation_votes' => array(self::HAS_MANY, 'RecitationVote', 'voter_id'),
 			'user_sessions' => array(self::HAS_MANY, 'UserSession', 'user_id')
