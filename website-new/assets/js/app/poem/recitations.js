@@ -9,10 +9,11 @@
 
 			init: function() {
 				services.events({
-
+					'.order a': this.changeOrder,
+					'.more-tab': this.loadMore
 				});
 
-				this.load('created desc');
+				this.load('new');
 			},
 
 			load: function(order) {
@@ -20,6 +21,7 @@
 				_index = 0;
 				app.data.recitations = [];
 				$element.find('.recitation-list').html('');
+				$element.find('.more-tab').show();
 				this.loadMore();
 			},
 
@@ -33,6 +35,11 @@
 					}
 				).success(
 					function(response) {
+						$element.find('.loading').hide();
+						if (response.data.recitations.length == 0) {
+							$element.find('.more-tab').hide();
+							return;
+						}
 						app.data.recitations = app.data.recitations.concat(response.data.recitations);
 						services.rendering(
 							'recitation',
@@ -43,13 +50,20 @@
 								}
 							}
 						);
-						$element.find('.recitation-list').append($element.find('.recitation-template>div').removeClass('rendered'));
-						$element.find('.loading').hide();
+						$element.find('.recitation-list').append($($element.find('.recitation-template').html()));
+						$element.find('.recitation-list .recitation-rendered').removeClass('recitation-rendered');
+						_index = app.data.recitations.length;
 					},
 					this
 				)
-			}
+			},
 
+			changeOrder: function($source)
+			{
+				$element.find('.order li').removeClass('active');
+				$source.parent('li').addClass('active');
+				this.load($source.data('sort'));
+			}
 		};
 	});
 })(jQuery, app);

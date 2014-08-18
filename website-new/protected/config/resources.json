@@ -61,7 +61,8 @@
 
 	"css": {
 		"files": [
-			"mediaelement/mediaelementplayer.css"
+			"mediaelement/mediaelementplayer.css",
+			"font-awesome/css/font-awesome.css"
 		]
 	}
 }

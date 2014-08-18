@@ -25,6 +25,13 @@ class RecitationsResourceController extends ApiController
 			$this->sendError('404', 'ERR_NOT_FOUND', 'Poem not found');
 		}
 
+		$order = 'created desc';
+
+		if ($this->request->getQuery('order') == 'best')
+		{
+			$order = 'votes desc';
+		}
+
 		$recitations = Recitation::model()->with(array('performer','topic.comments_count'))->findAllByAttributes(
 			array(
 				'poem_id' => $poem_id
@@ -32,7 +39,7 @@ class RecitationsResourceController extends ApiController
 			array(
 				'offset' => $this->request->getQuery('index', 0),
 				'limit' => 15,
-				'order' => 't.' . $this->request->getQuery('order', 'created desc')
+				'order' => 't.' . $order
 			)
 		);
 

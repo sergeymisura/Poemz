@@ -1,3 +1,6 @@
+
+@color-yellow: #f8c015;
+
 html, body {
   height: 100%;
 }
@@ -95,6 +98,14 @@ html, body {
       }
     }
   }
+
+  &.nav-right > li {
+    float: right;
+  }
+
+  &.nav-small > li > a {
+      padding: 3px 8px;
+  }
 }
 
 h3, h4, h5, h6 {
@@ -127,4 +138,26 @@ h3 {
 .loading {
   min-height: 100px;
   background: url(../img/loader.gif) center no-repeat;
+}
+
+.icon {
+  font-size: 150%;
+  color: @brand-primary;
+}
+
+.more {
+  border-top: solid 1px @brand-primary;
+
+  span {
+    cursor: pointer;
+    float: right;
+    background: @brand-primary url(../img/icon_more.png) no-repeat 50px 6px;
+    font: 11px arial bold;
+    padding: 2px 25px 3px 15px;
+    color: white;
+
+    &:hover {
+      background-color: darken(@brand-primary, 8%);
+    }
+  }
 }

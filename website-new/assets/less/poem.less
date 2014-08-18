@@ -30,13 +30,14 @@
   }
 
   .recitations-header {
-    padding-left: 20px;
+    .nav {
+      & > li {
+        margin-top: 12px;
+      }
+    }
   }
 
   .recitations {
-    border-top: dashed 1px #c8c8c8;
-    padding: 15px 20px;
-
     .recitation {
 
       margin-bottom: 10px;
@@ -46,6 +47,10 @@
         > div {
           padding-left: 0;
           padding-right: 0;
+        }
+
+        > div:last-child {
+          padding-right: 15px;
         }
 
         .index {
