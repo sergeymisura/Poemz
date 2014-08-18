@@ -10,6 +10,8 @@
  * @property  integer submitter_id Database column
  * @property  integer avatar_id Database column
  * @property  string  slug Database column
+ * @property  string  wiki_url Database column
+ * @property  mixed   wiki_excerpt Database column
  * @property  User submitter Relation
  * @property  Image avatar Relation
  * @property  Poem[] poems Relation

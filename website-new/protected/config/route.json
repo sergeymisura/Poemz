@@ -12,6 +12,7 @@
 	"POST:api/recording/keep": "api/recordingApi/keep",
 	"POST:api/recording/discard": "api/recordingApi/discard",
 
+	"RESOURCE:api/authors": "api/resources/authorsResource",
 	"RESOURCE:api/poems/<poem_id>/recitations": "api/resources/recitationsResource",
 	"POST:api/poems/<poem_id>/recitations/<id>/prepare": "api/resources/recitationsResource/prepare",
 

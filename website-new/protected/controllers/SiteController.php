@@ -28,7 +28,14 @@ class SiteController extends PageController
 		 * @var  Author  $author
 		 */
 		$author = Author::model()->findByAttributes(array('slug' => $author_slug));
-		var_dump($author->getAttributes());
+
+		if ($author == null)
+		{
+			$this->notFound();
+		}
+
+		$this->setPageData('author', $author);
+		$this->render('author', array('author' => $author));
 	}
 
 	public function actionPoem($author_slug, $poem_slug)
@@ -38,7 +45,18 @@ class SiteController extends PageController
 		 * @var  Poem    $poem
 		 */
 		$author = Author::model()->findByAttributes(array('slug' => $author_slug));
+
+		if ($author == null)
+		{
+			$this->notFound();
+		}
+
 		$poem = Poem::model()->findByAttributes(array('author_id' => $author->id, 'slug' => $poem_slug));
+
+		if ($poem == null)
+		{
+			$this->notFound();
+		}
 
 		$this->contentClass = 'column-container';
 		$this->setPageData('poem', $poem);

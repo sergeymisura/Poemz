@@ -18,7 +18,7 @@
  * @property  RecitationData recitation_data Relation
  * @property  RecitationVote[] recitation_votes Relation
  */
-abstract class 	RecitationBase extends Model
+abstract class RecitationBase extends Model
 {
 	/**
 	 * Returns an instance of the model class
