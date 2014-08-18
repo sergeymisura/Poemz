@@ -13,7 +13,7 @@
 				</div>
 				<div class="col-sm-9">
 					<h3><?= $this->text($poem->title) ?></h3>
-					<div>by <a href=""><?= $this->text($poem->author->name) ?></a></div>
+					<div>by <a href="<?= $this->createUrl('site/author', array('author_slug' => $poem->author->slug)) ?>"><?= $this->text($poem->author->name) ?></a></div>
 				</div>
 			</div>
 			<div class="poem-text"><?= $this->text($poem->text) ?></div>
@@ -208,6 +208,9 @@
 
 					<br/>
 
+					<div class="alert alert-warning hide-light no-recordings">
+						No one have recorded this poem yet! Be the first!
+					</div>
 					<div class="recitation-list"></div>
 
 					<div class="loading"></div>

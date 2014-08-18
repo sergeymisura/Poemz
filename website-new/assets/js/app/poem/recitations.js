@@ -37,6 +37,9 @@
 					function(response) {
 						$element.find('.loading').hide();
 						if (response.data.recitations.length == 0) {
+							if (app.data.recitations.length == 0) {
+								$element.find('.no-recordings').fadeIn();
+							}
 							$element.find('.more-tab').hide();
 							return;
 						}
