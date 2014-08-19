@@ -29,5 +29,44 @@
 
 		</div>
 		<!-- /Left side -->
+
+		<!-- Right side -->
+		<div class="col-sm-6">
+			<ul class="nav nav-tabs nav-right nav-small order">
+				<li><a href="#" data-sort="new">Newest</a></li>
+				<li><a href="#" data-sort="best">The best</a></li>
+				<li class="active"><a href="#" data-sort="first-line">By first line</a></li>
+				<li><a href="#" data-sort="title">By title</a></li>
+			</ul>
+
+			<div class="letters text-justify">
+				<span class="letters-container" data-template="letters">
+					{{each letters }}
+						{{if active }}
+							<a href="#letter-${ letter }">${ letter }</a>
+						{{else}}
+							<span>${ letter }</span>
+						{{/if}}
+					{{/each}}
+				</span>
+				<span class="final"></span>
+			</div>
+
+			<div class="row poems" data-template="poems">
+				{{each columns}}
+					<div class="col-sm-6">
+						{{each $value}}
+							{{if isHeader }}
+								<h3 class="section-header"><a id="${ link }">${ text }</a></h3>
+							{{else}}
+								<h5 class="title"><a href="#">${ title }</a></h5>
+								<div class="first-line">${ first_line }</div>
+							{{/if}}
+						{{/each}}
+					</div>
+				{{/each}}
+			</div>
+		</div>
+		<!-- /Right side -->
 	</div>
 </div>

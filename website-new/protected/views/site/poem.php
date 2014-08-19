@@ -16,7 +16,7 @@
 					<div>by <a href="<?= $this->createUrl('site/author', array('author_slug' => $poem->author->slug)) ?>"><?= $this->text($poem->author->name) ?></a></div>
 				</div>
 			</div>
-			<div class="poem-text"><?= $this->text($poem->text) ?></div>
+			<div class="poem-text"><?= $this->text($poem->poem_text->text) ?></div>
 			<br/>
 			<div class="recording-fade">
 				<div>

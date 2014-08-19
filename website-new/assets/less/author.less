@@ -1,0 +1,43 @@
+
+.author-page {
+  .letters {
+    margin-top: 15px;
+    border-bottom: dashed 1px @color-gray;
+    line-height: 11px;
+
+    > .letters-container {
+      > a,span {
+        font-size: 125%;
+      }
+
+      span {
+        color: @color-gray;
+      }
+    }
+
+    > span.final {
+      display: inline-block;
+      height: 1px;
+      width: 100%;
+    }
+  }
+
+  .poems {
+    .section-header {
+      border-bottom: solid 3px @text-color;
+
+      > a {
+        color: @text-color;
+      }
+
+      > a:hover {
+        text-decoration: none;
+        color: @text-color;
+      }
+    }
+
+    .title {
+      margin-bottom: 0;
+    }
+  }
+}

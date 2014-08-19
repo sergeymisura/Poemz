@@ -25,17 +25,40 @@ class SiteController extends PageController
 	public function actionAuthor($author_slug)
 	{
 		/**
-		 * @var  Author  $author
+		 * @var  Author      $author
 		 */
-		$author = Author::model()->findByAttributes(array('slug' => $author_slug));
+		$author = Author::model()->with('poems')->findByAttributes(array('slug' => $author_slug));
 
 		if ($author == null)
 		{
 			$this->notFound();
 		}
 
+		$title_letters = Yii::app()->db->createCommand()
+			->selectDistinct('ucase(left(title, 1)) first_letter')
+			->from('poem')
+			->where('author_id = :author')
+			->having('first_letter >= \'A\' and first_letter <= \'Z\'')
+			->order('first_letter')
+			->queryColumn(array(':author' => $author->id));
+
+		$line_letters = Yii::app()->db->createCommand()
+			->selectDistinct('ucase(left(first_line, 1)) first_letter')
+			->from('poem')
+			->where('author_id = :author')
+			->having('first_letter >= \'A\' and first_letter <= \'Z\'')
+			->order('first_letter')
+			->queryColumn(array(':author' => $author->id));
+
 		$this->setPageData('author', $author);
-		$this->render('author', array('author' => $author));
+		$this->setPageData('title_letters', $title_letters);
+		$this->setPageData('line_letters', $line_letters);
+		$this->render(
+			'author',
+			array(
+				'author' => $author
+			)
+		);
 	}
 
 	public function actionPoem($author_slug, $poem_slug)
