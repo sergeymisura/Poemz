@@ -1,9 +1,10 @@
 {
 	"GET:/" : "site/index",
-	"GET:images/<image_id>.jpg" : "images/index",
 	"GET:logout" : "site/logout",
+	"GET:new" : "site/new",
 
 	"GET:media/<id>" : "site/media",
+	"GET:images/<image_id>.jpg" : "images/index",
 
 	"POST:api/auth": "api/authApi/db",
 	"POST:api/auth/facebook": "api/authApi/facebook",

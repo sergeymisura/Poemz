@@ -27,7 +27,7 @@ class SiteController extends PageController
 		/**
 		 * @var  Author      $author
 		 */
-		$author = Author::model()->with('poems')->findByAttributes(array('slug' => $author_slug));
+		$author = Author::model()->with('poems.recitations_count')->findByAttributes(array('slug' => $author_slug));
 
 		if ($author == null)
 		{
@@ -84,6 +84,11 @@ class SiteController extends PageController
 		$this->contentClass = 'column-container';
 		$this->setPageData('poem', $poem);
 		$this->render('poem', array('poem' => $poem));
+	}
+
+	public function actionNew()
+	{
+		$this->render('new');
 	}
 
 	public function actionLogout()

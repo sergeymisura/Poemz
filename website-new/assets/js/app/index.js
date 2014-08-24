@@ -148,8 +148,9 @@
 			return app.config.baseUrl + '/' + author.slug;
 		},
 
-		poem: function(poem) {
-			return app.config.baseUrl + '/' + poem.author.slug + '/' + poem.slug;
+		poem: function(poem, author) {
+			author = author || poem.author;
+			return app.config.baseUrl + '/' + author.slug + '/' + poem.slug;
 		}
 	};
 

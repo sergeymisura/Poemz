@@ -13,7 +13,33 @@ class AuthorsResourceController extends ApiController
 	 */
 	public function actionList()
 	{
-		$this->sendError(501, 'ERR_NOT_IMPLEMENTED', 'The action you are requesting is not implemented');
+		/**
+		 * @var  Author[]  $authors
+		 */
+		$criteria = new CDbCriteria;
+
+		$query = $this->request->getQuery('q');
+		if ($query)
+		{
+			$criteria->addCondition('name like :query');
+			$query = str_replace('%', '', $query);
+			$query = str_replace('?', '', $query);
+			$criteria->params[':query'] = $query . '%';
+		}
+
+		$count = Author::model()->count($criteria);
+
+		$criteria->limit = 15;
+		$criteria->offset = $this->request->getQuery('offset', 0);
+
+		$authors = Author::model()->findAll($criteria);
+		$this->send(
+			array(
+				'authors' => $authors,
+				'count' => $count,
+				'offset' => $criteria->offset
+			)
+		);
 	}
 
 	/**
@@ -63,7 +89,37 @@ class AuthorsResourceController extends ApiController
 	 */
 	public function actionCreate()
 	{
-		$this->sendError(501, 'ERR_NOT_IMPLEMENTED', 'The action you are requesting is not implemented');
+		/**
+		 * @var  Author  $author
+		 */
+
+		if ($this->session == null)
+		{
+			$this->authFailed();
+		}
+
+		if (!isset($this->payload->name))
+		{
+			$this->sendError(400, 'ERR_INVALID', 'Author\'s name is required');
+		}
+
+		if (Author::model()->findByAttributes(array('name' => $this->payload->name)) != null)
+		{
+			$this->sendError(400, 'ERR_EXISTS', 'Author with this name already exists');
+		}
+
+		$author = new Author;
+		$author->submitter_id = $this->session->user_id;
+		$author->name = $this->payload->name;
+		$author->slug = Model::slugify($author->name);
+		$author->pullWikiInfo();
+		$author->save();
+
+		$this->send(
+			array(
+				'author' => $author
+			)
+		);
 	}
 
 	/**

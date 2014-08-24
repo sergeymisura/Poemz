@@ -10,22 +10,20 @@
 		<!-- Left side -->
 		<div class="col-sm-6">
 
-			<!-- Author's info -->
 			<div class="row">
 				<div class="col-sm-3">
 					<img class="thumbnail full-width" src="<?= $author->avatar->url ?>"/>
 				</div>
 				<div class="col-sm-9">
 					<h3><?= $this->text($author->name) ?></h3>
-					<br/>
-					<div class="wiki" data-template="wiki">
-						<div>{{html wiki_excerpt }}</div>
-						<p class="small text-right"><a href="${ wiki_url }">more on Wikipedia</a></p>
-					</div>
-					<div class="wiki-loading loading hide-light"></div>
 				</div>
 			</div>
-			<!-- /Author's info -->
+
+			<div class="wiki" data-template="wiki">
+				<div>{{html wiki_excerpt }}</div>
+				<p class="small text-right"><a href="${ wiki_url }" target="_blank">more on Wikipedia</a></p>
+			</div>
+			<div class="wiki-loading loading hide-light"></div>
 
 		</div>
 		<!-- /Left side -->
@@ -33,9 +31,9 @@
 		<!-- Right side -->
 		<div class="col-sm-6">
 			<ul class="nav nav-tabs nav-right nav-small order">
-				<li><a href="#" data-sort="new">Newest</a></li>
-				<li><a href="#" data-sort="best">The best</a></li>
-				<li class="active"><a href="#" data-sort="first-line">By first line</a></li>
+<!--				<li><a href="#" data-sort="new">Newest</a></li>
+				<li><a href="#" data-sort="polpular">Most popular</a></li>  -->
+				<li class="active"><a href="#" data-sort="first_line">By first line</a></li>
 				<li><a href="#" data-sort="title">By title</a></li>
 			</ul>
 
@@ -59,7 +57,7 @@
 							{{if isHeader }}
 								<h3 class="section-header"><a id="${ link }">${ text }</a></h3>
 							{{else}}
-								<h5 class="title"><a href="#">${ title }</a></h5>
+								<h5 class="title"><a href="${ app.urls.poem($value, app.data.author) }">${ title }</a></h5>
 								<div class="first-line">${ first_line }</div>
 							{{/if}}
 						{{/each}}

@@ -42,6 +42,7 @@
 				"js/app/poem/recitations.js",
 				"js/app/poem/now-playing.js",
 				"js/app/author/author.js",
+				"js/app/new/new.js",
 				"js/app/services/auth.js",
 				"js/app/services/recording.js",
 				"js/app/services/recording-html5.js",
