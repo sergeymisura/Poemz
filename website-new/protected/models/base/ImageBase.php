@@ -9,6 +9,7 @@
  * @property  integer author_id Database column
  * @property  mixed   content Database column
  * @property  Author[] authors Relation
+ * @property  Author[] authors Relation
  * @property  User author Relation
  */
 abstract class ImageBase extends Model
@@ -43,6 +44,7 @@ abstract class ImageBase extends Model
 	public function relations()
 	{
 		return array(
+			'authors' => array(self::HAS_MANY, 'Author', 'avatar_original_id'),
 			'authors' => array(self::HAS_MANY, 'Author', 'avatar_id'),
 			'author' => array(self::BELONGS_TO, 'User', 'author_id')
 		);

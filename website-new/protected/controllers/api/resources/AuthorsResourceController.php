@@ -24,7 +24,7 @@ class AuthorsResourceController extends ApiController
 			$criteria->addCondition('name like :query');
 			$query = str_replace('%', '', $query);
 			$query = str_replace('?', '', $query);
-			$criteria->params[':query'] = $query . '%';
+			$criteria->params[':query'] = '%' . $query . '%';
 		}
 
 		$count = Author::model()->count($criteria);

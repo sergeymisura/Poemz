@@ -27,6 +27,12 @@ class Image extends ImageBase
 
 		ob_start();
 		imagejpeg($new);
-		$this->content = ob_get_clean();
+
+		$new_image = new Image;
+		$new_image->author_id = $this->author_id;
+		$new_image->content = ob_get_clean();
+		$new_image->save();
+
+		return $new_image;
 	}
 }

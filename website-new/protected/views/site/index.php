@@ -37,7 +37,7 @@
 	<br/>
 
 	<div class="text-center">
-		<button type="button" class="btn btn-primary btn-lg record-now">Record your favorite poem now!</button>
+		<a href="<?= $this->createUrl('site/new') ?>" class="btn btn-primary btn-lg record-now">Record your favorite poem now!</a>
 	</div>
 
 	<br/>

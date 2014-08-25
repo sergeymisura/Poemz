@@ -14,6 +14,7 @@
 	"POST:api/recording/discard": "api/recordingApi/discard",
 
 	"RESOURCE:api/authors": "api/resources/authorsResource",
+	"RESOURCE:api/authors/<author_id>/poems": "api/resources/poemsResource",
 	"RESOURCE:api/poems/<poem_id>/recitations": "api/resources/recitationsResource",
 	"POST:api/poems/<poem_id>/recitations/<id>/prepare": "api/resources/recitationsResource/prepare",
 

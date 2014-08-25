@@ -12,6 +12,8 @@
  * @property  string  slug Database column
  * @property  string  wiki_url Database column
  * @property  mixed   wiki_excerpt Database column
+ * @property  integer avatar_original_id Database column
+ * @property  Image avatar_original Relation
  * @property  User submitter Relation
  * @property  Image avatar Relation
  * @property  Poem[] poems Relation
@@ -48,6 +50,7 @@ abstract class AuthorBase extends Model
 	public function relations()
 	{
 		return array(
+			'avatar_original' => array(self::BELONGS_TO, 'Image', 'avatar_original_id'),
 			'submitter' => array(self::BELONGS_TO, 'User', 'submitter_id'),
 			'avatar' => array(self::BELONGS_TO, 'Image', 'avatar_id'),
 			'poems' => array(self::HAS_MANY, 'Poem', 'author_id')

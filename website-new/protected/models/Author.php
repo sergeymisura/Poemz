@@ -25,12 +25,13 @@ class Author extends AuthorBase
 					'inprop' => 'url',
 					'exsentences' => '10',
 					'pithumbsize' => '160',
-					'titles' => $this->name
+					'titles' => $this->name,
+					'redirects' => '1'
 				)
 			);
 
 			$data = json_decode($response->data(), true);
-			//var_dump($data);die();
+
 			if ($data && isset($data['query']) && isset($data['query']['pages']) && count($data['query']['pages']) > 0)
 			{
 				$ids = array_keys($data['query']['pages']);
@@ -38,22 +39,39 @@ class Author extends AuthorBase
 				$this->wiki_url = $page['fullurl'];
 				$this->wiki_excerpt = $page['extract'];
 
-				if (isset($page['thumbnail']))
+				if (isset($page['pageimage']))
 				{
-					$thumb_url = $page['thumbnail']['source'];
-					if ($page['thumbnail']['width'] < 160) {
-						$thumb_url = str_replace('/' . $page['thumbnail']['width'] . 'px-', '/160px-', $thumb_url);
-					}
-					$content = @file_get_contents($thumb_url);
-					if ($content)
-					{
-						$image = new Image;
-						$image->author_id = $this->submitter_id;
-						$image->content = $content;
-						$image->square(160);
-						$image->save();
+					$response = $http->get(
+						'http://en.wikipedia.org/w/api.php',
+						array(
+							'format' => 'json',
+							'action' => 'query',
+							'prop' => 'imageinfo',
+							'iiprop' => 'url',
+							'titles' => 'File:' . $page['pageimage']
+						)
+					);
 
-						$this->avatar_id = $image->id;
+					$image_data = json_decode($response->data(), true);
+					if ($image_data && isset($image_data['query']) && isset($image_data['query']['pages']) && count($image_data['query']['pages']) > 0)
+					{
+						$ids = array_keys($image_data['query']['pages']);
+						$image_page = $image_data['query']['pages'][$ids[0]];
+
+						if (isset($image_page['imageinfo']) && count($image_page['imageinfo']) && isset($image_page['imageinfo'][0]['url']))
+						{
+							$content = @file_get_contents($image_page['imageinfo'][0]['url']);
+							if ($content)
+							{
+								$image = new Image;
+								$image->author_id = $this->submitter_id;
+								$image->content = $content;
+								$image->save();
+
+								$this->avatar_original_id = $image->id;
+								$this->avatar_id = $image->square(160)->id;
+							}
+						}
 					}
 				}
 
