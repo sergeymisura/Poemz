@@ -2,6 +2,7 @@
 	"GET:/" : "site/index",
 	"GET:logout" : "site/logout",
 	"GET:new" : "site/new",
+	"GET:new/<author_slug>" : "site/new",
 
 	"GET:media/<id>" : "site/media",
 	"GET:images/<image_id>.jpg" : "images/index",

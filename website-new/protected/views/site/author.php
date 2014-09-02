@@ -64,6 +64,11 @@
 					</div>
 				{{/each}}
 			</div>
+
+			<br/>
+			<div class="text-center">
+				<a class="btn btn-primary" href="<?= $this->createUrl('site/new') . '/'. $author->slug ?>">Can't find your favorite? Add it!</a>
+			</div>
 		</div>
 		<!-- /Right side -->
 	</div>

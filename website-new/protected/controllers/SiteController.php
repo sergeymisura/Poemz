@@ -91,8 +91,17 @@ class SiteController extends PageController
 		$this->render('poem', array('poem' => $poem));
 	}
 
-	public function actionNew()
+	public function actionNew($author_slug=null)
 	{
+		if ($author_slug)
+		{
+			$author = Author::model()->findByAttributes(array('slug' => $author_slug));
+			if ($author == null)
+			{
+				$this->notFound();
+			}
+			$this->setPageData('author', $author);
+		}
 		$this->render('new');
 	}
 

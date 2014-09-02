@@ -18,11 +18,16 @@
 			},
 
 			appReady: function() {
-				app.get($element.find('.author-finder')).display({
-					uri: 'authors',
-					data: {},
-					name: 'authors'
-				});
+				if (typeof app.data.author == 'undefined') {
+					app.get($element.find('.author-finder')).display({
+						uri: 'authors',
+						data: {},
+						name: 'authors'
+					});
+				}
+				else {
+					$element.find('.author-finder').trigger('objectSelected', app.data.author);
+				}
 			},
 
 			authorSelected: function($source, ev, author) {
