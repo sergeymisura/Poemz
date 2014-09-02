@@ -4,7 +4,7 @@
 
 		var _lastRequest = 0;
 		var _lastRequestText = null;
-		var _apiSettings;
+		var _options;
 
 		return {
 
@@ -18,8 +18,8 @@
 				});
 			},
 
-			display: function(apiSettings) {
-				_apiSettings = apiSettings;
+			display: function(options) {
+				_options = options;
 				$element.find('.input-query').focus();
 			},
 
@@ -47,12 +47,12 @@
 							return;
 						}
 						services.api.get(
-							_apiSettings.uri,
-							$.extend({ q: q }, _apiSettings.data)
+							_options.uri,
+							$.extend({ q: q }, _options.data)
 						).success(
 							function(response) {
 								if (requestIndex == _lastRequest) {
-									this.updateObjectsList(response.data[_apiSettings.name], q);
+									this.updateObjectsList(response.data[_options.name], q, response.data.count);
 								}
 							},
 							this
@@ -66,22 +66,33 @@
 				this.objectSelected(ev.data);
 			},
 
-			updateObjectsList: function(authors, request) {
+			updateObjectsList: function(objects, request, total) {
 				$element.find('.results-area > *').hide();
-				if (authors.length > 0) {
-					services.rendering('select-object', authors);
+
+				var name = $.map(request.split(' '), function (word) {
+					if (word.length > 0) {
+						return word.substr(0, 1).toUpperCase() + word.substr(1);
+					}
+					return null;
+				}).join(' ');
+				services.rendering('add-object', { name: name });
+
+				if (objects.length > 0) {
+					services.rendering('select-object', objects, _options.listFilters || {});
 					$element.find('.objects-list').fadeIn();
+
+					if (objects.length < total) {
+						$element.find('.have-more').fadeIn();
+					}
+					else {
+						$element.find('.no-more').fadeIn();
+					}
 				}
 				else {
-					var name = $.map(request.split(' '), function (word) {
-						if (word.length > 0) {
-							return word.substr(0, 1).toUpperCase() + word.substr(1);
-						}
-						return null;
-					}).join(' ');
-					services.rendering('add-object', { name: name });
 					$element.find('.no-matches').fadeIn();
 				}
+
+				$element.trigger('listUpdated', objects, request, total);
 			},
 
 			createObject: function($source) {

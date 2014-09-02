@@ -77,7 +77,56 @@ class PoemsResourceController extends ApiController
 	 */
 	public function actionCreate($author_id)
 	{
-		$this->sendError(501, 'ERR_NOT_IMPLEMENTED', 'The action you are requesting is not implemented');
+		/**
+		 * @var  Author  $author
+		 */
+
+		if ($this->session == null)
+		{
+			$this->authFailed();
+		}
+
+		$author = Author::model()->findByPk($author_id);
+		if ($author == null)
+		{
+			$this->sendError('404', 'ERR_NOT_FOUND', 'Author not found');
+		}
+
+		if (!isset($this->payload->title))
+		{
+			$this->sendError(400, 'ERR_INVALID', 'Title is required');
+		}
+
+		if (!isset($this->payload->text))
+		{
+			$this->sendError(400, 'ERR_INVALID', 'Text is required');
+		}
+
+		$text = trim($this->payload->text);
+		$lines = explode("\n", $text);
+		$first_line = $lines[0];
+		$last_char = strtolower(substr($first_line, strlen($first_line) - 1));
+		if ($last_char >= 'a' && $last_char <= 'z')
+		{
+			$first_line .= '...';
+		}
+
+		$poem = new Poem;
+		$poem->author_id = $author->id;
+		$poem->submitted_by = $this->session->user_id;
+		$poem->title = $this->payload->title;
+		$poem->slug = Model::slugify($poem->title);
+		$poem->first_line = $first_line;
+		$poem->save();
+
+		$poem_text = new PoemText;
+		$poem_text->poem_id = $poem->id;
+		$poem_text->text = $text;
+		$poem_text->save();
+
+		$poem->getRelated('poem_text');
+
+		$this->send(array('poem' => $poem));
 	}
 
 	/**

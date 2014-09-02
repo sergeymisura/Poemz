@@ -74,12 +74,30 @@
 					<div class="loading hide-light"></div>
 					<div class="objects-list poems-list hide-light">
 						<div data-template="select-object">
-							<h5 class="title"><a href="#"">${ title }</a></h5>
+							<h5 class="title"><a href="${ app.urls.poem($data, author()) }#record"">${ title }</a></h5>
 							<div class="first-line">${ first_line }</div>
 						</div>
+						<br/>
 					</div>
+					<p class="have-more alert alert-warning hide-light">We have more matching poems, so keep typing...</p>
+					<p class="add-new-poem hide-light" data-template="add-object">
+						<button type="button" class="btn btn-primary btn-add-new" data-title="${ name }">Can't find the poem? Add it!</button>
+					</p>
 				</div>
 			</div>
+			<form class="new-poem-form hide-light">
+				<div class="form-group">
+					<label for="new-poem-title">Poem title:</label>
+					<input type="text" class="form-control" id="new-poem-title" name="title" data-required="value"/>
+				</div>
+				<div class="form-group">
+					<label for="new-poem-text">Poem text:</label>
+					<textarea class="form-control" id="new-poem-text" name="text" data-required="value"></textarea>
+				</div>
+				<div class="form-group">
+					<button type="submit" class="btn btn-primary submit-poem">Submit the poem and start recording</button>
+				</div>
+			</form>
 		</div>
 		<!-- /Poem -->
 	</div>

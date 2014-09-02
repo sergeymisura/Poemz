@@ -39,7 +39,7 @@ class ApiController extends BaseController
 			echo $_GET['callback'] . '(';
 		}
 
-		echo json_encode($data);
+		echo CJSON::encode($data);
 
 		if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['callback']))
 		{

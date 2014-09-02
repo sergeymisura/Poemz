@@ -16,7 +16,12 @@ class SiteController extends PageController
 		/**
 		 * @var  Poem[]  $poems
 		 */
-		$poems = Poem::model()->with('author')->findAll(array('limit' => 6));
+		$poems = Poem::model()->with('author')->findAll(
+			array(
+				'limit' => 6,
+				'order' => 't.id desc'
+			)
+		);
 
 		$this->setPageData('poems', $poems);
 		$this->render('index');

@@ -126,7 +126,7 @@
 		app.config = {
 			baseUrl: '<?= Yii::app()->baseUrl ?>'
 		};
-		app.data = <?= json_encode($this->page_data) ?>;
+		app.data = <?= CJSON::encode($this->page_data) ?>;
 	</script>
 </body>
 </html>

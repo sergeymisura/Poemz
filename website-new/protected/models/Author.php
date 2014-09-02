@@ -69,7 +69,7 @@ class Author extends AuthorBase
 								$image->save();
 
 								$this->avatar_original_id = $image->id;
-								$this->avatar_id = $image->square(160)->id;
+								$this->avatar_id = $image->square(200)->id;
 							}
 						}
 					}

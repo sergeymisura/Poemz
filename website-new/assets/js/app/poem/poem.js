@@ -13,11 +13,19 @@
 					'.listen': this.listen
 				});
 
+				services.events(app, {
+					ready: this.appReady
+				});
+
 				$element.find('.nice-scroll').niceScroll({
 					cursorcolor: '#e3e3e3'
 				});
+			},
 
-				//this.displayRecorder();
+			appReady: function() {
+				if (document.location.hash == '#record') {
+					this.displayRecorder();
+				}
 			},
 
 			toggleComments: function($source) {
@@ -47,7 +55,7 @@
 			},
 
 			displayRecorder: function() {
-				app.get('.recorder').display($element.find('.now-playing').width() + 40);
+				app.get('.recorder').display($element.find('.recitations').width() + 40);
 			},
 
 			recitationCreated: function() {
