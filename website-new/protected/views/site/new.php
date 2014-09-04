@@ -81,7 +81,7 @@
 					</div>
 					<p class="have-more alert alert-warning hide-light">We have more matching poems, so keep typing...</p>
 					<p class="add-new-poem hide-light" data-template="add-object">
-						<button type="button" class="btn btn-primary btn-add-new" data-title="${ name }">Can't find the poem? Add it!</button>
+						<button type="button" class="btn btn-primary btn-add-new" data-name="${ name }">Can't find the poem? Add it!</button>
 					</p>
 				</div>
 			</div>

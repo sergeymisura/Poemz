@@ -45,6 +45,7 @@
 			newPoemForm: function($source, ev, title) {
 				$element.find('.poem-selector').hide();
 				$element.find('.new-poem-form').fadeIn();
+				$element.find('.new-poem-form #new-poem-title').val(title).focus();
 			},
 
 			submitPoem: function($source) {
