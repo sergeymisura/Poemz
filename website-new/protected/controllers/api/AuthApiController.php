@@ -118,7 +118,12 @@ class AuthApiController extends ApiController
 
 	private function createAuthCookie($session)
 	{
+		$options = array();
+		if (Yii::app()->baseUrl != '')
+		{
+			$options['path'] = Yii::app()->baseUrl;
+		}
 		$cookie_name = Yii::app()->params['auth_cookie'];
-		$this->request->cookies[$cookie_name] = new CHttpCookie($cookie_name, $session->id, array('path' => Yii::app()->baseUrl));
+		$this->request->cookies[$cookie_name] = new CHttpCookie($cookie_name, $session->id, $options);
 	}
 }
