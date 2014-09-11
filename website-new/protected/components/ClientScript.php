@@ -54,12 +54,9 @@ class ClientScript extends CClientScript
 			if (isset($resources['less']))
 			{
 				$this->registerScriptFile($assets . 'js/lib/less-1.6.2.min.js');
-				foreach ($resources['less'] as $name => $options)
+				foreach ($resources['less']['files'] as $file)
 				{
-					foreach ($options['files'] as $file)
-					{
-						$this->registerLinkTag('stylesheet/less', 'text/css', $assets . $file);
-					}
+					$this->registerLinkTag('stylesheet/less', 'text/css', $assets . $file);
 				}
 			}
 		}
@@ -87,7 +84,8 @@ class ClientScript extends CClientScript
 					$this->registerScriptFile($assets . 'js' . '/' . 'compiled' . '/' . $name . '.js?' . $hash);
 				}
 			}
-			foreach ($resources['css']['files'] as $file) {
+			foreach ($resources['css']['files'] as $file)
+			{
 				if ($cdn != null)
 				{
 					$name = substr($file, strpos($file, '/') + 1);
@@ -107,10 +105,18 @@ class ClientScript extends CClientScript
 					$this->registerCssFile($assets . $file . '?' . $hash);
 				}
 			}
+			if (isset($resources['less']))
+			{
+				foreach ($resources['less']['files'] as $file)
+				{
+					$css = $assets . DIRECTORY_SEPARATOR . 'css' . DIRECTORY_SEPARATOR . pathinfo($file, PATHINFO_FILENAME) . '.css';
+					$this->registerCssFile($css . '?' . $hash);
+				}
+			}
 		}
 	}
 
-	public function buildResources($file_name, $hash_only=false)
+	public static function buildResources($file_name, $hash_only=false)
 	{
 		$resources = json_decode(file_get_contents($file_name), true);
 		if ($resources == null)
@@ -119,7 +125,7 @@ class ClientScript extends CClientScript
 		}
 
 		$default_source_path = Yii::app()->basePath . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'assets';
-		$compiler_path = Yii::getPathOfAlias('common') . DIRECTORY_SEPARATOR . 'compiler.jar';
+		$compiler_path = Yii::app()->basePath . DIRECTORY_SEPARATOR . 'compiler.jar';
 		$output_path = $default_source_path . DIRECTORY_SEPARATOR . 'js' . DIRECTORY_SEPARATOR . 'compiled';
 
 		if (!is_dir($output_path))
@@ -165,6 +171,18 @@ class ClientScript extends CClientScript
 			}
 
 			$content .= file_get_contents($output);
+		}
+
+		foreach ($resources['less']['files'] as $file)
+		{
+			$css_path = $default_source_path . DIRECTORY_SEPARATOR . 'css';
+			if (!is_dir($css_path))
+			{
+				mkdir($css_path);
+			}
+			$source = $default_source_path . DIRECTORY_SEPARATOR . $file;
+			$dest = $default_source_path . DIRECTORY_SEPARATOR . 'css' . DIRECTORY_SEPARATOR . pathinfo($source, PATHINFO_FILENAME) . '.css';
+			passthru('lessc ' . $source . ' ' . $dest);
 		}
 
 		foreach ($resources['css']['files'] as $file)

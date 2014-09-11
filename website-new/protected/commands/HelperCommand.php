@@ -1,6 +1,11 @@
 <?php
 class HelperCommand extends CConsoleCommand
 {
+	public function actionBuild()
+	{
+		ClientScript::buildResources(Yii::app()->basePath . '/config/resources.json');
+	}
+
 	public function actionPassword($id, $password)
 	{
 		/**

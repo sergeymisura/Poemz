@@ -57,11 +57,9 @@
 	},
 
 	"less": {
-		"application": {
-			"files": [
-				"less/application.less"
-			]
-		}
+		"files": [
+			"less/application.less"
+		]
 	},
 
 	"css": {
