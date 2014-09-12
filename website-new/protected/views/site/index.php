@@ -21,8 +21,9 @@
 					<div class="first-line">${ first_line }</div>
 				</div>
 				<div class="read-by">
-					<div>#1 read by <a href="#">robratterman</a></div>
-					<div>#2 read by <a href="#">bobert</a></div>
+					{{each recitations(id)}}
+						<div>#${ $index + 1 } read by <a href="${ app.urls.poem($data) }#listen-${ id }">${ performer.username }</a></div>
+					{{/each}}
 				</div>
 				<h6 class="text-center"><a href="${ app.urls.poem($data) }">Hear more versions</a></h6>
 				<div><a href="${ app.urls.poem($data) }#record" class="btn btn-primary btn-xs record-own">Record your version</a></div>

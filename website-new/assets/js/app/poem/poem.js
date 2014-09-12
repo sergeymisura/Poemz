@@ -20,11 +20,25 @@
 				$element.find('.nice-scroll').niceScroll({
 					cursorcolor: '#e3e3e3'
 				});
+
+
 			},
 
 			appReady: function() {
 				if (document.location.hash == '#record') {
 					this.displayRecorder();
+				}
+
+				if (document.location.hash.indexOf('#listen-') == 0) {
+					var id = parseInt(document.location.hash.split('-')[1]);
+					services.api.get(
+						'poems/' + app.data.poem.id + '/recitations/' + id
+					).success(
+						function(response) {
+							app.get('.now-playing').display(response.data.recitation, false);
+						},
+						this
+					);
 				}
 			},
 
@@ -65,7 +79,7 @@
 
 			listen: function($source) {
 				var recitation = app.data.recitations[$source.data('index')];
-				app.get('.now-playing').display(recitation);
+				app.get('.now-playing').display(recitation, true);
 			}
 		};
 	});

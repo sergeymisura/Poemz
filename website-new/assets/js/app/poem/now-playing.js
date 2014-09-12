@@ -4,6 +4,7 @@
 
 		var _recitation;
 		var _player;
+		var _autoStart;
 
 		return {
 
@@ -13,8 +14,9 @@
 				});
 			},
 
-			display: function(recitation) {
+			display: function(recitation, autoStart) {
 				_recitation = recitation;
+				_autoStart = autoStart;
 				if ($element.is(':visible')) {
 					$element.slideUp(500, $.proxy(this.prepare, this));
 				}
@@ -44,7 +46,9 @@
 				$element.find('audio').mediaelementplayer({
 					success: function(player) {
 						_player = player;
-						_player.play();
+						if (_autoStart) {
+							_player.play();
+						}
 					}
 				});
 				$element.slideDown();

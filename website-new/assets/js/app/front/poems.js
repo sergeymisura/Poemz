@@ -11,7 +11,19 @@
 					'.nav-tabs a': this.listSelected
 				});
 
-				services.rendering('poem', app.data.poems);
+				this.render(app.data.poems, app.data.recitations);
+			},
+
+			render: function (poems, recitations) {
+				services.rendering(
+					'poem',
+					poems,
+					{
+						recitations: function(poemId) {
+							return recitations[poemId];
+						}
+					}
+				);
 			},
 
 			listSelected: function($source) {
@@ -32,15 +44,15 @@
 					$element.find('.nav-tabs li').removeClass('active');
 					$source.parent().addClass('active');
 
+					$element.find('.loading').css('height', $element.find('.poems').height() + 'px').show();
 					$element.find('.poems').hide();
-					$element.find('.loading').show();
 					currentList = list;
 
 					services.api.get(
 						'poems/' + list
 					).success(
 						function(response) {
-							services.rendering('poem', response.data.poems);
+							this.render(response.data.poems, response.data.recitations);
 							$element.find('.poems').fadeIn();
 							$element.find('.loading').hide();
 						},

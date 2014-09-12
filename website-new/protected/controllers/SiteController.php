@@ -19,6 +19,7 @@ class SiteController extends PageController
 		$poems = Poem::newest();
 
 		$this->setPageData('poems', $poems);
+		$this->setPageData('recitations', Poem::topRecitations($poems));
 		$this->render('index');
 	}
 

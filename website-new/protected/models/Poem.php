@@ -67,4 +67,19 @@ class Poem extends PoemBase
 
 		return $result;
 	}
+
+	/**
+	 * @param   Poem[]  $list
+	 *
+	 * @return  array  An associative array with poem id as keys and top 2 recitations as values
+	 */
+	public static function topRecitations($list)
+	{
+		$recitations = array();
+		foreach ($list as $poem)
+		{
+			$recitations[$poem->id] = $poem->getRelated('recitations', true, array('order' => 'votes desc', 'limit' => 2, 'with' => 'performer'));
+		}
+		return $recitations;
+	}
 }

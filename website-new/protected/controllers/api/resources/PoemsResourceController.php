@@ -81,6 +81,7 @@ class PoemsResourceController extends ApiController
 		$this->send(
 			array(
 				'poems' => $results,
+				'recitations' => Poem::topRecitations($results),
 				'count' => $count,
 				'offset' => $offset
 			)
