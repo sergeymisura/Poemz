@@ -6,8 +6,12 @@
 
 		return {
 
+			isLoggedIn: function() {
+				return app.data.session != null;
+			},
+
 			login: function(callback) {
-				if (app.data.session != null) {
+				if (this.isLoggedIn()) {
 					callback(app.data.session);
 					return;
 				}

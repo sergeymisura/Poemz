@@ -55,6 +55,38 @@ class PoemsResourceController extends ApiController
 		);
 	}
 
+	public function actionMixedList($list)
+	{
+		$count = Poem::model()->count();
+		$results = array();
+		$offset = $this->request->getQuery('offset', 0);
+
+		switch ($list)
+		{
+			case 'best':
+				$results = Poem::best($offset);
+				break;
+			case 'random':
+				$results = Poem::random();
+				break;
+			case 'newest':
+				$results = Poem::newest($offset);
+				break;
+			case 'favorite':
+				$results = Poem::favorite($this->session->user, $offset);
+				break;
+			default:
+				$this->sendError(404, 'ERR_NOT_FOUND', 'Unknown list');
+		}
+		$this->send(
+			array(
+				'poems' => $results,
+				'count' => $count,
+				'offset' => $offset
+			)
+		);
+	}
+
 	/**
 	 * Sends back a requested instance of Poem
 	 *

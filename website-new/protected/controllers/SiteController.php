@@ -16,12 +16,7 @@ class SiteController extends PageController
 		/**
 		 * @var  Poem[]  $poems
 		 */
-		$poems = Poem::model()->with('author')->findAll(
-			array(
-				'limit' => 6,
-				'order' => 't.id desc'
-			)
-		);
+		$poems = Poem::newest();
 
 		$this->setPageData('poems', $poems);
 		$this->render('index');
@@ -30,7 +25,7 @@ class SiteController extends PageController
 	public function actionAuthor($author_slug)
 	{
 		/**
-		 * @var  Author      $author
+		 * @var  Author  $author
 		 */
 		$author = Author::model()->with('poems.recitations_count')->findByAttributes(array('slug' => $author_slug));
 
