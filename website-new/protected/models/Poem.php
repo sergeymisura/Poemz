@@ -33,9 +33,13 @@ class Poem extends PoemBase
 			->limit($limit)
 			->offset($offset);
 
-		$ids = $command->queryColumn();
+		$result = array();
+		foreach ($command->query() as $row)
+		{
+			$result[] = Poem::model()->with('author')->findByPk($row['poem_id']);
+		}
 
-		return Poem::model()->with('author')->findAll('t.id in (' . implode(',', $ids) . ')');
+		return $result;
 	}
 
 	public static function random($limit=6)
