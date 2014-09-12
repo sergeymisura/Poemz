@@ -16,7 +16,20 @@ class Poem extends PoemBase
 
 	public static function best($offset=0, $limit=6)
 	{
-		return self::random($limit);
+		$command = Yii::app()->db->createCommand()
+			->selectDistinct('poem_id')
+			->from('recitation')
+			->order('votes desc')
+			->limit($limit)
+			->offset($offset);
+
+		$result = array();
+		foreach ($command->query() as $row)
+		{
+			$result[] = Poem::model()->with('author')->findByPk($row['poem_id']);
+		}
+
+		return $result;
 	}
 
 	public static function favorite($user, $offset=0, $limit=6)
@@ -47,7 +60,10 @@ class Poem extends PoemBase
 		$result = array();
 		$offsets = array();
 
-		$total = Poem::model()->count();
+		$total = Yii::app()->db->createCommand()
+			->select('count(distinct poem_id)')
+			->from('recitation')
+			->queryScalar();
 
 		while (count($offsets) < min($limit, $total))
 		{
@@ -59,7 +75,8 @@ class Poem extends PoemBase
 					array(
 						'order' => 't.id',
 						'limit' => 1,
-						'offset' => $new_offset
+						'offset' => $new_offset,
+						'condition' => 't.id in (select poem_id from recitation)'
 					)
 				);
 			}
