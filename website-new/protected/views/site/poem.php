@@ -91,7 +91,7 @@
 							</div>
 						</div>
 
-						<div class="comments hide-light">
+						<div class="comments hide-light" data-controller="poem-comments" data-topic="${ topic }">
 							<div class="row comment">
 								<div class="col-sm-2 text-center">
 									<img class="thumbnail" src="<?= Yii::app()->baseUrl ?>/assets/img/portrait_placeholder_5.jpg" />

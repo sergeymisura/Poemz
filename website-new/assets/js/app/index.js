@@ -35,6 +35,7 @@
 			init: function() {
 				services.events({
 					'.login-button': this.login,
+					'.create-account-button': this.createAccount,
 					'.have-account': this.modeChange
 				});
 
@@ -87,7 +88,37 @@
 					).error(
 						function(code) {
 							if (code == 403) {
-								$element.find('.login-error').fadeIn();
+								$element.find('.login-error').html('Please try again...').fadeIn();
+								return true;
+							}
+						},
+						this
+					)
+				}
+			},
+
+			createAccount: function() {
+				$element.find('.login-error').hide();
+				var form = services.form($element);
+				if (form.validate()) {
+					var data = form.collect();
+					if (data.password != data.confirmation) {
+						$element.find('.login-error').html('Password confirmation does not match.').fadeIn();
+						return;
+					}
+
+					services.api.post(
+							'auth/register',
+							form.collect()
+						).success(
+						function(response) {
+							services.auth.loginCompleted(response.data.session);
+						},
+						this
+					).error(
+						function(code, response) {
+							if (code == 400) {
+								$element.find('.login-error').html(response.message).fadeIn();
 								return true;
 							}
 						},

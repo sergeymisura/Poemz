@@ -8,6 +8,7 @@
 	"GET:images/<image_id>.jpg" : "images/index",
 
 	"POST:api/auth": "api/authApi/db",
+	"POST:api/auth/register": "api/authApi/register",
 	"POST:api/auth/facebook": "api/authApi/facebook",
 
 	"POST:api/recording/upload": "api/recordingApi/upload",

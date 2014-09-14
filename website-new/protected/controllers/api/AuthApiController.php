@@ -116,6 +116,47 @@ class AuthApiController extends ApiController
 		$this->send(array('session' => $session));
 	}
 
+	public function actionRegister()
+	{
+		/**
+		 * @var  User  $user
+		 */
+		if (!isset($this->payload->email))
+		{
+			$this->sendError(400, 'ERR_INVALID', 'Email is required');
+		}
+
+		if (!isset($this->payload->password))
+		{
+			$this->sendError(400, 'ERR_INVALID', 'Password is required');
+		}
+
+		if (!isset($this->payload->username))
+		{
+			$this->sendError(400, 'ERR_INVALID', 'Username is required');
+		}
+
+		if (User::model()->countByAttributes(array('username' => $this->payload->username)) > 0)
+		{
+			$this->sendError(400, 'ERR_INVALID', 'Sorry, this stage name is already taken.');
+		}
+
+		if (User::model()->countByAttributes(array('email' => $this->payload->email)) > 0)
+		{
+			$this->sendError(400, 'ERR_INVALID', 'The user with this email already exists.');
+		}
+
+		$user = new User;
+		$user->email = $this->payload->email;
+		$user->password_hash = $user->createPasswordHash($this->payload->password);
+		$user->username = $this->payload->username;
+		$user->save();
+
+		$session = UserSession::createSession($user);
+		$this->createAuthCookie($session);
+		$this->send(array('session' => $session));
+	}
+
 	private function createAuthCookie($session)
 	{
 		$options = array();
