@@ -57,6 +57,7 @@ class AuthApiController extends ApiController
 			$user = new User;
 			$user->facebook_user_id = $apiResponse->id;
 			$user->email = $apiResponse->email;
+			$user->created = User::getDbDate(null, true);
 
 			$display_name = strtolower($apiResponse->first_name . '_' . substr($apiResponse->last_name, 0, 1));
 			$idx = 0;
@@ -150,6 +151,7 @@ class AuthApiController extends ApiController
 		$user->email = $this->payload->email;
 		$user->password_hash = $user->createPasswordHash($this->payload->password);
 		$user->username = $this->payload->username;
+		$user->created = User::getDbDate(null, true);
 		$user->save();
 
 		$session = UserSession::createSession($user);
