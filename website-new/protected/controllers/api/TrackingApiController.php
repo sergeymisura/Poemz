@@ -23,38 +23,7 @@ class TrackingApiController extends ApiController
 			$this->sendError(404, 'ERR_NOT_FOUND', 'Recitation is not found');
 		}
 
-		$visitor = null;
-
-		if ($this->request->cookies->contains('poemz'))
-		{
-			$visitor = Visitor::findByCookie($this->request->cookies['poemz']->value);
-		}
-
-		if ($visitor == null)
-		{
-			$visitor = new Visitor;
-		}
-
-		if ($this->session)
-		{
-			if (count($this->session->user->visitors) > 0)
-			{
-				$visitor = $this->session->user->visitors[0];
-			}
-			else
-			{
-				if ($visitor->user_id != $this->session->user_id && $visitor->user_id != null)
-				{
-					$visitor = new Visitor;
-				}
-				if ($visitor->user_id == null)
-				{
-					$visitor->user_id = $this->session->user_id;
-				}
-			}
-		}
-
-		$visitor->save();
+		$visitor = Visitor::matchVisitor($this->request, $this->session);
 
 		$stat_record = Stat::model()->findByAttributes(
 			array(
@@ -73,15 +42,6 @@ class TrackingApiController extends ApiController
 			$stat_record->stat_hash = $this->payload->hash;
 			$stat_record->save();
 		}
-
-		$this->request->cookies['poemz'] = new CHttpCookie(
-			'poemz',
-			$visitor->cookieValue,
-			array(
-				'path' => Yii::app()->baseUrl != '' ? Yii::app()->baseUrl : '/',
-				'expire' => time() + 365 * 24 * 60 * 60
-			)
-		);
 
 		$this->send();
 	}

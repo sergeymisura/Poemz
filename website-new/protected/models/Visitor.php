@@ -22,4 +22,59 @@ class Visitor extends VisitorBase
 		$pair = explode('#', $decrypted);
 		return self::model()->findByPk($pair[0]);
 	}
+
+	/**
+	 * Matches unique visitor record to the current user
+	 *
+	 * @param   HttpRequestExt  $request
+	 * @param   UserSession     $session
+	 *
+	 * @return  Visitor
+	 */
+	public static function matchVisitor($request, $session)
+	{
+		$visitor = null;
+
+		if ($request->cookies->contains('poemz'))
+		{
+			$visitor = self::findByCookie($request->cookies['poemz']->value);
+		}
+
+		if ($visitor == null)
+		{
+			$visitor = new self;
+		}
+
+		if ($session)
+		{
+			if (count($session->user->visitors) > 0)
+			{
+				$visitor = $session->user->visitors[0];
+			}
+			else
+			{
+				if ($visitor->user_id != $session->user_id && $visitor->user_id != null)
+				{
+					$visitor = new self;
+				}
+				if ($visitor->user_id == null)
+				{
+					$visitor->user_id = $session->user_id;
+				}
+			}
+		}
+
+		$visitor->save();
+
+		$request->cookies['poemz'] = new CHttpCookie(
+			'poemz',
+			$visitor->cookieValue,
+			array(
+				'path' => Yii::app()->baseUrl != '' ? Yii::app()->baseUrl : '/',
+				'expire' => time() + 365 * 24 * 60 * 60
+			)
+		);
+
+		return $visitor;
+	}
 }

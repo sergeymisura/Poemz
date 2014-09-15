@@ -76,9 +76,7 @@ class AuthApiController extends ApiController
 		$user->facebook_token = $this->payload->access_token;
 		$user->save();
 
-		$session = UserSession::createSession($user);
-		$this->createAuthCookie($session);
-		$this->send(array('session' => $session));
+		$this->authenticated($user);
 	}
 
 	function actionDb()
@@ -112,9 +110,7 @@ class AuthApiController extends ApiController
 			$this->authFailed();
 		}
 
-		$session = UserSession::createSession($user);
-		$this->createAuthCookie($session);
-		$this->send(array('session' => $session));
+		$this->authenticated($user);
 	}
 
 	public function actionRegister()
@@ -154,8 +150,21 @@ class AuthApiController extends ApiController
 		$user->created = User::getDbDate(null, true);
 		$user->save();
 
+		$this->authenticated($user);
+	}
+
+	/**
+	 * Creates a session, matches the visitor record etc.
+	 *
+	 * @param   User  $user
+	 *
+	 * @return  void
+	 */
+	private function authenticated($user)
+	{
 		$session = UserSession::createSession($user);
 		$this->createAuthCookie($session);
+		Visitor::matchVisitor($this->request, $session);
 		$this->send(array('session' => $session));
 	}
 
