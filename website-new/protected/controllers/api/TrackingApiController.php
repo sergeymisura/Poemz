@@ -40,9 +40,16 @@ class TrackingApiController extends ApiController
 			{
 				$visitor = $this->session->user->visitors[0];
 			}
-			if ($visitor->user_id == null)
+			else
 			{
-				$visitor->user_id = $this->session->user_id;
+				if ($visitor->user_id != $this->session->user_id && $visitor->user_id != null)
+				{
+					$visitor = new Visitor;
+				}
+				if ($visitor->user_id == null)
+				{
+					$visitor->user_id = $this->session->user_id;
+				}
 			}
 		}
 
