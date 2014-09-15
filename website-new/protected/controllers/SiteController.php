@@ -82,6 +82,15 @@ class SiteController extends PageController
 			$this->notFound();
 		}
 
+		if ($poem->topic_id == null)
+		{
+			$topic = new Topic;
+			$topic->save();
+
+			$poem->topic_id = $topic->id;
+			$poem->save();
+		}
+
 		$this->contentClass = 'column-container';
 		$this->setPageData('poem', $poem);
 		$this->render('poem', array('poem' => $poem));

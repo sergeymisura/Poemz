@@ -25,7 +25,9 @@
 				<br/>
 				<div>
 					<img src="<?= Yii::app()->baseUrl ?>/assets/img/comments.png" class="pull-left" />
-					<h5 class="pull-left comments-toggle"><a href="#" class="toggle-comments" data-count="2">2 comments</a></h5>
+					<h5 class="pull-left comments-toggle">
+						<a href="#" class="toggle-comments" data-count="<?= $poem->topic->comments_count ?>"><?= $poem->topic->comments_count ?> comments</a>
+					</h5>
 				</div>
 				<div class="clearfix"></div>
 				<div class="comments hide-light">

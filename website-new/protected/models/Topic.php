@@ -4,6 +4,7 @@
  *
  * @package Regent.Common.Models
  *
+ * @param  int  comments_count
  */
 class Topic extends TopicBase
 {
