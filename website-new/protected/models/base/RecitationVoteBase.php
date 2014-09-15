@@ -10,8 +10,8 @@
  * @property  integer voter_id Database column
  * @property  mixed   voted Database column
  * @property  integer direction Database column
- * @property  User voter Relation
  * @property  Recitation recitation Relation
+ * @property  User voter Relation
  */
 abstract class RecitationVoteBase extends Model
 {
@@ -45,8 +45,8 @@ abstract class RecitationVoteBase extends Model
 	public function relations()
 	{
 		return array(
-			'voter' => array(self::BELONGS_TO, 'User', 'voter_id'),
-			'recitation' => array(self::BELONGS_TO, 'Recitation', 'recitation_id')
+			'recitation' => array(self::BELONGS_TO, 'Recitation', 'recitation_id'),
+			'voter' => array(self::BELONGS_TO, 'User', 'voter_id')
 		);
 	}
 

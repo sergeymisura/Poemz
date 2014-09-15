@@ -23,6 +23,7 @@
  * @property  Recitation[] recitations Relation
  * @property  RecitationVote[] recitation_votes Relation
  * @property  UserSession[] user_sessions Relation
+ * @property  Visitor[] visitors Relation
  */
 abstract class UserBase extends Model
 {
@@ -62,7 +63,8 @@ abstract class UserBase extends Model
 			'posts' => array(self::HAS_MANY, 'Post', 'author_id'),
 			'recitations' => array(self::HAS_MANY, 'Recitation', 'performer_id'),
 			'recitation_votes' => array(self::HAS_MANY, 'RecitationVote', 'voter_id'),
-			'user_sessions' => array(self::HAS_MANY, 'UserSession', 'user_id')
+			'user_sessions' => array(self::HAS_MANY, 'UserSession', 'user_id'),
+			'visitors' => array(self::HAS_MANY, 'Visitor', 'user_id')
 		);
 	}
 

@@ -20,6 +20,7 @@
 	"GET:api/poems/<list>": "api/resources/poemsResource/mixedList",
 	"RESOURCE:api/poems/<poem_id>/recitations": "api/resources/recitationsResource",
 	"POST:api/poems/<poem_id>/recitations/<id>/prepare": "api/resources/recitationsResource/prepare",
+	"POST:api/tracking": "api/trackingApi/index",
 
 	"GET:<author_slug>/<poem_slug>" : "site/poem",
 	"GET:<author_slug>" : "site/author"

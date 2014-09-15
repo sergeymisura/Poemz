@@ -5,6 +5,7 @@
 		var _recitation;
 		var _player;
 		var _autoStart;
+		var _statHash;
 
 		return {
 
@@ -41,11 +42,35 @@
 				}
 			},
 
+			createStatHash: function()
+			{
+				_statHash = SHA1(Math.random() + '_' + (new Date().valueOf()) + '_' + _recitation.id);
+			},
+
 			render: function() {
+
+				var controller = this;
+				this.createStatHash();
+
 				services.rendering('now-playing', _recitation);
 				$element.find('audio').mediaelementplayer({
 					success: function(player) {
 						_player = player;
+
+						_player.addEventListener(
+							'ended',
+							function() {
+								services.api.post(
+									'tracking',
+									{
+										recitation_id: _recitation.id,
+										hash: _statHash
+									}
+								)
+								controller.createStatHash();
+							}
+						);
+
 						if (_autoStart) {
 							_player.play();
 						}

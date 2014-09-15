@@ -12,11 +12,12 @@
  * @property  integer latest Database column
  * @property  integer votes Database column
  * @property  integer topic_id Database column
- * @property  Topic topic Relation
  * @property  User performer Relation
  * @property  Poem poem Relation
+ * @property  Topic topic Relation
  * @property  RecitationData recitation_data Relation
  * @property  RecitationVote[] recitation_votes Relation
+ * @property  Stat[] stats Relation
  */
 abstract class RecitationBase extends Model
 {
@@ -50,11 +51,12 @@ abstract class RecitationBase extends Model
 	public function relations()
 	{
 		return array(
-			'topic' => array(self::BELONGS_TO, 'Topic', 'topic_id'),
 			'performer' => array(self::BELONGS_TO, 'User', 'performer_id'),
 			'poem' => array(self::BELONGS_TO, 'Poem', 'poem_id'),
+			'topic' => array(self::BELONGS_TO, 'Topic', 'topic_id'),
 			'recitation_data' => array(self::HAS_ONE, 'RecitationData', 'recitation_id'),
-			'recitation_votes' => array(self::HAS_MANY, 'RecitationVote', 'recitation_id')
+			'recitation_votes' => array(self::HAS_MANY, 'RecitationVote', 'recitation_id'),
+			'stats' => array(self::HAS_MANY, 'Stat', 'recitation_id')
 		);
 	}
 

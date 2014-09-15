@@ -11,7 +11,8 @@
 				"js/lib/jquery/jquery.nicescroll.min.js",
 				"js/lib/html5-recorder/recorder.js",
 				"bootstrap/js/bootstrap.min.js",
-				"mediaelement/mediaelement-and-player.min.js"
+				"mediaelement/mediaelement-and-player.min.js",
+				"js/lib/webtoolkit.sha1.js"
 			],
 			"level": "WHITESPACE_ONLY"
 		},

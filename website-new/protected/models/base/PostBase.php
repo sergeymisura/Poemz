@@ -12,9 +12,9 @@
  * @property  mixed   created Database column
  * @property  mixed   message Database column
  * @property  User author Relation
- * @property  Topic topic Relation
  * @property  Post parent Relation
  * @property  Post[] posts Relation
+ * @property  Topic topic Relation
  */
 abstract class PostBase extends Model
 {
@@ -49,9 +49,9 @@ abstract class PostBase extends Model
 	{
 		return array(
 			'author' => array(self::BELONGS_TO, 'User', 'author_id'),
-			'topic' => array(self::BELONGS_TO, 'Topic', 'topic_id'),
 			'parent' => array(self::BELONGS_TO, 'Post', 'parent_id'),
-			'posts' => array(self::HAS_MANY, 'Post', 'parent_id')
+			'posts' => array(self::HAS_MANY, 'Post', 'parent_id'),
+			'topic' => array(self::BELONGS_TO, 'Topic', 'topic_id')
 		);
 	}
 
