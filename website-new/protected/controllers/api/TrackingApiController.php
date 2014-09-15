@@ -29,7 +29,8 @@ class TrackingApiController extends ApiController
 		{
 			$visitor = Visitor::findByCookie($this->request->cookies['poemz']->value);
 		}
-		else
+
+		if ($visitor == null)
 		{
 			$visitor = new Visitor;
 		}
