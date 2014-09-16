@@ -13,6 +13,7 @@
  * @property  string  wiki_url Database column
  * @property  mixed   wiki_excerpt Database column
  * @property  integer avatar_original_id Database column
+ * @property  mixed   submitted Database column
  * @property  Image avatar_original Relation
  * @property  User submitter Relation
  * @property  Image avatar Relation

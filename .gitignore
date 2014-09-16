@@ -7,4 +7,6 @@
 /website-new/assets/previews
 /website-new/assets/media
 /website-new/protected/config/local.php
+/website-new/sitemap.xml
+/website-new/robots.txt
 /.idea

@@ -12,6 +12,7 @@
  * @property  string  first_line Database column
  * @property  string  slug Database column
  * @property  integer topic_id Database column
+ * @property  mixed   submitted Database column
  * @property  User submitted_by Relation
  * @property  Author author Relation
  * @property  Topic topic Relation
