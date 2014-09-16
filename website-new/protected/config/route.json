@@ -20,6 +20,11 @@
 	"GET:api/poems/<list>": "api/resources/poemsResource/mixedList",
 	"RESOURCE:api/poems/<poem_id>/recitations": "api/resources/recitationsResource",
 	"POST:api/poems/<poem_id>/recitations/<id>/prepare": "api/resources/recitationsResource/prepare",
+
+	"GET:api/poems/<poem_id>/recitations/<id>/vote": "api/resources/recitationsResource/getVote",
+	"POST:api/poems/<poem_id>/recitations/<id>/vote": "api/resources/recitationsResource/addVote",
+	"POST:api/poems/<poem_id>/recitations/<id>/revoke": "api/resources/recitationsResource/revokeVote",
+
 	"POST:api/tracking": "api/trackingApi/index",
 
 	"GET:<author_slug>/<poem_slug>" : "site/poem",

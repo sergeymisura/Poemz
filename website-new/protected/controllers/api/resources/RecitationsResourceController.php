@@ -131,4 +131,134 @@ class RecitationsResourceController extends ApiController
 
 		$this->send(array('media' => Yii::app()->baseUrl . '/assets/media/' . $recitation->id . '.mp3'));
 	}
+
+	public function actionGetVote($poem_id, $id)
+	{
+		/**
+		 * @var  Recitation      $recitation
+		 * @var  RecitationVote  $vote
+		 */
+
+		if ($this->session == null)
+		{
+			$this->sendError(401, 'ERR_NOT_AUTHORIZED', 'Please log in first.');
+		}
+
+		$recitation = Recitation::model()->findByPk($id);
+
+		if ($recitation == null || $recitation->poem_id != $poem_id)
+		{
+			$this->sendError('404', 'ERR_NOT_FOUND', 'Recitation not found');
+		}
+
+		$vote = RecitationVote::model()->findByAttributes(
+			array(
+				'recitation_id' => $recitation->id,
+				'voter_id' => $this->session->user_id
+			)
+		);
+
+		$this->send(
+			array(
+				'vote' => $vote == null ? null : $vote->direction
+			)
+		);
+	}
+
+	public function actionAddVote($poem_id, $id)
+	{
+		/**
+		 * @var  Recitation      $recitation
+		 * @var  RecitationVote  $vote
+		 */
+
+		if ($this->session == null)
+		{
+			$this->sendError(401, 'ERR_NOT_AUTHORIZED', 'Please log in first.');
+		}
+
+		$recitation = Recitation::model()->findByPk($id);
+
+		if ($recitation == null || $recitation->poem_id != $poem_id)
+		{
+			$this->sendError('404', 'ERR_NOT_FOUND', 'Recitation not found');
+		}
+
+		if ($recitation->performer_id == $this->session->user_id)
+		{
+			$this->sendError('400', 'ERR_SELF', 'You cannot vote on your own performance!');
+		}
+
+		$visitor = Visitor::matchVisitor($this->request, $this->session);
+		$count = Stat::model()->countByAttributes(
+			array(
+				'visitor_id' => $visitor->id,
+				'recitation_id' => $recitation->id
+			)
+		);
+		if ($count == 0)
+		{
+			$this->sendError('400', 'ERR_LISTEN', 'You cannot vote on the recitation you didn\'t listen!');
+		}
+
+		$vote = RecitationVote::model()->findByAttributes(
+			array(
+				'recitation_id' => $recitation->id,
+				'voter_id' => $this->session->user_id
+			)
+		);
+
+		if ($vote == null)
+		{
+			$vote = new RecitationVote;
+			$vote->recitation_id = $recitation->id;
+			$vote->voter_id = $this->session->user_id;
+			$vote->voted = Model::getDbDate(null, true);
+			$vote->direction = 1;
+			$vote->save();
+
+			$recitation->updateVotes();
+		}
+
+		$this->send(
+			array(
+				'vote' => $vote->direction
+			)
+		);
+	}
+
+	public function actionRevokeVote($poem_id, $id)
+	{
+		/**
+		 * @var  Recitation      $recitation
+		 * @var  RecitationVote  $vote
+		 */
+
+		if ($this->session == null)
+		{
+			$this->sendError(401, 'ERR_NOT_AUTHORIZED', 'Please log in first.');
+		}
+
+		$recitation = Recitation::model()->findByPk($id);
+
+		if ($recitation == null || $recitation->poem_id != $poem_id)
+		{
+			$this->sendError('404', 'ERR_NOT_FOUND', 'Recitation not found');
+		}
+
+		RecitationVote::model()->deleteAllByAttributes(
+			array(
+				'recitation_id' => $recitation->id,
+				'voter_id' => $this->session->user_id
+			)
+		);
+
+		$recitation->updateVotes();
+
+		$this->send(
+			array(
+				'vote' => null
+			)
+		);
+	}
 }

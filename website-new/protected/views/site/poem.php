@@ -78,9 +78,10 @@
 							</div>
 						</div>
 						<div class="player"><audio data-src="${ media }" style="width: 100%"/></div>
+						<div class="alert alert-danger vote-error hide-light"></div>
 						<div class="row">
 							<div class="col-sm-6">
-								<h5><a href="#">Vote!</a></h5>
+								<h5><a href="#" class="vote-link" data-action="vote">Vote!</a> (${ votes } people voted so far)</h5>
 							</div>
 							<div class="col-sm-6">
 								<div class="pull-right">

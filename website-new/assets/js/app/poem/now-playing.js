@@ -11,7 +11,7 @@
 
 			init: function() {
 				services.events({
-
+					'.vote-link': this.vote
 				});
 			},
 
@@ -23,6 +23,38 @@
 				}
 				else {
 					this.prepare();
+				}
+			},
+
+			updateVoteLink: function() {
+				if (!services.auth.isLoggedIn()) {
+					this.toggleVoteLink(true);
+				}
+				else {
+					app.data.votes = app.data.votes || {};
+					if (typeof app.data.votes[_recitation.id] == 'undefined')	{
+						services.api.get(
+							'poems/' + _recitation.poem_id + '/recitations/' + _recitation.id + '/vote'
+						).success(
+							function(response) {
+								app.data.votes[_recitation.id] = response.data.vote == null;
+								this.toggleVoteLink(app.data.votes[_recitation.id]);
+							},
+							this
+						);
+					}
+					else {
+						this.toggleVoteLink(app.data.votes[_recitation.id]);
+					}
+				}
+			},
+
+			toggleVoteLink: function(vote) {
+				if (vote) {
+					$element.find('.vote-link').html('Vote!').data('action', 'vote');
+				}
+				else {
+					$element.find('.vote-link').html('Voted').data('action', 'revoke');
 				}
 			},
 
@@ -38,7 +70,7 @@
 					);
 				}
 				else {
-					this.render(_recitation.media);
+					this.render();
 				}
 			},
 
@@ -76,7 +108,37 @@
 						}
 					}
 				});
+				this.updateVoteLink();
 				$element.slideDown();
+			},
+
+			vote: function($source) {
+				var action = $source.data('action');
+				$element.find('.vote-error').hide();
+
+				services.auth.login($.proxy(
+					function() {
+						services.api.post(
+							'poems/' + _recitation.poem_id + '/recitations/' + _recitation.id + '/' + action
+						).success(
+							function(response) {
+								app.data.votes = app.data.votes || {};
+								app.data.votes[_recitation.id] = response.data.vote == null;
+								this.toggleVoteLink(app.data.votes[_recitation.id]);
+							},
+							this
+						).error(
+							function(code, response) {
+								if (response.error == 'ERR_SELF' || response.error == 'ERR_LISTEN') {
+									$element.find('.vote-error').html(response.message).fadeIn();
+									return true;
+								}
+							},
+							this
+						);
+					},
+					this
+				));
 			}
 
 		};
