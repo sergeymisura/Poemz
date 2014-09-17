@@ -31,11 +31,11 @@
 	<?php if (count($poems) > 0): ?>
 		<div class="row">
 			<?php foreach ($poems as $poem): ?>
-				<div class="col-sm-4">
+				<div class="col-sm-4 search-result-poem">
 					<div class="pull-left">
 						<img class="img-thumbnail img-th-small" src="<?= $poem->author->avatarUrl ?>" />
 					</div>
-					<div class="pull-left" style="margin-left: 5px">
+					<div class="search-result-poem-info" >
 						<h5 class="title">
 							<a href="<?= $this->createUrl('site/poem', array('author_slug' => $poem->author->slug, 'poem_slug' => $poem->slug)) ?>">
 								<?= $this->text($poem->title) ?>
