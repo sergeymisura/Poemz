@@ -36,6 +36,10 @@ class Author extends AuthorBase
 			{
 				$ids = array_keys($data['query']['pages']);
 				$page = $data['query']['pages'][$ids[0]];
+				if (!isset($page['extract']))
+				{
+					return false;
+				}
 				$this->wiki_url = $page['fullurl'];
 				$this->wiki_excerpt = $page['extract'];
 
@@ -83,5 +87,14 @@ class Author extends AuthorBase
 		{
 			return false;
 		}
+	}
+
+	public function getAvatarUrl()
+	{
+		if ($this->avatar_id == null)
+		{
+			return Yii::app()->baseUrl . '/assets/img/mystery_man.png';
+		}
+		return $this->avatar->url;
 	}
 }

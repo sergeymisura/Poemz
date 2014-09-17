@@ -9,7 +9,7 @@
 		<div class="col-sm-6 nice-scroll">
 			<div class="row">
 				<div class="col-sm-3">
-					<img class="thumbnail full-width" src="<?= $poem->author->avatar->url ?>"/>
+					<img class="thumbnail full-width" src="<?= $poem->author->avatarUrl ?>"/>
 				</div>
 				<div class="col-sm-9">
 					<h3><?= $this->text($poem->title) ?></h3>

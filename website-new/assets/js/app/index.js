@@ -172,6 +172,9 @@
 
 	app.urls = {
 		image: function(id) {
+			if (id == null) {
+				return app.config.baseUrl + '/assets/img/mystery_man.png';
+			}
 			return app.config.baseUrl + '/images/' + id + '.jpg';
 		},
 
