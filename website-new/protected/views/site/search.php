@@ -3,6 +3,7 @@
  * @var  SiteController  $this
  * @var  Author[]        $authors
  * @var  Poem[]          $poems
+ * @var  integer         $idx
  */
 ?>
 
@@ -30,7 +31,7 @@
 	<?php endif; ?>
 	<?php if (count($poems) > 0): ?>
 		<div class="row">
-			<?php foreach ($poems as $poem): ?>
+			<?php $idx = 0; foreach ($poems as $poem): $idx++; ?>
 				<div class="col-sm-4 search-result-poem">
 					<div class="pull-left">
 						<img class="img-thumbnail img-th-small" src="<?= $poem->author->avatarUrl ?>" />
@@ -49,6 +50,7 @@
 						<br/>
 					</div>
 				</div>
+				<?php if ($idx % 3 == 0): ?></div><div class="row"><?php endif; ?>
 			<?php endforeach; ?>
 		</div>
 	<?php endif; ?>
