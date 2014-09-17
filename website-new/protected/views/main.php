@@ -108,9 +108,11 @@
 						<a href="#" class="create-account">or create account</a>
 					</form>
 				{{/if}}
-				<form class="navbar-form text-center">
+				<form class="navbar-form text-center" action="<?= Yii::app()->createUrl('site/search') ?>" method="get">
 					<div class="form-group">
-						<input type="search" class="form-control search-field" placeholder="Find your favorite poem" />
+						<input type="search" class="form-control search-field" name="q" placeholder="Find your favorite poem"
+							   value="<?= isset($_GET['q']) ? $this->text($_GET['q']) : '' ?>"
+							/>
 					</div>
 				</form>
 			</div>

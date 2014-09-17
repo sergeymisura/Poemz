@@ -118,4 +118,35 @@ class SiteController extends PageController
 		}
 		$this->redirect($this->createUrl('site/index'));
 	}
+
+	public function actionSearch()
+	{
+		$query = $this->request->getQuery('q', '');
+		if ($query == '')
+		{
+			$this->redirect($this->createUrl('site/index'));
+		}
+
+		$authors = Author::model()->findAll(
+			'name like :query',
+			array(
+				':query' => '%' . $query . '%'
+			)
+		);
+
+		$poems = Poem::model()->findAll(
+			'title like :query or first_line like :query',
+			array(
+				':query' => '%' . $query . '%'
+			)
+		);
+
+		$this->render(
+			'search',
+			array(
+				'authors' => $authors,
+				'poems' => $poems
+			)
+		);
+	}
 }

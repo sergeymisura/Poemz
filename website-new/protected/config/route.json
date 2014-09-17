@@ -1,5 +1,6 @@
 {
 	"GET:/" : "site/index",
+	"GET:search" : "site/search",
 	"GET:logout" : "site/logout",
 	"GET:new" : "site/new",
 	"GET:new/<author_slug>" : "site/new",
