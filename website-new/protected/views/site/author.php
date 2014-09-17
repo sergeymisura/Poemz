@@ -12,7 +12,7 @@
 
 			<div class="row">
 				<div class="col-sm-3">
-					<img class="thumbnail full-width" src="<?= $author->avatar->url ?>"/>
+					<img class="thumbnail full-width" src="<?= $author->avatarUrl ?>"/>
 				</div>
 				<div class="col-sm-9">
 					<h3><?= $this->text($author->name) ?></h3>

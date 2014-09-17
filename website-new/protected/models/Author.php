@@ -4,6 +4,7 @@
  *
  * @package Regent.Common.Models
  *
+ * @property  string  $avatarUrl
  */
 class Author extends AuthorBase
 {
