@@ -53,7 +53,9 @@
 								}
 							}
 						);
-						$element.find('.recitation-list').append($($element.find('.recitation-template').html()));
+						var copy = $($element.find('.recitation-template').html());
+						$element.find('.recitation-list').append($element.find('.recitation-template .recitation-rendered'));
+						$element.find('.recitation-template').html(copy);
 						$element.find('.recitation-list .recitation-rendered').removeClass('recitation-rendered');
 						_index = app.data.recitations.length;
 					},

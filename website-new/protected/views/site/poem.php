@@ -168,10 +168,10 @@
 								<div class="col-sm-2">
 									<img class="thumbnail" data-src="${ performer.avatar }" />
 								</div>
-								<div class="col-sm-5">
+								<div class="col-sm-5 text-column">
 									<div class="username"><a href="#">${ performer.username }</a></div>
 								</div>
-								<div class="col-sm-2">
+								<div class="col-sm-2 text-column">
 									<a href="#" class="btn-icon" title="Vote for this recitation">
 										<i class="fa fa-thumbs-o-up"></i> ${ votes }
 									</a>
