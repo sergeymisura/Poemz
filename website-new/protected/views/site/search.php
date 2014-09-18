@@ -31,6 +31,9 @@
 		<br/>
 	<?php endif; ?>
 	<?php if (count($poems) > 0): ?>
+		<?php if (count($authors) > 0): ?>
+			<hr/>
+		<?php endif;?>
 		<div class="row">
 			<?php $idx = 0; foreach ($poems as $poem): $idx++; ?>
 				<div class="col-sm-4 search-result-poem">
