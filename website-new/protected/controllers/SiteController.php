@@ -75,7 +75,7 @@ class SiteController extends PageController
 			$this->notFound();
 		}
 
-		$poem = Poem::model()->findByAttributes(array('author_id' => $author->id, 'slug' => $poem_slug));
+		$poem = Poem::model()->with('poem_text')->findByAttributes(array('author_id' => $author->id, 'slug' => $poem_slug));
 
 		if ($poem == null)
 		{

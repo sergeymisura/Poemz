@@ -12,28 +12,37 @@
 					<img class="thumbnail full-width" src="<?= $poem->author->avatarUrl ?>"/>
 				</div>
 				<div class="col-sm-9">
-					<h3><?= $this->text($poem->title) ?></h3>
+					<h3 class="view"><?= $this->text($poem->title) ?></h3>
+					<h3 class="edit"><input type="text" class="form-control poem-title-control" value="<?= $this->text($poem->title) ?>" data-required="value" /></h3>
 					<div>by <a href="<?= $this->createUrl('site/author', array('author_slug' => $poem->author->slug)) ?>"><?= $this->text($poem->author->name) ?></a></div>
 					<br/>
 					<div>
-						<a class="btn-icon" href="#" title="Edit the text of the poem">
+						<a class="btn-icon btn-toggle-edit" href="#" title="Edit the text of the poem">
 							<i class="fa fa-pencil-square-o"></i>
 						</a>
-						<a class="btn-icon" href="#" data-toggle="tooltip" data-placement="top" title="Flag the content as inappropriate or incorrect">
-							<i class="fa fa-flag-o"></i>
-						</a>
-						<a class="btn-icon" href="#" data-toggle="tooltip" data-placement="top" title="Watch for the new recitations of this poem">
+						<a class="btn-icon" href="#" title="Watch for the new recitations of this poem">
 							<i class="fa fa-eye"></i>
 						</a>
-						<a class="btn-icon" href="#" data-toggle="tooltip" data-placement="top" title="Go to the comments">
+						<a class="btn-icon" href="#" title="Go to the comments">
 							<i class="fa fa-comments-o"></i>
+						</a>
+						<a class="btn-icon" href="#" title="Flag the content as inappropriate or incorrect">
+							<i class="fa fa-flag-o"></i>
 						</a>
 					</div>
 				</div>
 			</div>
-			<div class="poem-text"><?= $this->text($poem->poem_text->text) ?></div>
+			<div class="poem-text view"><?= $this->text($poem->poem_text->text) ?></div>
+			<div class="edit">
+				<textarea class="form-control poem-text-control" name="text" data-required="value"><?= $this->text($poem->poem_text->text) ?></textarea>
+				<br/>
+				<div>
+					<button class="btn btn-primary btn-save-poem">Save</button>
+					<button class="btn btn-default btn-reset">Reset</button>
+				</div>
+			</div>
 			<br/>
-			<div class="recording-fade">
+			<div class="recording-fade view">
 				<div>
 					<button type="button" class="btn btn-primary btn-lg record-now">Record your version now!</button>
 				</div>
@@ -168,15 +177,18 @@
 								<div class="col-sm-2">
 									<img class="thumbnail" data-src="${ performer.avatar }" />
 								</div>
-								<div class="col-sm-5 text-column">
+								<div class="col-sm-4 text-column">
 									<div class="username"><a href="#">${ performer.username }</a></div>
 								</div>
-								<div class="col-sm-2 text-column">
+								<div class="col-sm-3 text-column text-right">
 									<a href="#" class="btn-icon" title="Vote for this recitation">
 										<i class="fa fa-thumbs-o-up"></i> ${ votes }
 									</a>
 									<a href="#" class="btn-icon" title="Toggle the comments section">
 										<i class="fa fa-comments-o"></i> ${ (topic ? topic.comments_count : 0) }
+									</a>
+									<a href="#" class="btn-icon" title="Add to the list of your favorites">
+										<i class="fa fa-star-o"></i>
 									</a>
 								</div>
 							</div>

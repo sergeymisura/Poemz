@@ -172,7 +172,56 @@ class PoemsResourceController extends ApiController
 	 */
 	public function actionUpdate($author_id, $id)
 	{
-		$this->sendError(501, 'ERR_NOT_IMPLEMENTED', 'The action you are requesting is not implemented');
+		/**
+		 * @var  Poem  $poem
+		 */
+
+		if ($this->session == null)
+		{
+			$this->authFailed();
+		}
+
+		$poem = Poem::model()->findByAttributes(
+			array(
+				'id' => $id,
+				'author_id' => $author_id
+			)
+		);
+
+		if ($poem == null)
+		{
+			$this->sendError('404', 'ERR_NOT_FOUND', 'Poem not found');
+		}
+
+		$modified = false;
+
+		if (isset($this->payload->title))
+		{
+			$poem->title = $this->payload->title;
+			$modified = true;
+		}
+
+		if (isset($this->payload->text))
+		{
+			$text = trim($this->payload->text);
+			$lines = explode("\n", $text);
+			$first_line = $lines[0];
+
+			$poem->poem_text->text = $text;
+			$poem->poem_text->save();
+
+			$poem->first_line = $first_line;
+			$modified = true;
+		}
+
+		if ($modified)
+		{
+			$poem->submitted = Poem::getDbDate(null, true);
+			$poem->submitted_by = $this->session->user_id;
+			$poem->save();
+		}
+
+		$this->send(array('poem' => $poem));
 	}
 
 	/**

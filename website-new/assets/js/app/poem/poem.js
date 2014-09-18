@@ -10,7 +10,10 @@
 					'.recorder': {
 						'created': this.recitationCreated
 					},
-					'.listen': this.listen
+					'.listen': this.listen,
+					'.btn-toggle-edit': this.toggleEdit,
+					'.btn-reset': this.resetEditing,
+					'.btn-save-poem': this.savePoem
 				});
 
 				services.events(app, {
@@ -40,6 +43,37 @@
 						this
 					);
 				}
+			},
+
+			toggleEdit: function($button) {
+				$element.toggleClass('editing');
+				$button.toggleClass('active-icon');
+			},
+
+			resetEditing: function() {
+				$element.find('.poem-title-control').val(app.data.poem.title);
+				$element.find('.poem-text-control').val(app.data.poem.poem_text.text);
+			},
+
+			savePoem: function() {
+				services.auth.login($.proxy(
+					function() {
+						if (services.form().validate()) {
+							services.api.post(
+								'authors/' + app.data.poem.author_id + '/poems/' + app.data.poem.id,
+								{
+									title: $element.find('.poem-title-control').val(),
+									text: $element.find('.poem-text-control').val()
+								}
+							).success(
+								function() {
+									document.location.reload();
+								}
+							);
+						}
+					},
+					this
+				));
 			},
 
 			toggleComments: function($source) {
