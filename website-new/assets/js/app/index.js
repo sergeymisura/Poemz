@@ -170,6 +170,13 @@
 		};
 	});
 
+	app.transformation('.btn-icon', function($element) {
+		$element.tooltip({
+			placement: 'top',
+			title: $element.attr('title')
+		});
+	});
+
 	app.urls = {
 		image: function(id) {
 			if (id == null) {

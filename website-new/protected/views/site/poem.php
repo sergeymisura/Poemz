@@ -14,6 +14,21 @@
 				<div class="col-sm-9">
 					<h3><?= $this->text($poem->title) ?></h3>
 					<div>by <a href="<?= $this->createUrl('site/author', array('author_slug' => $poem->author->slug)) ?>"><?= $this->text($poem->author->name) ?></a></div>
+					<br/>
+					<div>
+						<a class="btn-icon" href="#" title="Edit the text of the poem">
+							<i class="fa fa-pencil-square-o"></i>
+						</a>
+						<a class="btn-icon" href="#" data-toggle="tooltip" data-placement="top" title="Flag the content as inappropriate or incorrect">
+							<i class="fa fa-flag-o"></i>
+						</a>
+						<a class="btn-icon" href="#" data-toggle="tooltip" data-placement="top" title="Watch for the new recitations of this poem">
+							<i class="fa fa-eye"></i>
+						</a>
+						<a class="btn-icon" href="#" data-toggle="tooltip" data-placement="top" title="Go to the comments">
+							<i class="fa fa-comments-o"></i>
+						</a>
+					</div>
 				</div>
 			</div>
 			<div class="poem-text"><?= $this->text($poem->poem_text->text) ?></div>
@@ -153,22 +168,16 @@
 								<div class="col-sm-2">
 									<img class="thumbnail" data-src="${ performer.avatar }" />
 								</div>
-								<div class="col-sm-7">
-									<div class="info">
-										<div class="username"><a href="#">${ performer.username }</a></div>
-										<div class="row">
-											<div class="col-sm-6">
-												<nobr>${ votes } votes</nobr>
-											</div>
-											<div class="col-sm-6 text-right">
-												<nobr>
-													<a href="#" data-count="${ (topic ? topic.comments_count : 0) }" class="toggle-comments">
-														${ (topic ? topic.comments_count : 0) } comments
-													</a>
-												</nobr>
-											</div>
-										</div>
-									</div>
+								<div class="col-sm-5">
+									<div class="username"><a href="#">${ performer.username }</a></div>
+								</div>
+								<div class="col-sm-2">
+									<a href="#" class="btn-icon" title="Vote for this recitation">
+										<i class="fa fa-thumbs-o-up"></i> ${ votes }
+									</a>
+									<a href="#" class="btn-icon" title="Toggle the comments section">
+										<i class="fa fa-comments-o"></i> ${ (topic ? topic.comments_count : 0) }
+									</a>
 								</div>
 							</div>
 							<div class="comments hide-light">
