@@ -12,7 +12,7 @@
 	<br/>
 	<?php if (count($authors) > 0): ?>
 		<div class="row">
-			<?php foreach ($authors as $author) :?>
+			<?php $idx = 0; foreach ($authors as $author): $idx++; ?>
 				<div class="col-sm-2">
 					<div>
 						<a href="<?= $this->createUrl('site/author', array('author_slug' => $author->slug)) ?>">
@@ -25,6 +25,7 @@
 						</a>
 					</h5>
 				</div>
+				<?php if ($idx % 6 == 0): ?></div><div class="row"><?php endif; ?>
 			<?php endforeach; ?>
 		</div>
 		<br/>
