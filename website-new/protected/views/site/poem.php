@@ -248,7 +248,10 @@
 					<div class="step1 text-center">
 						<button type="button" class="btn btn-primary btn-lg start-recording">Start recording</button>
 						<h3 class="recorder-separator">or</h3>
-						<button type="button" class="btn btn-default btn-lg">Upload a file</button>
+						<span class="btn btn-default btn-lg fileinput-button">
+							<span>Upload .mp3 file</span>
+							<input class="cover-upload" type="file" name="content"/>
+						</span>
 					</div>
 					<div class="step2 hide-light text-center">
 						<h4>Please allow us to use your microphone...</h4>

@@ -9,6 +9,9 @@
 				"js/lib/jquery/jquery.tmpl.min.js",
 				"js/lib/jquery/jquery.cookie.js",
 				"js/lib/jquery/jquery.nicescroll.min.js",
+				"js/lib/jquery/jquery-ui.min.js",
+				"js/lib/jquery/jquery.iframe-transport.js",
+				"js/lib/jquery/jquery.fileupload.js",
 				"js/lib/html5-recorder/recorder.js",
 				"bootstrap/js/bootstrap.min.js",
 				"mediaelement/mediaelement-and-player.min.js",
@@ -67,7 +70,8 @@
 	"css": {
 		"files": [
 			"mediaelement/mediaelementplayer.css",
-			"font-awesome/css/font-awesome.css"
+			"font-awesome/css/font-awesome.css",
+			"css/jquery.fileupload.css"
 		]
 	}
 }

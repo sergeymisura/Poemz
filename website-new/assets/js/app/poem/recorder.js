@@ -14,6 +14,13 @@
 					'.keep-recording': this.keepRecording,
 					'.try-again-recording': this.tryAgain
 				});
+
+				$element.find('.fileinput-button').fileupload({
+					dataType: 'json',
+					url: app.config.baseUrl + '/api/recording/upload',
+					done: $.proxy(this.uploaded, this),
+					dropZone: null
+				});
 			},
 
 			display: function(width) {

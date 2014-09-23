@@ -9,29 +9,36 @@ class RecordingApiController extends ApiController
 		}
 		if (isset($_FILES['content']))
 		{
-			$output = array();
-			$wav_path = Yii::app()->basePath . '/../assets/previews/' . $this->session->user_id . '.wav';
 			$mp3_path = Yii::app()->basePath . '/../assets/previews/' . $this->session->user_id . '.mp3';
-
-			if (file_exists($wav_path))
+			if ($_FILES['content']['type'] != 'audio/mp3')
 			{
+				$output = array();
+				$wav_path = Yii::app()->basePath . '/../assets/previews/' . $this->session->user_id . '.wav';
+
+				if (file_exists($wav_path))
+				{
+					unlink($wav_path);
+				}
+
+				if (file_exists($mp3_path))
+				{
+					unlink($mp3_path);
+				}
+
+				move_uploaded_file(
+					$_FILES['content']['tmp_name'],
+					$wav_path
+				);
+
+				exec('normalize-audio ' . $wav_path, $output);
+				exec('avconv -y -i ' . $wav_path . ' ' . $mp3_path, $output);
+
 				unlink($wav_path);
 			}
-
-			if (file_exists($mp3_path))
+			else
 			{
-				unlink($mp3_path);
+				move_uploaded_file($_FILES['content']['tmp_name'], $mp3_path);
 			}
-
-			move_uploaded_file(
-				$_FILES['content']['tmp_name'],
-				$wav_path
-			);
-
-			exec('normalize-audio ' . $wav_path, $output);
-			exec('avconv -y -i ' . $wav_path . ' ' . $mp3_path, $output);
-
-			unlink($wav_path);
 			if (file_exists($mp3_path))
 			{
 				$this->send();
