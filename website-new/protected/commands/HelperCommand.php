@@ -154,4 +154,18 @@ class HelperCommand extends CConsoleCommand
 			'Sitemap: ' . $baseUrl . '/sitemap.xml' . "\n"
 		);
 	}
+
+	public function actionExport()
+	{
+		/**
+		 * @var  Poem[]  $poemz
+		 */
+		$f = fopen('php://output', 'w');
+		$poemz = Poem::model()->with('author')->findAll();
+		foreach ($poemz as $poem)
+		{
+			fputcsv($f, [$poem->title, $poem->first_line, $poem->author->name]);
+		}
+		fclose($f);
+	}
 }
