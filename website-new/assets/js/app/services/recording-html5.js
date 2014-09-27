@@ -37,9 +37,9 @@
 				_recorder.stop();
 			},
 
-			upload: function() {
+			upload: function(progressCallback) {
 				var result = services.deferred.create();
-				_recorder.exportWAV(this.receivedCallback(result));
+				_recorder.exportWAV(this.receivedCallback(result, progressCallback));
 				return result;
 			},
 
@@ -48,7 +48,7 @@
 				_recorder.clear();
 			},
 
-			receivedCallback: function(result) {
+			receivedCallback: function(result, progressCallback) {
 				return $.proxy(
 					function(blob) {
 						var data = new FormData;
@@ -61,7 +61,14 @@
 								processData: false,
 								contentType: false,
 								success: result.successCallback(),
-								error: result.errorCallback()
+								error: result.errorCallback(),
+								xhrFields: {
+									onprogress: function(e) {
+										if (progressCallback) {
+											progressCallback(e, {loaded: e.loaded, total: e.total});
+										}
+									}
+								}
 							}
 						);
 					},

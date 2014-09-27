@@ -94,7 +94,7 @@
 			finishRecording: function() {
 				services.recording.stop();
 				this.selectStep('.step4')
-				services.recording.upload()
+				services.recording.upload($.proxy(this.uploadingProgress, this))
 					.success(this.uploaded, this)
 					.error(this.error, this)
 			},
