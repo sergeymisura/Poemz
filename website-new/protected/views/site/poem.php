@@ -266,6 +266,9 @@
 					</div>
 					<div class="step4 hide-light text-center">
 						<h4>Please wait while we are uploading your record...</h4>
+						<div class="progress">
+							<div class="progress-bar" style="width:0"></div>
+						</div>
 					</div>
 					<div class="step5 hide-light text-center">
 						<h4>Review your performance</h4>

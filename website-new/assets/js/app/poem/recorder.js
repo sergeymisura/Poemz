@@ -19,6 +19,8 @@
 					dataType: 'json',
 					url: app.config.baseUrl + '/api/recording/upload',
 					done: $.proxy(this.uploaded, this),
+					send: $.proxy(this.startFileUploading, this),
+					progress: $.proxy(this.uploadingProgress, this),
 					dropZone: null
 				});
 			},
@@ -34,6 +36,20 @@
 					},
 					this
 				));
+				this.setProgress(0);
+			},
+
+			setProgress: function(v) {
+				$element.find('.progress-bar').css('width', v + '%').html(v ? (v + '%') : '');
+			},
+
+			startFileUploading: function() {
+				this.setProgress(0);
+				this.selectStep('.step4');
+			},
+
+			uploadingProgress: function(e, data) {
+				this.setProgress(parseInt(data.loaded / data.total * 100));
 			},
 
 			hide: function() {
