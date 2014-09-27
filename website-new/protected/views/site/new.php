@@ -92,7 +92,7 @@
 				</div>
 				<div class="form-group">
 					<label for="new-poem-text">Poem text:</label>
-					<textarea class="form-control" id="new-poem-text" name="text" data-required="value"></textarea>
+					<textarea class="form-control poem-text-control" id="new-poem-text" name="text" data-required="value"></textarea>
 				</div>
 				<div class="form-group">
 					<button type="submit" class="btn btn-primary submit-poem">Submit the poem and start recording</button>
