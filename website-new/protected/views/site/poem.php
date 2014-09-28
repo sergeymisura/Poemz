@@ -20,6 +20,7 @@
 						<a class="btn-icon btn-toggle-edit" href="#" title="Edit the text of the poem">
 							<i class="fa fa-pencil-square-o"></i>
 						</a>
+						<!--
 						<a class="btn-icon" href="#" title="Watch for the new recitations of this poem">
 							<i class="fa fa-eye"></i>
 						</a>
@@ -29,6 +30,7 @@
 						<a class="btn-icon" href="#" title="Flag the content as inappropriate or incorrect">
 							<i class="fa fa-flag-o"></i>
 						</a>
+						-->
 					</div>
 				</div>
 			</div>
@@ -47,12 +49,14 @@
 					<button type="button" class="btn btn-primary btn-lg record-now">Record your version now!</button>
 				</div>
 				<br/>
+				<!--
 				<div>
 					<img src="<?= Yii::app()->baseUrl ?>/assets/img/comments.png" class="pull-left" />
 					<h5 class="pull-left comments-toggle">
 						<a href="#" class="toggle-comments" data-count="<?= $poem->topic->comments_count ?>"><?= $poem->topic->comments_count ?> comments</a>
 					</h5>
 				</div>
+				-->
 				<div class="clearfix"></div>
 				<div class="comments hide-light">
 					<div class="row comment">
@@ -103,6 +107,7 @@
 						</div>
 						<div class="player"><audio data-src="${ media }" style="width: 100%"/></div>
 						<div class="alert alert-danger vote-error hide-light"></div>
+						<!--
 						<div class="row">
 							<div class="col-sm-6">
 								<h5><a href="#" class="vote-link" data-action="vote">Vote!</a> (${ votes } people voted so far)</h5>
@@ -117,6 +122,7 @@
 								</div>
 							</div>
 						</div>
+						-->
 
 						<div class="comments hide-light" data-controller="poem-comments" data-topic="${ topic }">
 							<div class="row comment">
@@ -184,12 +190,14 @@
 									<a href="#" class="btn-icon" title="Vote for this recitation">
 										<i class="fa fa-thumbs-o-up"></i> ${ votes }
 									</a>
+									<!--
 									<a href="#" class="btn-icon" title="Toggle the comments section">
 										<i class="fa fa-comments-o"></i> ${ (topic ? topic.comments_count : 0) }
 									</a>
 									<a href="#" class="btn-icon" title="Add to the list of your favorites">
 										<i class="fa fa-star-o"></i>
 									</a>
+									-->
 								</div>
 							</div>
 							<div class="comments hide-light">
