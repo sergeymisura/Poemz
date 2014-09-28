@@ -11,7 +11,6 @@
 
 			init: function() {
 				services.events({
-					'.vote-link': this.vote
 				});
 			},
 

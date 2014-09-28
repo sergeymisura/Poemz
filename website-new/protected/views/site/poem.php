@@ -103,6 +103,11 @@
 							<div class="col-sm-9 recited-by">
 								<div>recited by</div>
 								<h4><a href="#">${ performer.username }</a></h4>
+								<div>
+									<a class="btn-icon vote-link" data-id="${ id }" href="#" title="Vote for this recitation">
+										<i class="fa fa-thumbs-o-up"></i> ${ votes }
+									</a>
+								</div>
 							</div>
 						</div>
 						<div class="player"><audio data-src="${ media }" style="width: 100%"/></div>
@@ -187,7 +192,7 @@
 									<div class="username"><a href="#">${ performer.username }</a></div>
 								</div>
 								<div class="col-sm-3 text-column text-right">
-									<a href="#" class="btn-icon" title="Vote for this recitation">
+									<a href="#" class="btn-icon vote-link" data-id="${ id }" title="Vote for this recitation">
 										<i class="fa fa-thumbs-o-up"></i> ${ votes }
 									</a>
 									<!--

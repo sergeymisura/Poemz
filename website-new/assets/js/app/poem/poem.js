@@ -13,7 +13,8 @@
 					'.listen': this.listen,
 					'.btn-toggle-edit': this.toggleEdit,
 					'.btn-reset': this.resetEditing,
-					'.btn-save-poem': this.savePoem
+					'.btn-save-poem': this.savePoem,
+					'.vote-link': this.vote
 				});
 
 				services.events(app, {
@@ -114,6 +115,12 @@
 			listen: function($source) {
 				var recitation = app.data.recitations[$source.data('index')];
 				app.get('.now-playing').display(recitation, true);
+			},
+
+			vote: function($source) {
+				var id = $source.data('id');
+				services.auth.login($.proxy(
+				));
 			}
 		};
 	});
