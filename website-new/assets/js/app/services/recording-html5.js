@@ -62,12 +62,14 @@
 								contentType: false,
 								success: result.successCallback(),
 								error: result.errorCallback(),
-								xhrFields: {
-									onprogress: function(e) {
+								xhr: function(){
+									var xhr = $.ajaxSettings.xhr() ;
+									xhr.upload.onprogress = function(e){
 										if (progressCallback) {
 											progressCallback(e, {loaded: e.loaded, total: e.total});
 										}
-									}
+									} ;
+									return xhr ;
 								}
 							}
 						);
