@@ -104,8 +104,8 @@
 								<div>recited by</div>
 								<h4><a href="#">${ performer.username }</a></h4>
 								<div>
-									<a class="btn-icon vote-link" data-id="${ id }" href="#" title="Vote for this recitation">
-										<i class="fa fa-thumbs-o-up"></i> ${ votes }
+									<a class="btn-icon vote-link" data-id="${ id }" data-action="vote" href="#" title="Vote for this recitation">
+										<i class="fa fa-thumbs-o-up"></i> <span>${ votes }</span>
 									</a>
 								</div>
 							</div>
@@ -192,8 +192,8 @@
 									<div class="username"><a href="#">${ performer.username }</a></div>
 								</div>
 								<div class="col-sm-3 text-column text-right">
-									<a href="#" class="btn-icon vote-link" data-id="${ id }" title="Vote for this recitation">
-										<i class="fa fa-thumbs-o-up"></i> ${ votes }
+									<a href="#" class="btn-icon vote-link" data-id="${ id }" data-action="vote" title="Vote for this recitation">
+										<i class="fa fa-thumbs-o-up"></i> <span>${ votes }</span>
 									</a>
 									<!--
 									<a href="#" class="btn-icon" title="Toggle the comments section">

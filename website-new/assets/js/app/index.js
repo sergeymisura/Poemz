@@ -170,6 +170,24 @@
 		};
 	});
 
+	app.controller('error-message', function($element, services) {
+		return {
+			init: function() {},
+
+			display: function(options) {
+				options = $.extend(
+					{
+						title: 'Oops...',
+						type: 'danger',
+						text: 'Something just happened'
+					},
+					options);
+				services.rendering('error', options);
+				$element.modal();
+			}
+		};
+	});
+
 	app.transformation('.btn-icon', function($element) {
 		$element.tooltip({
 			placement: 'top',

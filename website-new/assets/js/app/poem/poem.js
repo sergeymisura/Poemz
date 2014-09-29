@@ -18,7 +18,8 @@
 				});
 
 				services.events(app, {
-					ready: this.appReady
+					ready: this.appReady,
+					loadVotes: this.loadVotes
 				});
 
 				$element.find('.nice-scroll').niceScroll({
@@ -119,8 +120,78 @@
 
 			vote: function($source) {
 				var id = $source.data('id');
+				var action = $source.data('action');
 				services.auth.login($.proxy(
+					function() {
+						services.api.post(
+							'poems/' + app.data.poem.id + '/recitations/' + id + '/' + action
+						).success(
+							function(response) {
+								this.updateVoteLink(id, response.data.votes, action == 'vote');
+							},
+							this
+						).error(
+							function(code, response) {
+								var options = {};
+								if (code == 400) {
+									options.text = response.message
+								}
+								services.message(options);
+							},
+							this
+						)
+					},
+					this
 				));
+			},
+
+			updateVoteLink: function(id, votes, hasVoted) {
+				var $link = $element.find('.vote-link[data-id="' + id + '"]');
+				$link.find('span').html(votes);
+				if (hasVoted) {
+					$link.addClass('active-icon');
+					$link.data('action', 'revoke');
+					$link.attr('data-original-title', 'Recall your vote');
+				}
+				else {
+					$link.removeClass('active-icon');
+					$link.data('action', 'vote');
+					$link.attr('data-original-title', 'Vote for this recitation');
+				}
+			},
+
+			loadVotes: function() {
+				if (!services.auth.isLoggedIn()) {
+					return;
+				}
+
+				app.data.votes = app.data.votes || {};
+				var missing = [];
+				$element.find('.vote-link').each($.proxy(function(idx, link) {
+					var $link = $(link);
+					var recitationId = $link.data('id');
+					if (typeof app.data.votes[recitationId] == 'undefined') {
+						missing.push(recitationId);
+					}
+					else {
+						this.updateVoteLink(recitationId, $link.find('span').html(), app.data.votes[recitationId]);
+					}
+				}, this));
+
+				if (missing.length > 0) {
+					services.api.get(
+						'self/votes',
+						{ recitations: missing.join(',') }
+					).success(
+						function(response) {
+							$.each(response.data.votes, function(id, voted) {
+								app.data.votes[id] = voted;
+							});
+							this.loadVotes();
+						},
+						this
+					);
+				}
 			}
 		};
 	});

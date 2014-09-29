@@ -28,6 +28,8 @@
 
 	"POST:api/tracking": "api/trackingApi/index",
 
+	"GET:api/self/votes": "api/selfApi/votes",
+
 	"GET:<author_slug>/<poem_slug>" : "site/poem",
 	"GET:<author_slug>" : "site/author"
 }

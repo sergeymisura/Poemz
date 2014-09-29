@@ -222,7 +222,8 @@ class RecitationsResourceController extends ApiController
 
 		$this->send(
 			array(
-				'vote' => $vote->direction
+				'vote' => $vote->direction,
+				'votes' => $recitation->votes
 			)
 		);
 	}
@@ -257,7 +258,8 @@ class RecitationsResourceController extends ApiController
 
 		$this->send(
 			array(
-				'vote' => null
+				'vote' => null,
+				'votes' => $recitation->votes
 			)
 		);
 	}

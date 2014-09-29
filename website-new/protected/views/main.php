@@ -18,6 +18,20 @@
 		fjs.parentNode.insertBefore(js, fjs);
 	}(document, 'script', 'facebook-jssdk'));</script>
 
+	<div class="modal fade" id="modal-error" data-controller="error-message">
+		<div class="modal-dialog">
+			<div class="modal-content" data-template="error">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">${ title }</h4>
+				</div>
+				<div class="modal-body">
+					<div class="alert alert-${ type }">${ text }</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
 	<div class="modal fade" id="modal-sign-in" data-controller="login-form">
 		<div class="modal-dialog">
 			<div class="modal-content">

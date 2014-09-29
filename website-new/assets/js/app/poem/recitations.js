@@ -58,6 +58,7 @@
 						$element.find('.recitation-template').html(copy);
 						$element.find('.recitation-list .recitation-rendered').removeClass('recitation-rendered');
 						_index = app.data.recitations.length;
+						$(app).trigger('loadVotes');
 					},
 					this
 				)

@@ -54,7 +54,8 @@
 				"js/app/services/auth.js",
 				"js/app/services/recording.js",
 				"js/app/services/recording-html5.js",
-				"js/app/services/recording-swf.js"
+				"js/app/services/recording-swf.js",
+				"js/app/services/message.js"
 			],
 			"level": "WHITESPACE_ONLY"
 		}
