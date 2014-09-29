@@ -19,7 +19,8 @@
 
 				services.events(app, {
 					ready: this.appReady,
-					loadVotes: this.loadVotes
+					loadVotes: this.loadVotes,
+					loginCompleted: this.loginCompleted
 				});
 
 				$element.find('.nice-scroll').niceScroll({
@@ -192,6 +193,11 @@
 						this
 					);
 				}
+			},
+
+			loginCompleted: function() {
+				app.data.votes = {};
+				this.loadVotes();
 			}
 		};
 	});
