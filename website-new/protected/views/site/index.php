@@ -22,7 +22,7 @@
 				</div>
 				<div class="read-by">
 					{{each recitations(id)}}
-						<div>#${ $index + 1 } read by <a href="${ app.urls.poem($data) }#listen-${ id }">${ performer.username }</a></div>
+						<div>#${ $index + 1 } by <a href="${ app.urls.poem($data) }#listen-${ id }">${ performer.username }</a></div>
 					{{/each}}
 				</div>
 				<h6 class="text-center"><a href="${ app.urls.poem($data) }">Hear more versions</a></h6>
