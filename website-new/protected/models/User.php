@@ -45,4 +45,9 @@ class User extends UserBase
 			$this->save();
 		}
 	}
+
+	public function getWebsiteText()
+	{
+		return str_replace('http://', '', str_replace('https://', '', $this->website));
+	}
 }
