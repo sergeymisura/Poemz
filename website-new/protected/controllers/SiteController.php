@@ -6,6 +6,8 @@
  */
 class SiteController extends PageController
 {
+	public $pageTitle = 'Poemz';
+
 	/**
 	 * Page
 	 *
@@ -34,6 +36,8 @@ class SiteController extends PageController
 		{
 			$this->notFound();
 		}
+
+		$this->pageTitle = 'Poemz: ' . $author->name;
 
 		$title_letters = Yii::app()->db->createCommand()
 			->selectDistinct('ucase(left(title, 1)) first_letter')
@@ -81,6 +85,8 @@ class SiteController extends PageController
 		{
 			$this->notFound();
 		}
+
+		$this->pageTitle = 'Poemz: ' . $poem->title . ' by ' . $author->name;
 
 		if ($poem->topic_id == null)
 		{

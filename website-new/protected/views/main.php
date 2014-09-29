@@ -7,6 +7,7 @@
 			env: 'development'
 		};
 	</script>
+	<title><?= $this->text($this->pageTitle) ?></title>
 </head>
 <body>
 	<div id="fb-root"></div>
