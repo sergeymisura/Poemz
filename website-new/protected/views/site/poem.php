@@ -246,7 +246,7 @@
 					<br/>
 
 					<div class="alert alert-warning hide-light no-recordings">
-						No one have recorded this poem yet! Be the first!
+						No one has recorded this poem yet! Be the first!
 					</div>
 					<div class="recitation-list"></div>
 
@@ -278,7 +278,7 @@
 						</div>
 					</div>
 					<div class="step4 hide-light text-center">
-						<h4>Please wait while we are uploading your record...</h4>
+						<h4>Please wait while we upload your record...</h4>
 						<div class="progress">
 							<div class="progress-bar" style="width:0"></div>
 						</div>
