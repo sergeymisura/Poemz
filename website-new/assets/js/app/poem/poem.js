@@ -15,7 +15,7 @@
 					'.btn-reset': this.resetEditing,
 					'.btn-save-poem': this.savePoem,
 					'.vote-link': this.vote,
-					'.delete-link': this.delete
+					'.delete-link': this.deleteRecitation
 				});
 
 				services.events(app, {
@@ -201,7 +201,7 @@
 				this.loadVotes();
 			},
 
-			delete: function($source) {
+			deleteRecitation: function($source) {
 				var id = $source.data('id');
 				if (confirm('Delete recitation? This action cannot be rolled back and the recording will be lost forever!'))
 				{
