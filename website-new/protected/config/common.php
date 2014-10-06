@@ -32,6 +32,10 @@ return array(
 		'http' => array(
 			'class'		=> 'Http'
 		),
+
+		'access' => array(
+			'class'		=> 'AccessComponent'
+		),
 	),
 
 	'params' => array(

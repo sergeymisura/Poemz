@@ -99,6 +99,9 @@ class SiteController extends PageController
 
 		$this->contentClass = 'column-container';
 		$this->setPageData('poem', $poem);
+
+		$this->permissions = ['poem:edit', 'recitation:delete'];
+
 		$this->render('poem', array('poem' => $poem));
 	}
 

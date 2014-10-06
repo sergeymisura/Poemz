@@ -25,6 +25,19 @@
 					_callback(session);
 				}
 				$(app).triggerHandler('loginCompleted');
+			},
+
+			can: function(permission, callback) {
+				if (this.isLoggedIn() == false) {
+					callback(false);
+					return;
+				}
+				if (typeof app.data.permissions[permission] != 'undefined') {
+					callback(app.data.permissions[permission]);
+					return;
+				}
+				/* TODO: Call the server to verify permission */
+				return false;
 			}
 
 		};

@@ -14,7 +14,8 @@
 					'.btn-toggle-edit': this.toggleEdit,
 					'.btn-reset': this.resetEditing,
 					'.btn-save-poem': this.savePoem,
-					'.vote-link': this.vote
+					'.vote-link': this.vote,
+					'.delete-link': this.delete
 				});
 
 				services.events(app, {
@@ -198,6 +199,18 @@
 			loginCompleted: function() {
 				app.data.votes = {};
 				this.loadVotes();
+			},
+
+			delete: function($source) {
+				var id = $source.data('id');
+				if (confirm('Delete recitation? This action cannot be rolled back and the recording will be lost forever!'))
+				{
+					services.api.post(
+						'poems/' + app.data.poem.id + '/recitations/' + id + '/delete'
+					).success(function() {
+							document.location.reload();
+						});
+				}
 			}
 		};
 	});

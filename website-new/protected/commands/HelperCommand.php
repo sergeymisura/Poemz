@@ -168,4 +168,51 @@ class HelperCommand extends CConsoleCommand
 		}
 		fclose($f);
 	}
+
+	public function actionPermissions()
+	{
+		$data = require_once(__DIR__ . '/../config/roles.php');
+		foreach ($data['permissions'] as $permission_id)
+		{
+			$permission = Permission::model()->findByPk($permission_id);
+			if ($permission == null)
+			{
+				$permission = new Permission;
+				$permission->id = $permission_id;
+				$permission->save();
+			}
+		}
+
+		foreach ($data['roles'] as $role_data)
+		{
+			$role = Role::model()->findByPk($role_data[0]);
+			if ($role == null)
+			{
+				$role = new Role;
+				$role->id = $role_data[0];
+				$role->save();
+			}
+			foreach ($role_data[1] as $permission_id)
+			{
+				$permission = Permission::model()->findByPk($permission_id);
+				if ($permission == null)
+				{
+					throw new Exception('Unknown permission: ' . $permission_id);
+				}
+
+				$role_permission = RolePermission::model()->findByAttributes([
+					'role_id' => $role->id,
+					'permission_id' => $permission->id
+				]);
+				if ($role_permission == null)
+				{
+					$role_permission = new RolePermission;
+					$role_permission->role_id = $role->id;
+					$role_permission->permission_id = $permission->id;
+					$role_permission->save();
+				}
+			}
+		}
+
+	}
 }

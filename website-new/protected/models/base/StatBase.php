@@ -10,8 +10,8 @@
  * @property  integer recitation_id Database column
  * @property  mixed   listened Database column
  * @property  string  stat_hash Database column
- * @property  Visitor visitor Relation
  * @property  Recitation recitation Relation
+ * @property  Visitor visitor Relation
  */
 abstract class StatBase extends Model
 {
@@ -45,8 +45,8 @@ abstract class StatBase extends Model
 	public function relations()
 	{
 		return array(
-			'visitor' => array(self::BELONGS_TO, 'Visitor', 'visitor_id'),
-			'recitation' => array(self::BELONGS_TO, 'Recitation', 'recitation_id')
+			'recitation' => array(self::BELONGS_TO, 'Recitation', 'recitation_id'),
+			'visitor' => array(self::BELONGS_TO, 'Visitor', 'visitor_id')
 		);
 	}
 

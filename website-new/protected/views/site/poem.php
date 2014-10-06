@@ -17,7 +17,7 @@
 					<div>by <a href="<?= $this->createUrl('site/author', array('author_slug' => $poem->author->slug)) ?>"><?= $this->text($poem->author->name) ?></a></div>
 					<br/>
 					<div>
-						<a class="btn-icon btn-toggle-edit" href="#" title="Edit the text of the poem">
+						<a class="btn-icon btn-toggle-edit" href="#" title="Edit the text of the poem" data-permission="poem:edit">
 							<i class="fa fa-pencil-square-o"></i>
 						</a>
 						<!--
@@ -104,6 +104,9 @@
 								<div>recited by</div>
 								<h4><a href="#">${ performer.username }</a></h4>
 								<div>
+									<a class="btn-icon delete-link" data-id="${ id }" data-permission="recitation:delete" href="#" title="Delete this recitation">
+										<i class="fa fa-times"></i>
+									</a>
 									<a class="btn-icon vote-link" data-id="${ id }" data-action="vote" href="#" title="Vote for this recitation">
 										<i class="fa fa-thumbs-o-up"></i> <span>${ votes }</span>
 									</a>
@@ -192,6 +195,9 @@
 									<div class="username"><a href="#">${ performer.username }</a></div>
 								</div>
 								<div class="col-sm-3 text-column text-right">
+									<a class="btn-icon delete-link" data-id="${ id }" data-permission="recitation:delete" href="#" title="Delete this recitation">
+										<i class="fa fa-times"></i>
+									</a>
 									<a href="#" class="btn-icon vote-link" data-id="${ id }" data-action="vote" title="Vote for this recitation">
 										<i class="fa fa-thumbs-o-up"></i> <span>${ votes }</span>
 									</a>

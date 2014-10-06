@@ -100,7 +100,14 @@ class RecitationsResourceController extends ApiController
 	 */
 	public function actionDelete($poem_id, $id)
 	{
-		$this->sendError(501, 'ERR_NOT_IMPLEMENTED', 'The action you are requesting is not implemented');
+		$recitation = Recitation::model()->findByPk($id, 'poem_id = :poem_id', array(':poem_id' => $poem_id));
+		if ($recitation == null)
+		{
+			$this->sendError(404, 'ERR_NOT_FOUND', 'Recitation not found');
+		}
+
+		$recitation->delete();
+		$this->send();
 	}
 
 	public function actionPrepare($poem_id, $id)

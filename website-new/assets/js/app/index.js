@@ -195,6 +195,17 @@
 		});
 	});
 
+	app.transformation('[data-permission]', function($element, services) {
+		$element.addClass('hide');
+		if (services.auth.isLoggedIn()) {
+			services.auth.can($element.data('permission'), function(can) {
+				if (can) {
+					$element.removeClass('hide');
+				}
+			});
+		}
+	});
+
 	app.urls = {
 		image: function(id) {
 			if (id == null) {

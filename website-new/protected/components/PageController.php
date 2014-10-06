@@ -13,6 +13,8 @@ abstract class PageController extends BaseController
 
 	public $contentClass = '';
 
+	public $permissions = [];
+
 	/**
 	 * @var  array  Data to pass to the javascript
 	 */
@@ -50,6 +52,21 @@ abstract class PageController extends BaseController
 		}
 
 		return false;
+	}
+
+	protected function beforeRender($view)
+	{
+		if (!parent::beforeRender($view))
+		{
+			return false;
+		}
+		$permissions = [];
+		foreach ($this->permissions as $permission_id)
+		{
+			$permissions[$permission_id] = Yii::app()->access->can($permission_id);
+		}
+		$this->setPageData('permissions', $permissions);
+		return true;
 	}
 
 	/**
