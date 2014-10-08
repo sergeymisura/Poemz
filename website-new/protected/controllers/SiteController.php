@@ -8,6 +8,21 @@ class SiteController extends PageController
 {
 	public $pageTitle = 'Poemz';
 
+	protected function beforeAction($action)
+	{
+		if (parent::beforeAction($action))
+		{
+			$this->openGraph = [
+				'site_name' => 'Poemz.org',
+				'title' => 'Poemz.org',
+				'type' => 'website',
+				'image' => Yii::app()->createAbsoluteUrl('/') . '/assets/img/poemz_logo.png',
+			];
+			return true;
+		}
+		return false;
+	}
+
 	/**
 	 * Page
 	 *
@@ -38,8 +53,10 @@ class SiteController extends PageController
 		}
 
 		$this->pageTitle = 'Poemz: ' . $author->name;
+		$this->openGraph['title'] = 'Poemz: ' . $author->name;
+		$this->openGraph['image'] = Yii::app()->createAbsoluteUrl('/') . $author->getAvatarUrl();
 
-		$title_letters = Yii::app()->db->createCommand()
+			$title_letters = Yii::app()->db->createCommand()
 			->selectDistinct('ucase(left(title, 1)) first_letter')
 			->from('poem')
 			->where('author_id = :author')
@@ -87,6 +104,8 @@ class SiteController extends PageController
 		}
 
 		$this->pageTitle = 'Poemz: ' . $poem->title . ' by ' . $author->name;
+		$this->openGraph['title'] = 'Poemz: ' . $poem->title . ' by ' . $author->name;
+		$this->openGraph['image'] = Yii::app()->createAbsoluteUrl('/') . $author->getAvatarUrl();
 
 		if ($poem->topic_id == null)
 		{
@@ -101,6 +120,8 @@ class SiteController extends PageController
 		$this->setPageData('poem', $poem);
 
 		$this->permissions = ['poem:edit', 'recitation:delete'];
+
+
 
 		$this->render('poem', array('poem' => $poem));
 	}

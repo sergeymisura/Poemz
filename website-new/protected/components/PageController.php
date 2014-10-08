@@ -15,6 +15,8 @@ abstract class PageController extends BaseController
 
 	public $permissions = [];
 
+	public $openGraph = [];
+
 	/**
 	 * @var  array  Data to pass to the javascript
 	 */
@@ -56,6 +58,10 @@ abstract class PageController extends BaseController
 
 	protected function beforeRender($view)
 	{
+		/**
+		 * @var  ClientScript  $client
+		 */
+
 		if (!parent::beforeRender($view))
 		{
 			return false;
@@ -66,6 +72,14 @@ abstract class PageController extends BaseController
 			$permissions[$permission_id] = Yii::app()->access->can($permission_id);
 		}
 		$this->setPageData('permissions', $permissions);
+
+		$client = Yii::app()->clientScript;
+
+		foreach ($this->openGraph as $name => $value)
+		{
+			$client->registerMetaTag($value, null, null, ['property' => 'og:' . $name]);
+		}
+
 		return true;
 	}
 
