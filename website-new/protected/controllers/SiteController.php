@@ -105,6 +105,7 @@ class SiteController extends PageController
 
 		$this->pageTitle = 'Poemz: ' . $poem->title . ' by ' . $author->name;
 		$this->openGraph['title'] = 'Poemz: ' . $poem->title . ' by ' . $author->name;
+		$this->openGraph['description'] = $poem->first_line;
 		$this->openGraph['image'] = Yii::app()->createAbsoluteUrl('/') . $author->getAvatarUrl();
 
 		if ($poem->topic_id == null)
