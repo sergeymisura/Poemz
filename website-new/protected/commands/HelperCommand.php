@@ -39,6 +39,21 @@ class HelperCommand extends CConsoleCommand
 		$author->save();
 	}
 
+	public function actionUserAvatar($user, $file)
+	{
+		/**
+		 * @var  User  $user
+		 */
+		$user = User::model()->findByAttributes(['username' => $user]);
+
+		$image = new Image;
+		$image->content = @file_get_contents($file);
+		$image->save();
+
+		$user->avatar_id = $image->id;
+		$user->save();
+	}
+
 	public function actionSlugify()
 	{
 		/**

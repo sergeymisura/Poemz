@@ -18,12 +18,14 @@
  * @property  string  password_salt Database column
  * @property  mixed   about Database column
  * @property  string  website Database column
+ * @property  integer avatar_id Database column
  * @property  Author[] authors Relation
  * @property  Image[] images Relation
  * @property  Poem[] poems Relation
  * @property  Post[] posts Relation
  * @property  Recitation[] recitations Relation
  * @property  RecitationVote[] recitation_votes Relation
+ * @property  Image avatar Relation
  * @property  UserRole[] user_roles Relation
  * @property  UserSession[] user_sessions Relation
  * @property  Visitor[] visitors Relation
@@ -66,6 +68,7 @@ abstract class UserBase extends Model
 			'posts' => array(self::HAS_MANY, 'Post', 'author_id'),
 			'recitations' => array(self::HAS_MANY, 'Recitation', 'performer_id'),
 			'recitation_votes' => array(self::HAS_MANY, 'RecitationVote', 'voter_id'),
+			'avatar' => array(self::BELONGS_TO, 'Image', 'avatar_id'),
 			'user_roles' => array(self::HAS_MANY, 'UserRole', 'user_id'),
 			'user_sessions' => array(self::HAS_MANY, 'UserSession', 'user_id'),
 			'visitors' => array(self::HAS_MANY, 'Visitor', 'user_id')

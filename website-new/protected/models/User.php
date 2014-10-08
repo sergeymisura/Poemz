@@ -26,6 +26,10 @@ class User extends UserBase
 
 	public function getAvatar()
 	{
+		if ($this->avatar_id != null)
+		{
+			return $this->avatar->url;
+		}
 		if ($this->facebook_user_id != null)
 		{
 			return 'https://graph.facebook.com/' . $this->facebook_user_id . '/picture?type=large';
