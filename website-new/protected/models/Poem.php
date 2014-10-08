@@ -14,6 +14,23 @@ class Poem extends PoemBase
 		return $relations;
 	}
 
+	public static function extractFirstLine($text)
+	{
+		$lines = explode("\n", trim($text));
+		$first_line = $lines[0];
+		$last_char = strtolower(substr($first_line, strlen($first_line) - 1));
+		if ($last_char >= 'a' && $last_char <= 'z')
+		{
+			$first_line .= '...';
+		}
+		elseif ($last_char == ',' || $last_char == '?' || $last_char == '!' ||
+			$last_char == ';' || $last_char == ':')
+		{
+			$first_line .= '..';
+		}
+		return $first_line;
+	}
+
 	public static function best($offset=0, $limit=6)
 	{
 		$command = Yii::app()->db->createCommand()

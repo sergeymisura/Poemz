@@ -136,20 +136,13 @@ class PoemsResourceController extends ApiController
 		}
 
 		$text = trim($this->payload->text);
-		$lines = explode("\n", $text);
-		$first_line = $lines[0];
-		$last_char = strtolower(substr($first_line, strlen($first_line) - 1));
-		if ($last_char >= 'a' && $last_char <= 'z')
-		{
-			$first_line .= '...';
-		}
 
 		$poem = new Poem;
 		$poem->author_id = $author->id;
 		$poem->submitted_by = $this->session->user_id;
 		$poem->title = $this->payload->title;
 		$poem->slug = Model::slugify($poem->title);
-		$poem->first_line = $first_line;
+		$poem->first_line = Poem::extractFirstLine($text);
 		$poem->save();
 
 		$poem_text = new PoemText;
@@ -204,13 +197,12 @@ class PoemsResourceController extends ApiController
 		if (isset($this->payload->text))
 		{
 			$text = trim($this->payload->text);
-			$lines = explode("\n", $text);
-			$first_line = $lines[0];
 
 			$poem->poem_text->text = $text;
 			$poem->poem_text->save();
 
-			$poem->first_line = $first_line;
+			$poem->first_line = Poem::extractFirstLine($text);
+
 			$modified = true;
 		}
 

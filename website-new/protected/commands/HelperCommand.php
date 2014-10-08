@@ -76,6 +76,21 @@ class HelperCommand extends CConsoleCommand
 		}
 	}
 
+	public function actionFirstLine()
+	{
+		/**
+		 * @var  Poem[]  $poems
+		 */
+
+		$poems = Poem::model()->with('poem_text')->findAll();
+		foreach ($poems as $poem)
+		{
+			$poem->first_line = Poem::extractFirstLine($poem->poem_text->text);
+			$poem->save();
+			echo $poem->first_line . "\n";
+		}
+	}
+
 	static public function slugify($text)
 	{
 		// replace non letter or digits by -
