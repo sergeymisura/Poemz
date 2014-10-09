@@ -221,6 +221,10 @@
 		poem: function(poem, author) {
 			author = author || poem.author;
 			return app.config.baseUrl + '/' + author.slug + '/' + poem.slug;
+		},
+
+		user: function(user) {
+			return app.config.baseUrl + '/users/' + user.slug;
 		}
 	};
 

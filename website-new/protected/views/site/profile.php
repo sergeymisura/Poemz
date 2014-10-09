@@ -36,15 +36,41 @@ $own = $this->session ? $user->id == $this->session->user_id : false;
 					</div>
 				</div>
 			</div>
+			<?php if ($user->about): ?>
+				<p class="about"><?= $this->text($user->about) ?></p>
+			<?php else: ?>
+				<?php if ($own): ?>
+					<div class="alert alert-info">
+						<a href="#">Click here</a> to add some information about yourself!
+					</div>
+				<?php endif; ?>
+			<?php endif; ?>
 
 		</div>
 
 		<div class="col-sm-6">
 			<ul class="nav nav-tabs nav-right nav-small">
-				<li class="active"><a href="#" data-sort="new">Newest</a></li>
-				<li><a href="#" data-sort="best">The best</a></li>
+				<li><a href="#" data-sort="new">Newest</a></li>
+				<li class="active"><a href="#" data-sort="best">The best</a></li>
 			</ul>
-
+			<div class="recitations-template">
+				<div class="recitation row">
+					<div class="col-xs-9">
+						<div class="pull-left">
+							<img class="thumbnail" src="http://local-dev.com/poemz-new/images/1.jpg" width="48px"/>
+						</div>
+						<div class="pull-left">
+							<div><a href="#" class="title">Sonnet 20</a> by <a href="#" class="author">William Shakespeare</a></div>
+							<div class="first-line">Shall I compare thee to a summer day...</div>
+						</div>
+					</div>
+					<div class="col-xs-3 text-right">
+						<a href="#" class="btn-icon vote-link" data-id="${ id }" data-action="vote" title="Vote for this recitation">
+							<i class="fa fa-thumbs-o-up"></i> <span>1</span>
+						</a>
+					</div>
+				</div>
+			</div>
 		</div>
 
 	</div>

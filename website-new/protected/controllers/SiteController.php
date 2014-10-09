@@ -181,12 +181,17 @@ class SiteController extends PageController
 		);
 	}
 
-	public function actionProfile($user_id)
+	public function actionProfile($slug)
 	{
 		/**
 		 * @var  User  $user
 		 */
-		$user = User::model()->findByAttributes(['username' => $user_id]);
+		$user = User::model()->findByAttributes(['slug' => $slug]);
+
+		if ($user == null)
+		{
+			$this->notFound();
+		}
 
 		$this->render('profile', ['user' => $user]);
 	}
