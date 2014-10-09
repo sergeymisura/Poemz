@@ -9,8 +9,8 @@
  * @property  string  role_id Database column
  * @property  string  permission_id Database column
  * @property  mixed   rules Database column
- * @property  Role role Relation
  * @property  Permission permission Relation
+ * @property  Role role Relation
  */
 abstract class RolePermissionBase extends Model
 {
@@ -44,8 +44,8 @@ abstract class RolePermissionBase extends Model
 	public function relations()
 	{
 		return array(
-			'role' => array(self::BELONGS_TO, 'Role', 'role_id'),
-			'permission' => array(self::BELONGS_TO, 'Permission', 'permission_id')
+			'permission' => array(self::BELONGS_TO, 'Permission', 'permission_id'),
+			'role' => array(self::BELONGS_TO, 'Role', 'role_id')
 		);
 	}
 

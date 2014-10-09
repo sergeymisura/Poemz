@@ -19,6 +19,7 @@
  * @property  mixed   about Database column
  * @property  string  website Database column
  * @property  integer avatar_id Database column
+ * @property  string  slug Database column
  * @property  Author[] authors Relation
  * @property  Image[] images Relation
  * @property  Poem[] poems Relation

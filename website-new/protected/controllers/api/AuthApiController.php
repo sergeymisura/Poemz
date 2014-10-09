@@ -70,6 +70,7 @@ class AuthApiController extends ApiController
 			}
 
 			$user->username = $display_name;
+			$user->slug = Model::slugify($display_name);
 			$user->active = 1;
 		}
 
@@ -147,6 +148,7 @@ class AuthApiController extends ApiController
 		$user->email = $this->payload->email;
 		$user->password_hash = $user->createPasswordHash($this->payload->password);
 		$user->username = $this->payload->username;
+		$user->slug = Model::slugify($user->username);
 		$user->created = User::getDbDate(null, true);
 		$user->save();
 

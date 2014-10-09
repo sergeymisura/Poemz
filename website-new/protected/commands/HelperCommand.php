@@ -61,7 +61,7 @@ class HelperCommand extends CConsoleCommand
 		 * @var  Poem[]  $poems
 		 */
 
-		$authors = Author::model()->findAll();
+		/*$authors = Author::model()->findAll();
 		foreach ($authors as $author)
 		{
 			$author->slug = self::slugify($author->name);
@@ -73,7 +73,7 @@ class HelperCommand extends CConsoleCommand
 		{
 			$poem->slug = self::slugify($poem->title);
 			$poem->save();
-		}
+		}*/
 	}
 
 	public function actionFirstLine()

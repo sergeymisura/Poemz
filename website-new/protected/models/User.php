@@ -36,4 +36,13 @@ class User extends UserBase
 		}
 		return 'http://www.gravatar.com/avatar/' . md5(strtolower($this->email)) . '?d=mm';
 	}
+
+	public function afterFind()
+	{
+		if ($this->slug == null)
+		{
+			$this->slug = Model::slugify($this->username);
+			$this->save();
+		}
+	}
 }

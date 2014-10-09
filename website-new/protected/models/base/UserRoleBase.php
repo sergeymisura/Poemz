@@ -8,8 +8,8 @@
  * @property  integer id Database column
  * @property  integer user_id Database column
  * @property  string  role_id Database column
- * @property  User user Relation
  * @property  Role role Relation
+ * @property  User user Relation
  */
 abstract class UserRoleBase extends Model
 {
@@ -43,8 +43,8 @@ abstract class UserRoleBase extends Model
 	public function relations()
 	{
 		return array(
-			'user' => array(self::BELONGS_TO, 'User', 'user_id'),
-			'role' => array(self::BELONGS_TO, 'Role', 'role_id')
+			'role' => array(self::BELONGS_TO, 'Role', 'role_id'),
+			'user' => array(self::BELONGS_TO, 'User', 'user_id')
 		);
 	}
 
