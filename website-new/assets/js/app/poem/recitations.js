@@ -13,7 +13,7 @@
 					'.more-tab': this.loadMore
 				});
 
-				this.load('new');
+				this.load('best');
 			},
 
 			load: function(order) {

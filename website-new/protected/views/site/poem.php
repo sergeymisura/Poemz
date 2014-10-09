@@ -175,8 +175,8 @@
 						<h4 class="pull-left">poemz recitations</h4>
 
 						<ul class="nav nav-tabs nav-right nav-small order">
-							<li class="active"><a href="#" data-sort="new">Newest</a></li>
-							<li><a href="#" data-sort="best">The best</a></li>
+							<li><a href="#" data-sort="new">Newest</a></li>
+							<li class="active"><a href="#" data-sort="best">The best</a></li>
 						</ul>
 					</div>
 					<div class="recitation-template hide">
