@@ -17,6 +17,7 @@
 			display: function(recitation, autoStart) {
 				_recitation = recitation;
 				_autoStart = autoStart;
+				document.location = '#listen-' + _recitation.id;
 				if ($element.is(':visible')) {
 					$element.slideUp(500, $.proxy(this.prepare, this));
 				}
