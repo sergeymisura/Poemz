@@ -38,7 +38,7 @@ class RecitationsResourceController extends ApiController
 			),
 			array(
 				'offset' => $this->request->getQuery('index', 0),
-				'limit' => 15,
+				'limit' => 10,
 				'order' => 't.' . $order
 			)
 		);
@@ -78,7 +78,7 @@ class RecitationsResourceController extends ApiController
 			),
 			array(
 				'offset' => $this->request->getQuery('index', 0),
-				'limit' => 15,
+				'limit' => 10,
 				'order' => 't.' . $order
 			)
 		);
