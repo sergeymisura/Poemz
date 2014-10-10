@@ -47,6 +47,46 @@ class RecitationsResourceController extends ApiController
 	}
 
 	/**
+	 * Sends back a list of user's Recitations
+	 *
+	 * @param   integer  $user_id  User ID
+	 *
+	 * @return  void
+	 */
+	public function actionListByUser($user_id)
+	{
+		/**
+		 * @var  User  $user
+		 */
+		$user = User::model()->findByPk($user_id);
+
+		if ($user == null)
+		{
+			$this->sendError('404', 'ERR_NOT_FOUND', 'User not found');
+		}
+
+		$order = 'created desc';
+
+		if ($this->request->getQuery('order') == 'best')
+		{
+			$order = 'votes desc';
+		}
+
+		$recitations = Recitation::model()->with(array('poem.author','topic.comments_count'))->findAllByAttributes(
+			array(
+				'performer_id' => $user->id
+			),
+			array(
+				'offset' => $this->request->getQuery('index', 0),
+				'limit' => 15,
+				'order' => 't.' . $order
+			)
+		);
+
+		$this->send(array('recitations' => $recitations));
+	}
+
+	/**
 	 * Sends back a requested instance of Recitation
 	 *
 	 * @param   integer  $poem_id  Poem ID

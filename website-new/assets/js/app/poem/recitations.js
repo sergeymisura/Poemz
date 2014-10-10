@@ -28,7 +28,7 @@
 			loadMore: function() {
 				$element.find('.loading').show();
 				services.api.get(
-					'poems/' + app.data.poem.id + '/recitations',
+					$element.data('source'),
 					{
 						index: _index,
 						order: _order

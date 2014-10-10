@@ -7,7 +7,7 @@
 
 $own = $this->session ? $user->id == $this->session->user_id : false;
 ?>
-<div class="container">
+<div class="profile container" data-controller="profile">
 	<div class="row">
 
 		<!-- Left side -->
@@ -48,29 +48,41 @@ $own = $this->session ? $user->id == $this->session->user_id : false;
 
 		</div>
 
-		<div class="col-sm-6">
-			<ul class="nav nav-tabs nav-right nav-small">
+		<div class="col-sm-6" data-controller="poem-recitations" data-source="users/<?= $user->id ?>/recitations">
+			<ul class="nav nav-tabs nav-right nav-small order">
 				<li><a href="#" data-sort="new">Newest</a></li>
 				<li class="active"><a href="#" data-sort="best">The best</a></li>
 			</ul>
-			<div class="recitations-template">
-				<div class="recitation row">
+			<div class="recitation-template hide">
+				<div class="recitation row" data-template="recitation">
 					<div class="col-xs-9">
 						<div class="pull-left">
-							<img class="thumbnail" src="http://local-dev.com/poemz-new/images/1.jpg" width="48px"/>
+							<img class="thumbnail" data-src="${ app.urls.image(poem.author.avatar_id) }"/>
 						</div>
-						<div class="pull-left">
-							<div><a href="#" class="title">Sonnet 20</a> by <a href="#" class="author">William Shakespeare</a></div>
-							<div class="first-line">Shall I compare thee to a summer day...</div>
+						<div class="pull-left info">
+							<div>
+								<a href="${ app.urls.recitation($data) }" class="title">${ poem.title }</a> by
+								<a href="${ app.urls.author(poem.author) }" class="author">${ poem.author.name }</a>
+							</div>
+							<div class="first-line">${ poem.first_line }</div>
 						</div>
 					</div>
-					<div class="col-xs-3 text-right">
+					<div class="col-xs-3 text-right actions">
 						<a href="#" class="btn-icon vote-link" data-id="${ id }" data-action="vote" title="Vote for this recitation">
-							<i class="fa fa-thumbs-o-up"></i> <span>1</span>
+							<i class="fa fa-thumbs-o-up"></i> <span>${ votes }</span>
 						</a>
 					</div>
 				</div>
 			</div>
+
+			<div class="alert alert-warning hide-light no-recordings">
+				No one has recorded this poem yet! Be the first!
+			</div>
+			<div class="recitation-list"></div>
+
+			<div class="loading"></div>
+
+			<div class="more"><span class="pull-right more-tab">more</span></div>
 		</div>
 
 	</div>

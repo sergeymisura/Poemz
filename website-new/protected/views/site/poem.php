@@ -170,7 +170,7 @@
 					</div>
 				</div>
 
-				<div class="recitations" data-controller="poem-recitations">
+				<div class="recitations" data-controller="poem-recitations" data-source="poems/<?= $poem->id ?>/recitations">
 					<div class="recitations-header">
 						<h4 class="pull-left">poemz recitations</h4>
 
