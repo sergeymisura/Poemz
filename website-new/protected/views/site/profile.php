@@ -59,7 +59,7 @@ $own = $this->session ? $user->id == $this->session->user_id : false;
 						<div class="pull-left">
 							<img class="thumbnail" data-src="${ app.urls.image(poem.author.avatar_id) }"/>
 						</div>
-						<div class="pull-left info">
+						<div class="info">
 							<div>
 								<a href="${ app.urls.recitation($data) }" class="title">${ poem.title }</a> by
 								<a href="${ app.urls.author(poem.author) }" class="author">${ poem.author.name }</a>
