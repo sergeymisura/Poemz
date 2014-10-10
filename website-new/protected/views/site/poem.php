@@ -102,7 +102,7 @@
 							</div>
 							<div class="col-sm-9 recited-by">
 								<div>recited by</div>
-								<h4><a href="#">${ performer.username }</a></h4>
+								<h4><a href="${ app.urls.user(performer) }">${ performer.username }</a></h4>
 								<div>
 									<a class="btn-icon delete-link" data-id="${ id }" data-permission="recitation:delete" href="#" title="Delete this recitation">
 										<i class="fa fa-times"></i>
@@ -192,7 +192,7 @@
 									<img class="thumbnail" data-src="${ performer.avatar }" />
 								</div>
 								<div class="col-sm-4 text-column">
-									<div class="username"><a href="#">${ performer.username }</a></div>
+									<div class="username"><a href="${ app.urls.user(performer) }">${ performer.username }</a></div>
 								</div>
 								<div class="col-sm-3 text-column text-right">
 									<a class="btn-icon delete-link" data-id="${ id }" data-permission="recitation:delete" href="#" title="Delete this recitation">
