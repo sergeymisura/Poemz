@@ -40,10 +40,10 @@
 		"app": {
 			"files": [
 				"js/app/index.js",
+				"js/app/recitations.js",
 				"js/app/front/poems.js",
 				"js/app/poem/poem.js",
 				"js/app/poem/recorder.js",
-				"js/app/poem/recitations.js",
 				"js/app/poem/now-playing.js",
 				"js/app/poem/comments.js",
 				"js/app/author/author.js",
@@ -52,7 +52,6 @@
 				"js/app/new/author.js",
 				"js/app/new/poem.js",
 				"js/app/profile/profile.js",
-				"js/app/profile/recitations.js",
 				"js/app/services/auth.js",
 				"js/app/services/recording.js",
 				"js/app/services/recording-html5.js",

@@ -1,6 +1,6 @@
 (function($, app) {
 
-	app.controller('poem-recitations', function($element, services) {
+	app.controller('recitations', function($element, services) {
 
 		var _order;
 		var _index;

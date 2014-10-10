@@ -23,7 +23,7 @@ $own = $this->session ? $user->id == $this->session->user_id : false;
 						<div><a href="<?= $user->website ?>" target="_blank"><i class="fa fa-globe"></i> <?= $user->websiteText ?></a></div>
 					<?php endif; ?>
 					<br/>
-					<div>
+					<div class="hide">
 						<?php if ($own): ?>
 							<a class="btn-icon btn-toggle-edit" href="#" title="Edit your profile">
 								<i class="fa fa-pencil-square-o"></i>
@@ -48,7 +48,7 @@ $own = $this->session ? $user->id == $this->session->user_id : false;
 
 		</div>
 
-		<div class="col-sm-6" data-controller="poem-recitations" data-source="users/<?= $user->id ?>/recitations">
+		<div class="col-sm-6" data-controller="recitations" data-source="users/<?= $user->id ?>/recitations">
 			<ul class="nav nav-tabs nav-right nav-small order">
 				<li><a href="#" data-sort="new">Newest</a></li>
 				<li class="active"><a href="#" data-sort="best">The best</a></li>
