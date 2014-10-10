@@ -115,7 +115,7 @@
 			<div class="collapse navbar-collapse" data-template="login-area">
 				{{if user }}
 					<p class="navbar-text navbar-right">
-						Welcome, <a href="#"><b>${ user.username }</b></a>
+						Welcome, <a href="${ app.urls.user(user) }"><b>${ user.username }</b></a>
 						<span class="small">(<a href="<?= $this->createUrl('site/logout') ?>">not you?</a>)</span>
 					</p>
 				{{else}}

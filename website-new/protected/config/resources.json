@@ -51,6 +51,8 @@
 				"js/app/new/selector.js",
 				"js/app/new/author.js",
 				"js/app/new/poem.js",
+				"js/app/profile/profile.js",
+				"js/app/profile/recitations.js",
 				"js/app/services/auth.js",
 				"js/app/services/recording.js",
 				"js/app/services/recording-html5.js",

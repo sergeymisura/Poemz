@@ -4,6 +4,7 @@
 	"GET:logout" : "site/logout",
 	"GET:new" : "site/new",
 	"GET:new/<author_slug>" : "site/new",
+	"GET:users/<slug>" : "site/profile",
 
 	"GET:media/<id>" : "site/media",
 	"GET:images/<image_id>.jpg" : "images/index",
@@ -20,6 +21,7 @@
 	"RESOURCE:api/authors/<author_id>/poems": "api/resources/poemsResource",
 	"GET:api/poems/<list>": "api/resources/poemsResource/mixedList",
 	"RESOURCE:api/poems/<poem_id>/recitations": "api/resources/recitationsResource",
+	"GET:api/users/<user_id>/recitations": "api/resources/recitationsResource/listByUser",
 	"POST:api/poems/<poem_id>/recitations/<id>/prepare": "api/resources/recitationsResource/prepare",
 
 	"GET:api/poems/<poem_id>/recitations/<id>/vote": "api/resources/recitationsResource/getVote",

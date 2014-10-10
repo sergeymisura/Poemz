@@ -180,4 +180,19 @@ class SiteController extends PageController
 			)
 		);
 	}
+
+	public function actionProfile($slug)
+	{
+		/**
+		 * @var  User  $user
+		 */
+		$user = User::model()->findByAttributes(['slug' => $slug]);
+
+		if ($user == null)
+		{
+			$this->notFound();
+		}
+
+		$this->render('profile', ['user' => $user]);
+	}
 }
