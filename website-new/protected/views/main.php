@@ -139,6 +139,8 @@
 		<?php echo $content ?>
 	</div>
 
+	<br/><br/>
+
 	<script type="text/javascript" language="JavaScript">
 		app = app || {};
 		app.config = {
