@@ -6,7 +6,7 @@
  */
 class SiteController extends PageController
 {
-	public $pageTitle = 'Poemz';
+	public $pageTitle = 'Poemz.org';
 
 	protected function beforeAction($action)
 	{
@@ -52,8 +52,8 @@ class SiteController extends PageController
 			$this->notFound();
 		}
 
-		$this->pageTitle = 'Poemz: ' . $author->name;
-		$this->openGraph['title'] = 'Poemz: ' . $author->name;
+		$this->pageTitle = 'Poemz.org: ' . $author->name;
+		$this->openGraph['title'] = 'Poemz.org: ' . $author->name;
 		$this->openGraph['image'] = Yii::app()->createAbsoluteUrl('/') . $author->getAvatarUrl();
 
 			$title_letters = Yii::app()->db->createCommand()
@@ -103,8 +103,8 @@ class SiteController extends PageController
 			$this->notFound();
 		}
 
-		$this->pageTitle = 'Poemz: ' . $poem->title . ' by ' . $author->name;
-		$this->openGraph['title'] = 'Poemz: ' . $poem->title . ' by ' . $author->name;
+		$this->pageTitle = 'Poemz.org: ' . $poem->title . ' by ' . $author->name;
+		$this->openGraph['title'] = 'Poemz.org: ' . $poem->title . ' by ' . $author->name;
 		$this->openGraph['description'] = $poem->first_line;
 		$this->openGraph['image'] = Yii::app()->createAbsoluteUrl('/') . $author->getAvatarUrl();
 
