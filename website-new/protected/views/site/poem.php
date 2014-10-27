@@ -271,6 +271,8 @@
 							<span>Upload .mp3 file</span>
 							<input class="cover-upload" type="file" name="content"/>
 						</span>
+                        <hr/>
+                        <a class="cancel-step1" href="#">or click here to cancel.</a>
 					</div>
 					<div class="step2 hide-light text-center">
 						<h4>Please allow us to use your microphone...</h4>

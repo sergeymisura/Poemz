@@ -8,6 +8,7 @@
 
 			init: function() {
 				services.events({
+                    '.cancel-step1': this.hide,
 					'.start-recording': this.initRecording,
 					'.finish-recording': this.finishRecording,
 					'.cancel-recording': this.cancelRecording,
