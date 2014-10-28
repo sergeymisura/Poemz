@@ -24,6 +24,16 @@ class User extends UserBase
 		return $hash;
 	}
 
+    public function getGravatar()
+    {
+        return 'http://www.gravatar.com/avatar/' . md5(strtolower($this->email)) . '?d=mm';
+    }
+
+    public function getFbAvatar()
+    {
+        return 'https://graph.facebook.com/' . $this->facebook_user_id . '/picture?type=large';
+    }
+
 	public function getAvatar()
 	{
 		if ($this->avatar_id != null)
@@ -32,9 +42,9 @@ class User extends UserBase
 		}
 		if ($this->facebook_user_id != null)
 		{
-			return 'https://graph.facebook.com/' . $this->facebook_user_id . '/picture?type=large';
+			return $this->getFbAvatar();
 		}
-		return 'http://www.gravatar.com/avatar/' . md5(strtolower($this->email)) . '?d=mm';
+		return $this->getGravatar();
 	}
 
 	public function afterFind()

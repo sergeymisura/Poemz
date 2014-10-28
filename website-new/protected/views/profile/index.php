@@ -23,13 +23,12 @@ $own = $this->session ? $user->id == $this->session->user_id : false;
 						<div><a href="<?= $user->website ?>" target="_blank"><i class="fa fa-globe"></i> <?= $user->websiteText ?></a></div>
 					<?php endif; ?>
 					<br/>
-					<div class="hide">
-						<?php if ($own): ?>
-							<a class="btn-icon btn-toggle-edit" href="#" title="Edit your profile">
-								<i class="fa fa-pencil-square-o"></i>
-							</a>
-						<?php else: ?>
-							<a class="btn-icon" href="#" title="Follow <?= $this->text($user->username) ?>">
+					<div>
+						<a class="btn-icon btn-edit own hide" href="<?= $this->createUrl('profile/edit', ['slug' => $user->slug]) ?>" title="Edit your profile">
+							<i class="fa fa-pencil-square-o"></i>
+						</a>
+                        <?php if (!$own): ?>
+                            <a class="btn-icon hide" href="#" title="Follow <?= $this->text($user->username) ?>">
 								<i class="fa fa-eye"></i>
 							</a>
 						<?php endif; ?>
@@ -84,6 +83,5 @@ $own = $this->session ? $user->id == $this->session->user_id : false;
 
 			<div class="more"><span class="pull-right more-tab">more</span></div>
 		</div>
-
 	</div>
 </div>

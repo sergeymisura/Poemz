@@ -7,7 +7,7 @@ return CMap::mergeArray(
 	CMap::mergeArray(
 		array(
 
-			'name' => 'Regent Online Classes Frontend',
+			'name' => 'Poemz.org',
 			'runtimePath' => '/tmp',
 
 			'preload' => array('log'),
