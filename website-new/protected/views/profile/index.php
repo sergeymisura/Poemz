@@ -24,7 +24,7 @@ $own = $this->session ? $user->id == $this->session->user_id : false;
 					<?php endif; ?>
 					<br/>
 					<div>
-						<a class="btn-icon btn-edit own hide" href="<?= $this->createUrl('profile/edit', ['slug' => $user->slug]) ?>" title="Edit your profile">
+						<a class="btn-icon btn-edit _own hide" href="<?= $this->createUrl('profile/edit', ['slug' => $user->slug]) ?>" title="Edit your profile">
 							<i class="fa fa-pencil-square-o"></i>
 						</a>
                         <?php if (!$own): ?>
