@@ -10,6 +10,10 @@
 				return app.data.session != null;
 			},
 
+            getSession: function() {
+                return app.data.session;
+            },
+
 			login: function(callback) {
 				if (this.isLoggedIn()) {
 					callback(app.data.session);

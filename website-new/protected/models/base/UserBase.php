@@ -13,14 +13,13 @@
  * @property  integer active Database column
  * @property  string  activation_code Database column
  * @property  integer preview_ready Database column
- * @property  string  facebook_user_id Database column
- * @property  string  facebook_token Database column
  * @property  string  password_salt Database column
  * @property  mixed   about Database column
  * @property  string  website Database column
  * @property  integer avatar_id Database column
  * @property  string  slug Database column
  * @property  Author[] authors Relation
+ * @property  Identity[] identitys Relation
  * @property  Image[] images Relation
  * @property  Poem[] poems Relation
  * @property  Post[] posts Relation
@@ -64,6 +63,7 @@ abstract class UserBase extends Model
 	{
 		return array(
 			'authors' => array(self::HAS_MANY, 'Author', 'submitter_id'),
+			'identitys' => array(self::HAS_MANY, 'Identity', 'user_id'),
 			'images' => array(self::HAS_MANY, 'Image', 'author_id'),
 			'poems' => array(self::HAS_MANY, 'Poem', 'submitted_by'),
 			'posts' => array(self::HAS_MANY, 'Post', 'author_id'),

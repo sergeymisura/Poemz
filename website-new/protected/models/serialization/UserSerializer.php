@@ -21,8 +21,7 @@ class UserSerializer extends ModelSerializer
 		unset($attributes['password_salt']);
 		unset($attributes['created']);
 		unset($attributes['activation_code']);
-		unset($attributes['facebook_user_id']);
-		unset($attributes['facebook_token']);
+		unset($attributes['user_facebook']);
 
 		$attributes['avatar'] = $this->model->getAvatar();
 	}
