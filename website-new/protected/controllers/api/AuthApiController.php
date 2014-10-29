@@ -16,6 +16,7 @@ class AuthApiController extends ApiController
 		/**
 		 * @var  HttpCurlResponse  $response
 		 * @var  User              $user
+         * @var  Identity          $identity
 		 */
 
 		if (!isset($this->payload->user_id))
@@ -36,6 +37,7 @@ class AuthApiController extends ApiController
 		);
 
 		$apiResponse = json_decode($response->data());
+
 		if (!isset($apiResponse->id))
 		{
 			$this->sendError(500, 'ERR_FB_ERROR', 'Facebook returned invalid response');
@@ -46,20 +48,27 @@ class AuthApiController extends ApiController
 			$this->sendError(400, 'ERR_INVALID', 'Auth token does not match user ID');
 		}
 
-		$user = User::model()->findByAttributes(
+		$identity = Identity::model()->with('user')->findByAttributes(
 			array(
-				'facebook_user_id' => $apiResponse->id
+				'uid' => $apiResponse->id,
+                'provider' => Identity::FACEBOOK
 			)
 		);
 
-		if ($user == null)
+		if ($identity == null)
 		{
 			$user = new User;
-			$user->facebook_user_id = $apiResponse->id;
 			$user->email = $apiResponse->email;
 			$user->created = User::getDbDate(null, true);
 
-			$display_name = strtolower($apiResponse->first_name . '_' . substr($apiResponse->last_name, 0, 1));
+            if (isset($apiResponse->username))
+            {
+                $display_name = $apiResponse->username;
+            }
+            else
+            {
+                $display_name = strtolower($apiResponse->first_name . '_' . substr($apiResponse->last_name, 0, 1));
+            }
 			$idx = 0;
 			while (User::model()->countByAttributes(array('username' => $display_name)) > 0)
 			{
@@ -72,10 +81,24 @@ class AuthApiController extends ApiController
 			$user->username = $display_name;
 			$user->slug = Model::slugify($display_name);
 			$user->active = 1;
-		}
+            $user->save();
 
-		$user->facebook_token = $this->payload->access_token;
-		$user->save();
+            $identity = new Identity();
+            $identity->provider = Identity::FACEBOOK;
+            $identity->user_id = $user->id;
+            $identity->uid = $apiResponse->id;
+		}
+        else
+        {
+            $user = $identity->user;
+        }
+
+        $identity->access_token = $this->payload->access_token;
+        if (isset($apiResponse->link))
+        {
+            $identity->link = $apiResponse->link;
+        }
+        $identity->save();
 
 		$this->authenticated($user);
 	}

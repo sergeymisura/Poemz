@@ -4,9 +4,23 @@
  *
  * @package Regent.Common.Models
  *
+ * @property  Identity  facebook
  */
 class User extends UserBase
 {
+	public function relations()
+	{
+		$relations = parent::relations();
+		$relations['facebook'] = [
+			self::HAS_ONE,
+			'Identity',
+			'user_id',
+			'condition' => 'provider = :provider',
+			'params' => [':provider' => Identity::FACEBOOK]
+		];
+		return $relations;
+	}
+
 	public function createPasswordHash($password)
 	{
 		if ($this->password_salt == null)
@@ -24,15 +38,15 @@ class User extends UserBase
 		return $hash;
 	}
 
-    public function getGravatar()
-    {
-        return 'http://www.gravatar.com/avatar/' . md5(strtolower($this->email)) . '?d=mm';
-    }
+	public function getGravatar()
+	{
+		return 'http://www.gravatar.com/avatar/' . md5(strtolower($this->email)) . '?d=mm';
+	}
 
-    public function getFbAvatar()
-    {
-        return 'https://graph.facebook.com/' . $this->facebook_user_id . '/picture?type=large';
-    }
+	public function getFbAvatar()
+	{
+		return 'https://graph.facebook.com/' . $this->facebook->uid . '/picture?type=large';
+	}
 
 	public function getAvatar()
 	{
@@ -40,7 +54,7 @@ class User extends UserBase
 		{
 			return $this->avatar->url;
 		}
-		if ($this->facebook_user_id != null)
+		if ($this->facebook != null)
 		{
 			return $this->getFbAvatar();
 		}

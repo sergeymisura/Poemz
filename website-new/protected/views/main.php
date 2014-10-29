@@ -15,7 +15,7 @@
 		var js, fjs = d.getElementsByTagName(s)[0];
 		if (d.getElementById(id)) return;
 		js = d.createElement(s); js.id = id;
-		js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=<?= Yii::app()->params['fb_app_id'] ?>";
+		js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&version=v2.1&appId=<?= Yii::app()->params['fb_app_id'] ?>";
 		fjs.parentNode.insertBefore(js, fjs);
 	}(document, 'script', 'facebook-jssdk'));</script>
 
@@ -89,7 +89,7 @@
 									 data-size="large"
 									 data-show-faces="false"
 									 data-auto-logout-link="false"
-									 data-scope="email">
+									 data-scope="email,public_profile">
 								</div>
 							</div>
 						</div>
