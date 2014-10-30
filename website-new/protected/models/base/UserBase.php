@@ -19,7 +19,7 @@
  * @property  integer avatar_id Database column
  * @property  string  slug Database column
  * @property  Author[] authors Relation
- * @property  Identity[] identitys Relation
+ * @property  Identity[] identities Relation
  * @property  Image[] images Relation
  * @property  Poem[] poems Relation
  * @property  Post[] posts Relation
@@ -63,7 +63,7 @@ abstract class UserBase extends Model
 	{
 		return array(
 			'authors' => array(self::HAS_MANY, 'Author', 'submitter_id'),
-			'identitys' => array(self::HAS_MANY, 'Identity', 'user_id'),
+			'identities' => array(self::HAS_MANY, 'Identity', 'user_id'),
 			'images' => array(self::HAS_MANY, 'Image', 'author_id'),
 			'poems' => array(self::HAS_MANY, 'Poem', 'submitted_by'),
 			'posts' => array(self::HAS_MANY, 'Post', 'author_id'),

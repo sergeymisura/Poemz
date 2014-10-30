@@ -20,8 +20,13 @@ $own = $this->session ? $user->id == $this->session->user_id : false;
 				<div class="col-sm-9">
 					<h3><?= $this->text($user->username) ?></h3>
 					<?php if ($user->website): ?>
-						<div><a href="<?= $user->website ?>" target="_blank"><i class="fa fa-globe"></i> <?= $user->websiteText ?></a></div>
+						<p><a href="<?= $user->website ?>" target="_blank"><i class="fa fa-globe"></i> <?= $user->websiteText ?></a></p>
 					<?php endif; ?>
+					<div>
+						<?php foreach ($user->identities as $identity): if ($identity->link && $identity->is_public == '1'): ?>
+							<a href="<?= $identity->link ?>" target="_blank"><img src="<?= Yii::app()->baseUrl ?>/assets/img/<?= $identity->provider ?>_29.png" /></a>
+						<?php endif; endforeach; ?>
+					</div>
 					<br/>
 					<div>
 						<a class="btn-icon btn-edit _own hide" href="<?= $this->createUrl('profile/edit', ['slug' => $user->slug]) ?>" title="Edit your profile">

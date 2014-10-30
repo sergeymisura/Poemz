@@ -94,6 +94,16 @@ class ApiController extends BaseController
 	}
 
 	/**
+	 * This functions sends back HTTP response 404
+	 *
+	 * @return  void
+	 */
+	public function notFound()
+	{
+		$this->sendError(404, 'ERR_NOT_FOUND', 'The requested resource is not found');
+	}
+
+	/**
 	 * This function is being called when the attempt to authenticate user has failed
 	 *
 	 * @see BaseController::authFailed()

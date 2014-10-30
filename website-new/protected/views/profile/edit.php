@@ -77,18 +77,25 @@
             <br/>
             <div class="social-network">
                 <div class="social-network-logo pull-left">
-                    <img src="<?= Yii::app()->baseUrl ?>/assets/img/FB-f-Logo__blue_72.png"/>
+                    <img src="<?= Yii::app()->baseUrl ?>/assets/img/Facebook_72.png"/>
                 </div>
                 <div class="social-network-info">
                     <?php if ($user->facebook): ?>
                         <p>
-                            You have linked your Facebook account <br/>
+                            You have linked your
                             <?php if ($user->facebook->link): ?>
-                                <a href="<?= $this->text($user->facebook->link) ?>" target="_blank"><?= $this->text($user->facebook->link) ?></a>
+                                <a href="<?= $this->text($user->facebook->link) ?>" target="_blank">Facebook account</a>
+							<?php else: ?>
+								Facebook account
                             <?php endif; ?>
+							<br/>
                         </p>
                         <p>
-                            <a class="btn-icon" href="#" title="Make it visible to others">
+                            <a class="btn-icon btn-toggle-profile" href="#"
+							   title="<?= $user->facebook->is_public
+								   ? 'A link to this profile is visible to others'
+								   : 'Make it visible to others' ?>"
+							   data-provider="<?= Identity::FACEBOOK ?>">
                                 <i class="fa <?= $user->facebook->is_public ? 'fa-toggle-on' : 'fa-toggle-off' ?>"></i>
                             </a>
                             <a class="btn-icon" href="#" title="Unlink your Facebook account"><i class="fa fa-trash"></i></a>
@@ -99,7 +106,7 @@
             <hr/>
             <div class="social-network">
                 <div class="social-network-logo pull-left">
-                    <img src="<?= Yii::app()->baseUrl ?>/assets/img/GooglePlus-Logo-Official_72.png"/>
+                    <img src="<?= Yii::app()->baseUrl ?>/assets/img/GooglePlus_72.png"/>
                 </div>
                 <div class="social-network-info">
                     <br/>
@@ -109,7 +116,7 @@
             <hr/>
             <div class="social-network">
                 <div class="social-network-logo pull-left">
-                    <img src="<?= Yii::app()->baseUrl ?>/assets/img/Twitter_logo_blue_72.png"/>
+                    <img src="<?= Yii::app()->baseUrl ?>/assets/img/Twitter_72.png"/>
                 </div>
                 <div class="social-network-info">
                     <br/>

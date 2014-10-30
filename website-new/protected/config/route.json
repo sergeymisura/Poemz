@@ -20,14 +20,18 @@
 
 	"RESOURCE:api/authors": "api/resources/authorsResource",
 	"RESOURCE:api/authors/<author_id>/poems": "api/resources/poemsResource",
+
 	"GET:api/poems/<list>": "api/resources/poemsResource/mixedList",
+
 	"RESOURCE:api/poems/<poem_id>/recitations": "api/resources/recitationsResource",
 	"GET:api/users/<user_id>/recitations": "api/resources/recitationsResource/listByUser",
 	"POST:api/poems/<poem_id>/recitations/<id>/prepare": "api/resources/recitationsResource/prepare",
-
 	"GET:api/poems/<poem_id>/recitations/<id>/vote": "api/resources/recitationsResource/getVote",
 	"POST:api/poems/<poem_id>/recitations/<id>/vote": "api/resources/recitationsResource/addVote",
 	"POST:api/poems/<poem_id>/recitations/<id>/revoke": "api/resources/recitationsResource/revokeVote",
+
+	"POST:api/users/<id>/toggle-social-profile": "api/resources/usersResource/toggleSocialProfile",
+	"RESOURCE:api/users": "api/resources/usersResource",
 
 	"POST:api/tracking": "api/trackingApi/index",
 
