@@ -40,7 +40,7 @@ class User extends UserBase
 
 	public function getGravatar()
 	{
-		return 'http://www.gravatar.com/avatar/' . md5(strtolower($this->email)) . '?d=mm';
+		return 'http://www.gravatar.com/avatar/' . md5(strtolower($this->email)) . '?d=mm&size=150';
 	}
 
 	public function getFbAvatar()
@@ -50,6 +50,10 @@ class User extends UserBase
 
 	public function getAvatar()
 	{
+		if ($this->external_avatar_url != null)
+		{
+			return $this->external_avatar_url;
+		}
 		if ($this->avatar_id != null)
 		{
 			return $this->avatar->url;

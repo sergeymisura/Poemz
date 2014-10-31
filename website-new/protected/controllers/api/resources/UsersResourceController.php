@@ -45,7 +45,80 @@ class UsersResourceController extends ApiController
 	 */
 	public function actionUpdate($id)
 	{
-		$this->sendError(501, 'ERR_NOT_IMPLEMENTED', 'The action you are requesting is not implemented');
+		/**
+		 * @var  User      $user
+		 */
+		$user = User::model()->findByPk($id);
+
+		if ($user == null)
+		{
+			$this->notFound();
+		}
+
+		if ($this->session == null || $user->id != $this->session->user_id)
+		{
+			$this->authFailed();
+		}
+
+		$modified = false;
+
+		if (isset($this->payload->email))
+		{
+			$exists = User::model()->countByAttributes(
+					['email' => $this->payload->email],
+					'id <> :user_id',
+					[':user_id' => $user->id]
+				) > 0;
+
+			if ($exists)
+			{
+				$this->sendError(400, 'ERR_EXISTS', 'A user with this email address already exists.');
+			}
+
+			$user->email = $this->payload->email;
+			$modified = true;
+		}
+
+		if (isset($this->payload->username))
+		{
+			$exists = User::model()->countByAttributes(
+					['username' => $this->payload->username],
+					'id <> :user_id',
+					[':user_id' => $user->id]
+				) > 0;
+
+			if ($exists)
+			{
+				$this->sendError(400, 'ERR_EXISTS', 'A user with this stage name already exists.');
+			}
+
+			$user->username = $this->payload->username;
+			$modified = true;
+		}
+
+		if (isset($this->payload->about))
+		{
+			$user->about = $this->payload->about;
+			$modified = true;
+		}
+
+		if (isset($this->payload->website))
+		{
+			$website = strtolower($this->payload->website);
+			if (strpos($website, 'http://') !== 0 && strpos($website, 'https://') !== 0)
+			{
+				$this->payload->website = 'http://' . $this->payload->website;
+			}
+			$user->website = $this->payload->website;
+			$modified = true;
+		}
+
+		if ($modified)
+		{
+			$user->save();
+		}
+
+		$this->send(['user' => $user]);
 	}
 
 	/**
@@ -109,5 +182,45 @@ class UsersResourceController extends ApiController
 		$identity->save();
 
 		$this->send();
+	}
+
+	public function actionSetAvatar($id)
+	{
+		/**
+		 * @var  User      $user
+		 * @var  Identity  $identity
+		 */
+		$user = User::model()->findByPk($id);
+
+		if ($user == null)
+		{
+			$this->notFound();
+		}
+
+		if ($this->session == null || $user->id != $this->session->user_id)
+		{
+			$this->authFailed();
+		}
+
+		if (!isset($this->payload->source))
+		{
+			$this->sendError(400, 'ERR_INVALID', 'Source is required');
+		}
+
+		switch ($this->payload->source)
+		{
+			case 'Facebook':
+				$user->external_avatar_url = $user->getFbAvatar();
+				break;
+			case 'Gravatar':
+				$user->external_avatar_url = $user->getGravatar();
+				break;
+			default:
+				$this->sendError(400, 'ERR_INVALID', 'Source is invalid');
+		}
+
+		$user->save();
+
+		$this->send(['user' => $user]);
 	}
 }

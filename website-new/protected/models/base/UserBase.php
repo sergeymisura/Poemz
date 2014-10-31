@@ -18,6 +18,7 @@
  * @property  string  website Database column
  * @property  integer avatar_id Database column
  * @property  string  slug Database column
+ * @property  string  external_avatar_url Database column
  * @property  Author[] authors Relation
  * @property  Identity[] identities Relation
  * @property  Image[] images Relation

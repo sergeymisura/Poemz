@@ -18,18 +18,23 @@ $own = $this->session ? $user->id == $this->session->user_id : false;
 					<img class="thumbnail full-width" src="<?= $user->getAvatar() ?>"/>
 				</div>
 				<div class="col-sm-9">
-					<h3><?= $this->text($user->username) ?></h3>
+					<h3>
+						<div class="row">
+							<div class="col-sm-8">
+								<?= $this->text($user->username) ?>
+							</div>
+							<div class="col-sm-4">
+								<?php foreach ($user->identities as $identity): if ($identity->link && $identity->is_public == '1'): ?>
+									<a title="Meet <?= $this->text($user->username) ?> on <?= $identity->provider ?>" href="<?= $identity->link ?>" target="_blank"><img src="<?= Yii::app()->baseUrl ?>/assets/img/<?= $identity->provider ?>_29.png" /></a>
+								<?php endif; endforeach; ?>
+							</div>
+						</div>
+					</h3>
 					<?php if ($user->website): ?>
 						<p><a href="<?= $user->website ?>" target="_blank"><i class="fa fa-globe"></i> <?= $user->websiteText ?></a></p>
 					<?php endif; ?>
 					<div>
-						<?php foreach ($user->identities as $identity): if ($identity->link && $identity->is_public == '1'): ?>
-							<a href="<?= $identity->link ?>" target="_blank"><img src="<?= Yii::app()->baseUrl ?>/assets/img/<?= $identity->provider ?>_29.png" /></a>
-						<?php endif; endforeach; ?>
-					</div>
-					<br/>
-					<div>
-						<a class="btn-icon btn-edit _own hide" href="<?= $this->createUrl('profile/edit', ['slug' => $user->slug]) ?>" title="Edit your profile">
+						<a class="btn-icon btn-edit own hide" href="<?= $this->createUrl('profile/edit', ['slug' => $user->slug]) ?>" title="Edit your profile">
 							<i class="fa fa-pencil-square-o"></i>
 						</a>
                         <?php if (!$own): ?>

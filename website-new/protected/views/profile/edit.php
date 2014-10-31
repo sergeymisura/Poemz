@@ -10,22 +10,28 @@
             <br/>
             <div class="row">
                 <div class="col-sm-3 col-sm-offset-1">
-                    <img src="<?= $user->getAvatar() ?>" class="img-thumbnail full-width" />
+                    <img src="<?= $user->getAvatar() ?>" class="img-thumbnail full-width avatar" />
                 </div>
                 <div class="col-sm-8">
                     <br/>
                     <div><button class="btn btn-default">Upload new avatar</button></div>
                     <br/>
                     <div>or use
-                        <a href="#" title="Gravatar"><img class="img-thumbnail img-th-xs" src="<?= $user->getGravatar() ?>"/></a>
+                        <a href="#" class="external-avatar" data-source="Gravatar" title="Gravatar"><img class="img-thumbnail img-th-xs" src="<?= $user->getGravatar() ?>"/></a>
                         <?php if ($user->facebook): ?>
-                            <a href="#" title="Facebook"><img class="img-thumbnail img-th-xs" src="<?= $user->getFbAvatar() ?>"/></a>
+                            <a href="#" class="external-avatar" data-source="Facebook" title="Facebook"><img class="img-thumbnail img-th-xs" src="<?= $user->getFbAvatar() ?>"/></a>
                         <?php endif; ?>
                     </div>
+					<div class="hide-light avatar-message">
+						<br/>
+						<div class="alert alert-success">Your avatar has been updated.</div>
+					</div>
                 </div>
             </div>
             <br/>
-            <form class="form-horizontal">
+            <form class="form-horizontal profile-form">
+				<div class="alert alert-success hide-light">Your profile has been updated.</div>
+				<div class="alert alert-danger hide-light"></div>
                 <div class="form-group">
                     <label for="email" class="col-sm-4 control-label">Email:</label>
                     <div class="col-sm-8">
@@ -66,8 +72,8 @@
                 </div>
                 <div class="form-group">
                     <div class="col-sm-7 col-sm-offset-5">
-                        <button class="btn btn-primary">Save profile</button>
-                        <button class="btn btn-default">Reset</button>
+                        <button class="btn btn-primary" type="submit">Save profile</button>
+                        <button class="btn btn-default" type="reset">Reset</button>
                     </div>
                 </div>
             </form>

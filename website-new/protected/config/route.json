@@ -31,6 +31,7 @@
 	"POST:api/poems/<poem_id>/recitations/<id>/revoke": "api/resources/recitationsResource/revokeVote",
 
 	"POST:api/users/<id>/toggle-social-profile": "api/resources/usersResource/toggleSocialProfile",
+	"POST:api/users/<id>/set-avatar": "api/resources/usersResource/setAvatar",
 	"RESOURCE:api/users": "api/resources/usersResource",
 
 	"POST:api/tracking": "api/trackingApi/index",
