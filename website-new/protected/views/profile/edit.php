@@ -65,9 +65,7 @@
                 <div class="form-group">
                     <label for="about" class="col-sm-4 control-label">Few words about you:</label>
                     <div class="col-sm-8">
-                        <textarea class="form-control" style="height: 200px" id="about" name="about">
-                            <?= $this->text($user->about) ?>
-                        </textarea>
+                        <textarea class="form-control" style="height: 200px" id="about" name="about"><?= $this->text($user->about) ?></textarea>
                     </div>
                 </div>
                 <div class="form-group">
