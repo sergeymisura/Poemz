@@ -14,7 +14,12 @@
                 </div>
                 <div class="col-sm-8">
                     <br/>
-                    <div><button class="btn btn-default">Upload new avatar</button></div>
+                    <div>
+						<span class="btn btn-default fileinput-button">
+							<span>Upload new avatar</span>
+							<input type="file" name="avatar"/>
+						</span>
+					</div>
                     <br/>
                     <div>or use
                         <a href="#" class="external-avatar" data-source="Gravatar" title="Gravatar"><img class="img-thumbnail img-th-xs" src="<?= $user->getGravatar() ?>"/></a>

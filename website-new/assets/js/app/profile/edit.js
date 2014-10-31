@@ -8,6 +8,13 @@
 					'.profile-form': { submit: this.saveProfile },
 					'.external-avatar': this.setAvatar
 				});
+
+				$element.find('.fileinput-button').fileupload({
+					dataType: 'json',
+					url: app.config.baseUrl + '/api/users/' + app.data.user.id + '/upload-avatar',
+					done: $.proxy(this.uploaded, this),
+					dropZone: null
+				});
             },
 
 			toggleProfile: function($source) {
@@ -71,6 +78,11 @@
 					},
 					this
 				);
+			},
+
+			uploaded: function(event, obj) {
+				$element.find('img.avatar').attr('src', obj.jqXHR.responseJSON.data.user.avatar);
+				$element.find('.avatar-message').fadeIn();
 			}
         };
     });

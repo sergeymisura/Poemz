@@ -32,6 +32,7 @@
 
 	"POST:api/users/<id>/toggle-social-profile": "api/resources/usersResource/toggleSocialProfile",
 	"POST:api/users/<id>/set-avatar": "api/resources/usersResource/setAvatar",
+	"POST:api/users/<id>/upload-avatar": "api/resources/usersResource/uploadAvatar",
 	"RESOURCE:api/users": "api/resources/usersResource",
 
 	"POST:api/tracking": "api/trackingApi/index",

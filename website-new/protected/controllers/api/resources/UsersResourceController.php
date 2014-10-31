@@ -188,7 +188,6 @@ class UsersResourceController extends ApiController
 	{
 		/**
 		 * @var  User      $user
-		 * @var  Identity  $identity
 		 */
 		$user = User::model()->findByPk($id);
 
@@ -222,5 +221,73 @@ class UsersResourceController extends ApiController
 		$user->save();
 
 		$this->send(['user' => $user]);
+	}
+
+	public function actionUploadAvatar($id)
+	{
+		/**
+		 * @var  User      $user
+		 */
+		$user = User::model()->findByPk($id);
+
+		if ($user == null)
+		{
+			$this->notFound();
+		}
+
+		if ($this->session == null || $user->id != $this->session->user_id)
+		{
+			$this->authFailed();
+		}
+
+		if (!isset($_FILES['avatar']))
+		{
+			$this->sendError(400, 'ERR_INVALID', 'Invalid request');
+		}
+
+		$image = new Image;
+		$image->content = $this->resizeCrop(file_get_contents($_FILES['avatar']['tmp_name']), 150, 150);
+		$image->save();
+
+		$user->avatar_id = $image->id;
+		$user->external_avatar_url = null;
+		$user->save();
+
+		$this->send(['user' => $user]);
+	}
+
+	/**
+	 * Resizes / crops the image to fit into the specified size
+	 *
+	 * @param   string  $content     Image content
+	 * @param   int     $new_width   New image width
+	 * @param   int     $new_height  New image height
+	 *
+	 * @return  string  New image content
+	 */
+	private function resizeCrop($content, $new_width, $new_height)
+	{
+		$gd = imagecreatefromstring($content);
+		$width = imagesx($gd);
+		$height = imagesy($gd);
+
+		$resized = imagecreatetruecolor($new_width, $new_height);
+		$ratio = max($new_width / $width, $new_height / $height);
+		imagecopyresampled(
+			$resized,
+			$gd,
+			0,
+			0,
+			floor(($width - $new_width / $ratio) / 2),
+			floor(($height - $new_height / $ratio) / 2),
+			$new_width,
+			$new_height,
+			floor($new_width / $ratio),
+			floor($new_height / $ratio)
+		);
+
+		ob_start();
+		imagejpeg($resized);
+		return ob_get_clean();
 	}
 }
