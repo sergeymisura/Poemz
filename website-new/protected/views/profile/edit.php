@@ -109,9 +109,16 @@
                             </a>
                             <a class="btn-icon" href="#" title="Unlink your Facebook account"><i class="fa fa-trash"></i></a>
                         </p>
+					<?php else: ?>
+						<br/>
+						<button type="button" class="btn btn-default btn-link-facebook">Link your Facebook account</button>
                     <?php endif?>
                 </div>
             </div>
+			<div class="facebook-alert hide-light">
+				<br/>
+				<div class="alert alert-danger"></div>
+			</div>
             <hr/>
             <div class="social-network">
                 <div class="social-network-logo pull-left">

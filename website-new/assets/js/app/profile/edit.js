@@ -6,7 +6,8 @@
 				services.events({
 					'.btn-toggle-profile': this.toggleProfile,
 					'.profile-form': { submit: this.saveProfile },
-					'.external-avatar': this.setAvatar
+					'.external-avatar': this.setAvatar,
+					'.btn-link-facebook': this.linkFacebook
 				});
 
 				$element.find('.fileinput-button').fileupload({
@@ -20,9 +21,8 @@
 			toggleProfile: function($source) {
 				var makeVisible = $source.find('i').hasClass('fa-toggle-off');
 				services.api.post(
-					'users/' + app.data.user.id + '/toggle-social-profile',
+					'users/' + app.data.user.id + '/social/' + $source.data('provider') + '/toggle',
 					{
-						provider: $source.data('provider'),
 						is_public: makeVisible ? 1 : 0
 					}
 				).success(
@@ -83,6 +83,39 @@
 			uploaded: function(event, obj) {
 				$element.find('img.avatar').attr('src', obj.jqXHR.responseJSON.data.user.avatar);
 				$element.find('.avatar-message').fadeIn();
+			},
+
+			linkFacebook: function() {
+				FB.getLoginStatus(
+					$.proxy(function(response) {
+						if (response.status == 'connected') {
+							this.facebookCallback(response);
+						}
+						else {
+							FB.login($.proxy(this.facebookCallback), this);
+						}
+					}, this));
+			},
+
+			facebookCallback: function(response) {
+				if (response.status == 'connected') {
+					services.api.post(
+						'users/' + app.data.user.id + '/social/Facebook/attach',
+						{
+							uid: response.authResponse.userID,
+							access_token: response.authResponse.accessToken
+						}
+					).success(function() { document.location.reload(); }, this)
+						.error(function(code, response) {
+							if (code == 400) {
+								$element.find('.facebook-alert .alert').html(response.message);
+							}
+							else {
+								$element.find('.facebook-alert .alert').html('Oops... Something went wrong.');
+							}
+							$element.find('.facebook-alert').fadeIn();
+						}, this);
+				}
 			}
         };
     });

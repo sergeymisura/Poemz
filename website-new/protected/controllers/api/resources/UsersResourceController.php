@@ -136,11 +136,12 @@ class UsersResourceController extends ApiController
 	/**
 	 * Switches visibility of user's social network profile
 	 *
-	 * @param   int  $id  User ID
+	 * @param   int     $id        User ID
+	 * @param   string  $provider  Social Profile provider
 	 *
 	 * @return  void
 	 */
-	public function actionToggleSocialProfile($id)
+	public function actionToggleSocialProfile($id, $provider)
 	{
 		/**
 		 * @var  User      $user
@@ -163,14 +164,9 @@ class UsersResourceController extends ApiController
 			$this->sendError(400, 'ERR_INVALID', '"is_public" field is required');
 		}
 
-		if (!isset($this->payload->provider))
-		{
-			$this->sendError(400, 'ERR_INVALID', 'Provider is required');
-		}
-
 		$identity = Identity::model()->findByAttributes([
 			'user_id' => $user->id,
-			'provider' => $this->payload->provider
+			'provider' => $provider
 		]);
 
 		if ($identity == null)
@@ -181,6 +177,96 @@ class UsersResourceController extends ApiController
 		$identity->is_public = $this->payload->is_public;
 		$identity->save();
 
+		$this->send();
+	}
+
+	public function actionAttachSocialProfile($id, $provider)
+	{
+		/**
+		 * @var  User      $user
+		 * @var  Identity  $identity
+		 */
+		$user = User::model()->findByPk($id);
+
+		if ($user == null)
+		{
+			$this->notFound();
+		}
+
+		if ($this->session == null || $user->id != $this->session->user_id)
+		{
+			$this->authFailed();
+		}
+
+		if (!isset($this->payload->uid))
+		{
+			$this->sendError(400, 'ERR_INVALID', 'Provider-issued user ID is required');
+		}
+
+		if (!isset($this->payload->access_token))
+		{
+			$this->sendError(400, 'ERR_INVALID', 'Provider-issued access token is required');
+		}
+
+		$identity = Identity::model()->findByAttributes([
+			'user_id' => $user->id,
+			'provider' => $provider
+		]);
+
+		if ($identity != null)
+		{
+			$this->sendError(400, 'ERR_INVALID', 'You already have a profile for this provider.');
+		}
+
+		$identity = Identity::model()->findByAttributes([
+			'uid' => $this->payload->uid,
+			'provider' => $provider
+		]);
+
+		if ($identity != null)
+		{
+			$this->sendError(400, 'ERR_INVALID', 'This account is already attached to another Poemz.org profile.');
+		}
+
+		$identity = new Identity;
+		$identity->user_id = $user->id;
+		$identity->provider = $provider;
+		$identity->uid = $this->payload->uid;
+		$identity->access_token = $this->payload->access_token;
+
+		switch ($provider)
+		{
+			case Identity::FACEBOOK:
+				$response = Yii::app()->http->get(
+					'https://graph.facebook.com/me',
+					array(
+						'access_token' => $this->payload->access_token
+					)
+				);
+
+				$apiResponse = json_decode($response->data());
+
+				if (!isset($apiResponse->id))
+				{
+					$this->sendError(500, 'ERR_FB_ERROR', 'Facebook returned invalid response');
+				}
+
+				if ($apiResponse->id != $this->payload->uid)
+				{
+					$this->sendError(400, 'ERR_INVALID', 'Auth token does not match user ID');
+				}
+
+				if (isset($apiResponse->link))
+				{
+					$identity->link = $apiResponse->link;
+				}
+				break;
+
+			default:
+				$this->sendError(400, 'ERR_INVALID', 'Invalid provider');
+		}
+
+		$identity->save();
 		$this->send();
 	}
 
