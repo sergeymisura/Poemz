@@ -11,7 +11,8 @@
 		return {
 			init: function() {
 				services.events({
-					'.social-button.facebook': this.facebook
+					'.social-button.facebook': this.facebook,
+					'.social-button.googleplus': this.googlePlus
 				});
 			},
 
@@ -47,6 +48,41 @@
 							$element.find('.social-button.facebook').html('Sign in with Facebook');
 						}
 					);
+				}
+				else {
+					$element.find('.social-button.facebook').html('Sign in with Facebook');
+				}
+			},
+
+			googlePlus: function($source) {
+				$source.html('Signing in...');
+				gapi.auth.signIn({callback: $.proxy(this.googlePlusConnected, this)});
+			},
+
+			googlePlusConnected: function(response) {
+				if (response.status.signed_in) {
+					if (typeof this._gplus_token != 'undefined'
+						&& this._gplus_token == response.access_token) {
+						return;
+					}
+					this._gplus_token = response.access_token;
+					services.api.post(
+						'auth/google-plus',
+						{
+							access_token: response.access_token
+						}
+					).success(
+						function(response) {
+							services.auth.loginCompleted(response.data.session);
+						}
+					).error(
+						function() {
+							$element.find('.social-button.facebook').html('Sign in with Google+');
+						}
+					);
+				}
+				else {
+					$element.find('.social-button.googleplus').html('Sign in with Google+');
 				}
 			}
 		};

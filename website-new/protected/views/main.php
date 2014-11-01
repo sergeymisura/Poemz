@@ -8,6 +8,13 @@
 		};
 	</script>
 	<title><?= $this->text($this->pageTitle) ?></title>
+
+	<meta name="google-signin-clientid" content="189154397502-tjeouombgnrt818uuslba8io2gvg0su9.apps.googleusercontent.com" />
+	<meta name="google-signin-scope" content="profile https://www.googleapis.com/auth/plus.profile.emails.read" />
+	<meta name="google-signin-cookiepolicy" content="single_host_origin" />
+
+	<script src="https://apis.google.com/js/platform.js" async defer></script>
+	<script src="https://apis.google.com/js/client:platform.js" async defer></script>
 </head>
 <body>
 	<div id="fb-root"></div>
@@ -85,7 +92,7 @@
 							<div class="text-center" data-controller="social-login">
 								<p>
 									<span class="social-button facebook">Sign in with Facebook</span>
-									<span class="social-button googleplus hide">Sign in with Google+</span>
+									<span class="social-button googleplus">Sign in with Google+</span>
 									<span class="social-button twitter hide">Sign in with Twitter</span>
 								</p>
 							</div>

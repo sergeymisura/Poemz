@@ -12,6 +12,7 @@
  * @property  string  access_token Database column
  * @property  string  link Database column
  * @property  boolean is_public Database column
+ * @property  string  avatar_url Database column
  * @property  User user Relation
  */
 abstract class IdentityBase extends Model

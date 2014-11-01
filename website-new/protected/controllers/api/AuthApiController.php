@@ -94,11 +94,86 @@ class AuthApiController extends ApiController
         }
 
         $identity->access_token = $this->payload->access_token;
+		$identity->avatar_url = 'https://graph.facebook.com/' . $identity->uid . '/picture?type=large';
         if (isset($apiResponse->link))
         {
             $identity->link = $apiResponse->link;
         }
         $identity->save();
+
+		$this->authenticated($user);
+	}
+
+	function actionGooglePlus()
+	{
+		/**
+		 * @var  HttpCurlResponse $response
+		 * @var  User $user
+		 * @var  Identity $identity
+		 */
+
+		if (!isset($this->payload->access_token)) {
+			$this->sendError(400, 'ERR_INVALID', 'Access token is required');
+		}
+
+		$response = Yii::app()->http->get(
+			'https://www.googleapis.com/plus/v1/people/me',
+			array(
+				'access_token' => $this->payload->access_token
+			)
+		);
+
+		$apiResponse = json_decode($response->data());
+
+		$identity = Identity::model()->with('user')->findByAttributes(
+			array(
+				'uid' => $apiResponse->id,
+				'provider' => Identity::GOOGLE_PLUS
+			)
+		);
+
+		$avatar_url = null;
+		if (isset($apiResponse->image))
+		{
+			$parts = explode('?', $apiResponse->image->url);
+			$avatar_url = $parts[0] . '?sz=150';
+		}
+
+		if ($identity == null)
+		{
+			$user = new User;
+			$user->email = $apiResponse->emails[0]->value;
+			$user->created = User::getDbDate(null, true);
+
+			$display_name = $apiResponse->displayName;
+
+			$idx = 0;
+			while (User::model()->countByAttributes(array('username' => $display_name)) > 0)
+			{
+				$idx++;
+				$display_name = $apiResponse->displayName . ' ' . $idx;
+			}
+
+			$user->username = $display_name;
+			$user->slug = Model::slugify($display_name);
+			$user->active = 1;
+			$user->external_avatar_url = $avatar_url;
+			$user->save();
+
+			$identity = new Identity();
+			$identity->provider = Identity::GOOGLE_PLUS;
+			$identity->user_id = $user->id;
+			$identity->uid = $apiResponse->id;
+		}
+		else
+		{
+			$user = $identity->user;
+		}
+
+		$identity->access_token = $this->payload->access_token;
+		$identity->link = $apiResponse->url;
+		$identity->avatar_url = $avatar_url;
+		$identity->save();
 
 		$this->authenticated($user);
 	}
