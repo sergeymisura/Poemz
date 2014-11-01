@@ -82,15 +82,12 @@
 							</form>
 						</div>
 						<div class="col-sm-6">
-							<div class="text-center facebook-button" data-controller="facebook-button">
-								<div onlogin="facebookLogin"
-									 class="fb-login-button"
-									 data-max-rows="1"
-									 data-size="large"
-									 data-show-faces="false"
-									 data-auto-logout-link="false"
-									 data-scope="email,public_profile">
-								</div>
+							<div class="text-center" data-controller="social-login">
+								<p>
+									<span class="social-button facebook">Sign in with Facebook</span>
+									<span class="social-button googleplus hide">Sign in with Google+</span>
+									<span class="social-button twitter hide">Sign in with Twitter</span>
+								</p>
 							</div>
 						</div>
 					</div>

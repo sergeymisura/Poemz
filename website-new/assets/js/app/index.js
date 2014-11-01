@@ -7,6 +7,51 @@
 		}
 	};
 
+	app.controller('social-login', function($element, services) {
+		return {
+			init: function() {
+				services.events({
+					'.social-button.facebook': this.facebook
+				});
+			},
+
+			facebook: function($source) {
+				$source.html('Signing in...');
+				FB.getLoginStatus($.proxy(
+					function(response) {
+						if (response.status == 'connected') {
+							this.facebookConnected(response);
+						}
+						else {
+							FB.login($.proxy(this.facebookConnected, this));
+						}
+					}
+				, this));
+			},
+
+			facebookConnected: function(response) {
+				if (response.status == 'connected') {
+					var authResponse = response.authResponse;
+					services.api.post(
+						'auth/facebook',
+						{
+							user_id: authResponse.userID,
+							access_token: authResponse.accessToken
+						}
+					).success(
+						function(response) {
+							services.auth.loginCompleted(response.data.session);
+						}
+					).error(
+						function() {
+							$element.find('.social-button.facebook').html('Sign in with Facebook');
+						}
+					);
+				}
+			}
+		};
+	});
+
 	app.controller('facebook-button', function($element, services) {
 		return {
 			init: function() {},
