@@ -148,7 +148,10 @@ $has_password = $user->password_hash != null;
 							   data-provider="<?= Identity::FACEBOOK ?>">
                                 <i class="fa <?= $user->facebook->is_public ? 'fa-toggle-on' : 'fa-toggle-off' ?>"></i>
                             </a>
-                            <a class="btn-icon" href="#" title="Unlink your Facebook account"><i class="fa fa-trash"></i></a>
+                            <a class="btn-icon btn-unlink-profile" href="#" title="Unlink your Facebook account"
+							   data-provider="<?= Identity::FACEBOOK ?>">
+								<i class="fa fa-trash"></i>
+							</a>
                         </p>
 					<?php else: ?>
 						<br/>

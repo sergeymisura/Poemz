@@ -33,6 +33,7 @@
 
 	"POST:api/users/<id>/social/<provider>/toggle": "api/resources/usersResource/toggleSocialProfile",
 	"POST:api/users/<id>/social/<provider>/attach": "api/resources/usersResource/attachSocialProfile",
+	"POST:api/users/<id>/social/<provider>/detach": "api/resources/usersResource/detachSocialProfile",
 	"POST:api/users/<id>/set-avatar": "api/resources/usersResource/setAvatar",
 	"POST:api/users/<id>/upload-avatar": "api/resources/usersResource/uploadAvatar",
 	"RESOURCE:api/users": "api/resources/usersResource",

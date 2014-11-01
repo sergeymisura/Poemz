@@ -270,6 +270,49 @@ class UsersResourceController extends ApiController
 		$this->send();
 	}
 
+	public function actionDetachSocialProfile($id, $provider)
+	{
+		/**
+		 * @var  User      $user
+		 * @var  Identity  $identity
+		 */
+		$user = User::model()->findByPk($id);
+
+		if ($user == null)
+		{
+			$this->notFound();
+		}
+
+		if ($this->session == null || $user->id != $this->session->user_id)
+		{
+			$this->authFailed();
+		}
+
+		$identity = Identity::model()->findByAttributes([
+			'user_id' => $user->id,
+			'provider' => $provider
+		]);
+
+		if ($identity == null)
+		{
+			$this->send();
+		}
+
+		if ($user->password_hash == null)
+		{
+			$count = Identity::model()->countByAttributes([
+				'user_id' => $user->id
+			]);
+			if ($count == 1)
+			{
+				$this->sendError(400, 'ERR_INVALID', 'This is your only way to log in to Poemz.org. Create a password before unlinking this profile.');
+			}
+		}
+
+		$identity->delete();
+		$this->send();
+	}
+
 	public function actionSetAvatar($id)
 	{
 		/**

@@ -8,7 +8,8 @@
 					'.profile-form': { submit: this.saveProfile },
 					'.password-form': { submit: this.savePassword },
 					'.external-avatar': this.setAvatar,
-					'.btn-link-facebook': this.linkFacebook
+					'.btn-link-facebook': this.linkFacebook,
+					'.btn-unlink-profile': this.unlinkProfile
 				});
 
 				$element.find('.fileinput-button').fileupload({
@@ -118,6 +119,29 @@
 			uploaded: function(event, obj) {
 				$element.find('img.avatar').attr('src', obj.jqXHR.responseJSON.data.user.avatar);
 				$element.find('.avatar-message').fadeIn();
+			},
+
+			unlinkProfile: function($source) {
+				var provider = $source.data('provider');
+
+				var $alert = $element.find('.' + provider.toLowerCase() + '-alert');
+				$alert.hide();
+
+				services.api.post(
+					'users/' + app.data.user.id + '/social/' + provider + '/detach'
+				).success(
+					function() {document.location.reload(); }
+				).error(
+					function(code, response) {
+						if (code == 400) {
+							$alert.find('.alert').html(response.message);
+						}
+						else {
+							$alert.find('.alert').html('Oops... Something wrong.');
+						}
+						$alert.fadeIn();
+					}
+				);
 			},
 
 			linkFacebook: function() {
