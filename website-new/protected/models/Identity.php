@@ -8,6 +8,6 @@
 class Identity extends IdentityBase
 {
     const FACEBOOK = 'Facebook';
-	const GOOGLE_PLUS = "Google";
+	const GOOGLE_PLUS = "GooglePlus";
 	const TWITTER = "Twitter";
 }

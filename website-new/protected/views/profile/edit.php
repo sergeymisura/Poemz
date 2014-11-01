@@ -25,9 +25,12 @@ $has_password = $user->password_hash != null;
                     <br/>
                     <div>or use
                         <a href="#" class="external-avatar" data-source="Gravatar" title="Gravatar"><img class="img-thumbnail img-th-xs" src="<?= $user->getGravatar() ?>"/></a>
-                        <?php if ($user->facebook): ?>
-                            <a href="#" class="external-avatar" data-source="Facebook" title="Facebook"><img class="img-thumbnail img-th-xs" src="<?= $user->getFbAvatar() ?>"/></a>
-                        <?php endif; ?>
+						<?php if ($user->facebook): ?>
+							<a href="#" class="external-avatar" data-source="Facebook" title="Facebook"><img class="img-thumbnail img-th-xs" src="<?= $user->getFbAvatar() ?>"/></a>
+						<?php endif; ?>
+						<?php if ($user->google_plus): ?>
+							<a href="#" class="external-avatar" data-source="GooglePlus" title="Google+"><img class="img-thumbnail img-th-xs" src="<?= $user->google_plus->avatar_url ?>"/></a>
+						<?php endif; ?>
                     </div>
 					<div class="hide-light avatar-message">
 						<br/>
@@ -163,17 +166,46 @@ $has_password = $user->password_hash != null;
 				<br/>
 				<div class="alert alert-danger"></div>
 			</div>
-			<div class="hide">
             <hr/>
             <div class="social-network">
                 <div class="social-network-logo pull-left">
                     <img src="<?= Yii::app()->baseUrl ?>/assets/img/GooglePlus_72.png"/>
                 </div>
-                <div class="social-network-info">
-                    <br/>
-                    <button type="button" class="btn btn-default">Link your Google+ account</button>
-                </div>
+				<div class="social-network-info">
+					<?php if ($user->google_plus): ?>
+						<p>
+							You have linked your
+							<?php if ($user->google_plus->link): ?>
+								<a href="<?= $this->text($user->google_plus->link) ?>" target="_blank">Google+ account</a>
+							<?php else: ?>
+								Google+ account
+							<?php endif; ?>
+							<br/>
+						</p>
+						<p>
+							<a class="btn-icon btn-toggle-profile" href="#"
+							   title="<?= $user->google_plus->is_public
+								   ? 'A link to this profile is visible to others'
+								   : 'Make it visible to others' ?>"
+							   data-provider="<?= Identity::GOOGLE_PLUS ?>">
+								<i class="fa <?= $user->google_plus->is_public ? 'fa-toggle-on' : 'fa-toggle-off' ?>"></i>
+							</a>
+							<a class="btn-icon btn-unlink-profile" href="#" title="Unlink your Google+ account"
+							   data-provider="<?= Identity::GOOGLE_PLUS ?>">
+								<i class="fa fa-trash"></i>
+							</a>
+						</p>
+					<?php else: ?>
+						<br/>
+						<button type="button" class="btn btn-default btn-link-googleplus">Link your Google+ account</button>
+					<?php endif?>
+				</div>
             </div>
+			<div class="googleplus-alert hide-light">
+				<br/>
+				<div class="alert alert-danger"></div>
+			</div>
+			<div class="hide">
             <hr/>
             <div class="social-network">
                 <div class="social-network-logo pull-left">

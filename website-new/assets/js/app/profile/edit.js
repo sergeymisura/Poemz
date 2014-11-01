@@ -9,6 +9,7 @@
 					'.password-form': { submit: this.savePassword },
 					'.external-avatar': this.setAvatar,
 					'.btn-link-facebook': this.linkFacebook,
+					'.btn-link-googleplus': this.linkGooglePlus,
 					'.btn-unlink-profile': this.unlinkProfile
 				});
 
@@ -164,8 +165,10 @@
 							uid: response.authResponse.userID,
 							access_token: response.authResponse.accessToken
 						}
-					).success(function() { document.location.reload(); }, this)
-						.error(function(code, response) {
+					).success(
+						function() { document.location.reload(); }, this
+					).error(
+						function(code, response) {
 							if (code == 400) {
 								$element.find('.facebook-alert .alert').html(response.message);
 							}
@@ -173,7 +176,45 @@
 								$element.find('.facebook-alert .alert').html('Oops... Something went wrong.');
 							}
 							$element.find('.facebook-alert').fadeIn();
-						}, this);
+						},
+						this
+					);
+				}
+			},
+
+			linkGooglePlus: function() {
+				gapi.auth.signIn({callback: $.proxy(this.googlePlusCallback, this)});
+			},
+
+			googlePlusCallback: function(response) {
+				if (response.status.signed_in) {
+					if (typeof this._gplus_token != 'undefined'
+						&& this._gplus_token == response.access_token) {
+						return;
+					}
+					this._gplus_token = response.access_token;
+					services.api.post(
+						'users/' + app.data.user.id + '/social/GooglePlus/attach',
+						{
+							access_token: response.access_token
+						}
+					).success(
+						function() { document.location.reload(); }, this
+					).error(
+						function(code, response) {
+							if (code == 400) {
+								$element.find('.googleplus-alert .alert').html(response.message);
+							}
+							else {
+								$element.find('.googleplus-alert .alert').html('Oops... Something went wrong.');
+							}
+							$element.find('.googleplus-alert').fadeIn();
+						},
+						this
+					);
+				}
+				else {
+					$element.find('.social-button.googleplus').html('Sign in with Google+');
 				}
 			}
         };

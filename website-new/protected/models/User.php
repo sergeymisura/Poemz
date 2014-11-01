@@ -5,6 +5,7 @@
  * @package Regent.Common.Models
  *
  * @property  Identity  facebook
+ * @property  Identity  google_plus
  */
 class User extends UserBase
 {
@@ -17,6 +18,13 @@ class User extends UserBase
 			'user_id',
 			'condition' => 'provider = :provider',
 			'params' => [':provider' => Identity::FACEBOOK]
+		];
+		$relations['google_plus'] = [
+			self::HAS_ONE,
+			'Identity',
+			'user_id',
+			'condition' => 'provider = :provider',
+			'params' => [':provider' => Identity::GOOGLE_PLUS]
 		];
 		return $relations;
 	}

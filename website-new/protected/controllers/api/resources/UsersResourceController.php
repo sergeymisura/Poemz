@@ -198,11 +198,6 @@ class UsersResourceController extends ApiController
 			$this->authFailed();
 		}
 
-		if (!isset($this->payload->uid))
-		{
-			$this->sendError(400, 'ERR_INVALID', 'Provider-issued user ID is required');
-		}
-
 		if (!isset($this->payload->access_token))
 		{
 			$this->sendError(400, 'ERR_INVALID', 'Provider-issued access token is required');
@@ -218,20 +213,9 @@ class UsersResourceController extends ApiController
 			$this->sendError(400, 'ERR_INVALID', 'You already have a profile for this provider.');
 		}
 
-		$identity = Identity::model()->findByAttributes([
-			'uid' => $this->payload->uid,
-			'provider' => $provider
-		]);
-
-		if ($identity != null)
-		{
-			$this->sendError(400, 'ERR_INVALID', 'This account is already attached to another Poemz.org profile.');
-		}
-
 		$identity = new Identity;
 		$identity->user_id = $user->id;
 		$identity->provider = $provider;
-		$identity->uid = $this->payload->uid;
 		$identity->access_token = $this->payload->access_token;
 
 		switch ($provider)
@@ -251,19 +235,44 @@ class UsersResourceController extends ApiController
 					$this->sendError(500, 'ERR_FB_ERROR', 'Facebook returned invalid response');
 				}
 
-				if ($apiResponse->id != $this->payload->uid)
-				{
-					$this->sendError(400, 'ERR_INVALID', 'Auth token does not match user ID');
-				}
-
 				if (isset($apiResponse->link))
 				{
 					$identity->link = $apiResponse->link;
+				}
+				$identity->uid = $apiResponse->id;
+				$identity->avatar_url = 'https://graph.facebook.com/' . $identity->uid . '/picture?type=large';
+				break;
+
+			case Identity::GOOGLE_PLUS:
+				$response = Yii::app()->http->get(
+					'https://www.googleapis.com/plus/v1/people/me',
+					array(
+						'access_token' => $this->payload->access_token
+					)
+				);
+
+				$apiResponse = json_decode($response->data());
+				$identity->uid = $apiResponse->id;
+				$identity->link = $apiResponse->url;
+				if (isset($apiResponse->image))
+				{
+					$parts = explode('?', $apiResponse->image->url);
+					$identity->avatar_url = $parts[0] . '?sz=150';
 				}
 				break;
 
 			default:
 				$this->sendError(400, 'ERR_INVALID', 'Invalid provider');
+		}
+
+		$existing_identity = Identity::model()->findByAttributes([
+			'uid' => $identity->uid,
+			'provider' => $provider
+		]);
+
+		if ($existing_identity != null)
+		{
+			$this->sendError(400, 'ERR_INVALID', 'This account is already attached to another Poemz.org profile.');
 		}
 
 		$identity->save();
@@ -317,6 +326,7 @@ class UsersResourceController extends ApiController
 	{
 		/**
 		 * @var  User      $user
+		 * @var  Identity  $identity
 		 */
 		$user = User::model()->findByPk($id);
 
@@ -335,16 +345,21 @@ class UsersResourceController extends ApiController
 			$this->sendError(400, 'ERR_INVALID', 'Source is required');
 		}
 
-		switch ($this->payload->source)
+		if ($this->payload->source == 'Gravatar')
 		{
-			case 'Facebook':
-				$user->external_avatar_url = $user->getFbAvatar();
-				break;
-			case 'Gravatar':
-				$user->external_avatar_url = $user->getGravatar();
-				break;
-			default:
-				$this->sendError(400, 'ERR_INVALID', 'Source is invalid');
+			$user->external_avatar_url = $user->getGravatar();
+		}
+		else
+		{
+			$identity = Identity::model()->findByAttributes([
+				'user_id' => $user->id,
+				'provider' => $this->payload->source
+			]);
+
+			if ($identity && $identity->avatar_url)
+			{
+				$user->external_avatar_url = $identity->avatar_url;
+			}
 		}
 
 		$user->save();
