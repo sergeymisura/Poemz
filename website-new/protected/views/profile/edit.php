@@ -163,6 +163,7 @@ $has_password = $user->password_hash != null;
 				<br/>
 				<div class="alert alert-danger"></div>
 			</div>
+			<div class="hide">
             <hr/>
             <div class="social-network">
                 <div class="social-network-logo pull-left">
@@ -183,6 +184,7 @@ $has_password = $user->password_hash != null;
                     <button type="button" class="btn btn-default">Link your Twitter account</button>
                 </div>
             </div>
+			</div>
         </div>
     </div>
 </div>
