@@ -178,6 +178,38 @@ class AuthApiController extends ApiController
 		$this->authenticated($user);
 	}
 
+	public function actionChangePassword()
+	{
+		if ($this->session == null)
+		{
+			$this->authFailed();
+		}
+
+		if (!isset($this->payload->new_password))
+		{
+			$this->sendError(400, 'ERR_INVALID', 'New password is required');
+		}
+
+		if ($this->session->user->password_hash != null)
+		{
+			if (!isset($this->payload->old_password))
+			{
+				$this->sendError(400, 'ERR_INVALID', 'Old password is required');
+			}
+
+			if ($this->session->user->createPasswordHash($this->payload->old_password)
+				!= $this->session->user->password_hash)
+			{
+				$this->authFailed();
+			}
+		}
+
+		$this->session->user->password_hash = $this->session->user->createPasswordHash($this->payload->new_password);
+		$this->session->user->save();
+
+		$this->send();
+	}
+
 	/**
 	 * Creates a session, matches the visitor record etc.
 	 *

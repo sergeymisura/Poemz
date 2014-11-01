@@ -6,6 +6,7 @@
 				services.events({
 					'.btn-toggle-profile': this.toggleProfile,
 					'.profile-form': { submit: this.saveProfile },
+					'.password-form': { submit: this.savePassword },
 					'.external-avatar': this.setAvatar,
 					'.btn-link-facebook': this.linkFacebook
 				});
@@ -35,6 +36,40 @@
 						);
 					}
 				);
+			},
+
+			savePassword: function($source) {
+				$source.find('.alert-danger').hide();
+				var form = services.form($source);
+				if (form.validate())
+				{
+					var data = form.collect();
+					if (data.new_password != data.confirm_password)
+					{
+						$source.find('.alert-danger').html('The password confirmation does not match').fadeIn();
+						return false;
+					}
+
+					services.api.post(
+						'auth/change-password',
+						data
+					).success(
+						function() {
+							$source.find('input').val('');
+							$source.find('.alert-info').addClass('hide');
+							$source.find('.old-password-group').removeClass('hide');
+							$source.find('.alert-success').fadeIn();
+						},
+						this
+					).error(
+						function(code, response) {
+							if (code == 403) {
+								$source.find('.alert-danger').html('The old password does not match').fadeIn();
+							}
+						}
+					)
+				}
+				return false;
 			},
 
 			saveProfile: function($source) {

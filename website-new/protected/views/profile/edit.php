@@ -2,6 +2,8 @@
 /**
  * @var  User  $user
  */
+
+$has_password = $user->password_hash != null;
 ?>
 <div class="profile-edit container" data-controller="profile-edit">
     <div class="row">
@@ -74,12 +76,51 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="col-sm-7 col-sm-offset-5">
+                    <div class="col-sm-8 col-sm-offset-4">
                         <button class="btn btn-primary" type="submit">Save profile</button>
                         <button class="btn btn-default" type="reset">Reset</button>
                     </div>
                 </div>
             </form>
+			<h3>Your Poemz password</h3>
+			<br/>
+			<form class="form-horizontal password-form">
+				<div class="alert alert-info <?= $has_password ? 'hide' : '' ?>">You don't have a password because you have
+					registered using a social network login. You can create one now.</div>
+				<div class="old-password-group form-group <?= $has_password ? '' : 'hide' ?>">
+					<label for="old-password" class="col-sm-4 control-label">Current password:</label>
+					<div class="col-sm-8">
+						<input type="password" class="form-control" id="old-password" name="old_password"
+							   data-required="value" />
+						<div class="errors"></div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="new-password" class="col-sm-4 control-label">New password:</label>
+					<div class="col-sm-8">
+						<input type="password" class="form-control" id="new-password" name="new_password"
+							   data-required="value" />
+						<div class="errors"></div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="confirm-password" class="col-sm-4 control-label">Retype the new password:</label>
+					<div class="col-sm-8">
+						<input type="password" class="form-control" id="confirm-password" name="confirm_password"
+							data-required="value" />
+						<div class="errors"></div>
+					</div>
+				</div>
+				<div class="alert alert-danger hide-light"></div>
+				<div class="alert alert-success hide-light">The password has been set.</div>
+				<div class="form-group">
+					<div class="col-sm-8 col-sm-offset-4">
+						<button class="btn btn-primary" type="submit">
+							<?= $user->password_hash == null ? 'Create password' : 'Change password' ?>
+						</button>
+					</div>
+				</div>
+			</form>
         </div>
         <div class="col-sm-4 col-sm-offset-1">
             <h3>Social network accounts</h3>
