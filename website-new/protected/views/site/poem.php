@@ -69,10 +69,10 @@
 								<div>recited by</div>
 								<h4><a href="${ app.urls.user(performer) }">${ performer.username }</a></h4>
 								<div>
-									<a class="btn-icon delete-link" data-id="${ id }" data-permission="recitation:delete" href="#" title="Delete this recitation">
+									<a class="btn-icon-lg delete-link" data-id="${ id }" data-permission="recitation:delete" href="#" title="Delete this recitation">
 										<i class="fa fa-times"></i>
 									</a>
-									<a class="btn-icon vote-link" data-id="${ id }" data-action="vote" href="#" title="Vote for this recitation">
+									<a class="btn-icon-lg vote-link" data-id="${ id }" data-action="vote" href="#" title="Vote for this recitation">
 										<i class="fa fa-thumbs-o-up"></i> <span>${ votes }</span>
 									</a>
 								</div>
@@ -174,34 +174,6 @@
 										<i class="fa fa-star-o"></i>
 									</a>-->
 								</div>
-						<!--		<div class="col-sm-1">
-									<h5 class="index">${ index($data) + 1 }</h5>
-								</div>
-								<div class="col-sm-2">
-									<button type="button" class="btn btn-default listen" data-index="${ index($data) }">Listen</button>
-								</div>
-								<div class="col-sm-2">
-									<img class="thumbnail" data-src="${ performer.avatar }" />
-								</div>
-								<div class="col-sm-4 text-column">
-									<div class="username"><a href="${ app.urls.user(performer) }">${ performer.username }</a></div>
-								</div>
-								<div class="col-sm-3 text-column text-right">
-									<a class="btn-icon delete-link" data-id="${ id }" data-permission="recitation:delete" href="#" title="Delete this recitation">
-										<i class="fa fa-times"></i>
-									</a>
-									<a href="#" class="btn-icon vote-link" data-id="${ id }" data-action="vote" title="Vote for this recitation">
-										<i class="fa fa-thumbs-o-up"></i> <span>${ votes }</span>
-									</a>
-									<!--
-									<a href="#" class="btn-icon" title="Toggle the comments section">
-										<i class="fa fa-comments-o"></i> ${ (topic ? topic.comments_count : 0) }
-									</a>
-									<a href="#" class="btn-icon" title="Add to the list of your favorites">
-										<i class="fa fa-star-o"></i>
-									</a>
-									- ->
-								</div>-->
 							</div>
 						</div>
 					</div>
