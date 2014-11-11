@@ -9,6 +9,7 @@
 	</script>
 	<title><?= $this->text($this->pageTitle) ?></title>
 
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="google-signin-clientid" content="189154397502-tjeouombgnrt818uuslba8io2gvg0su9.apps.googleusercontent.com" />
 	<meta name="google-signin-scope" content="profile https://www.googleapis.com/auth/plus.profile.emails.read" />
 	<meta name="google-signin-cookiepolicy" content="single_host_origin" />

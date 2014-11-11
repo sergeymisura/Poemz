@@ -6,8 +6,10 @@
   }
 
   .poem-info {
-    height: 120px;
-    overflow-y: hidden;
+    @media (min-width: @screen-sm) {
+      height: 120px;
+      overflow-y: hidden;
+    }
 
     .first-line {
       margin-top: 10px;
