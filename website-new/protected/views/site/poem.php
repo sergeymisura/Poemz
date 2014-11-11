@@ -147,15 +147,25 @@
 					<div class="recitation-template hide">
 						<div class="recitation" data-template="recitation">
 							<div class="row row-hover">
-								<div class="col-sm-2">
+								<div class="col-sm-2 col-xs-4">
 									<img class="img-thumbnail img-responsive" data-src="${ performer.avatar }" />
 								</div>
-								<div class="col-sm-5">
+								<div class="col-sm-6 col-xs-8">
 									<h4><a href="${ app.urls.user(performer) }">${ performer.username }</a></h4>
-									<p class="text-muted">Recorded ${ ago }</p>
+									<p class="text-muted hidden-xs">Recorded ${ ago }</p>
+									<div class="visible-xs">
+										<a class="btn-icon-lg play-link" href="#" title="Play this recitation">
+											<i class="fa fa-play"></i>
+										</a>
+										<a class="btn-icon-lg delete-link" data-id="${ id }" data-permission="recitation:delete" href="#" title="Delete this recitation">
+											<i class="fa fa-times"></i>
+										</a>
+										<a href="#" class="btn-icon-lg vote-link" data-id="${ id }" data-action="vote" title="Vote for this recitation">
+											<i class="fa fa-thumbs-o-up"></i> <span>${ votes }</span>
+										</a>
+									</div>
 								</div>
-								<div class="col-sm-1"></div>
-								<div class="col-sm-4 text-right">
+								<div class="col-sm-4 text-right hidden-xs">
 									<br/>
 									<a class="btn-icon-lg play-link" href="#" title="Play this recitation">
 										<i class="fa fa-play"></i>
