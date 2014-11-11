@@ -52,7 +52,7 @@ class Formatter extends CFormatter
 			array(60, 60, 'minute'),
 			array(3600, 24, 'hour'),
 			array(3600 * 24, 7, 'day'),
-			array(3600 * 24, 4, 'week'),
+			array(3600 * 24 * 7, 30, 'week'),
 			array(3600 * 24 * 30, 365, 'month')
 		);
 
