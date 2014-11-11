@@ -269,7 +269,7 @@
 		};
 	});
 
-	app.transformation('.btn-icon', function($element) {
+	app.transformation('.btn-icon, .btn-icon-lg', function($element) {
 		$element.tooltip({
 			placement: 'top',
 			title: $element.attr('title')

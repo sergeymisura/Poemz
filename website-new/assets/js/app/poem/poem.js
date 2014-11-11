@@ -10,7 +10,7 @@
 					'.recorder': {
 						'created': this.recitationCreated
 					},
-					'.listen': this.listen,
+					'.recitation .row-hover': this.listen,
 					'.btn-toggle-edit': this.toggleEdit,
 					'.btn-reset': this.resetEditing,
 					'.btn-save-poem': this.savePoem,
@@ -117,12 +117,11 @@
 				$element.find('.recitation-created').fadeIn();
 			},
 
-			listen: function($source) {
-				var recitation = app.data.recitations[$source.data('index')];
-				app.get('.now-playing').display(recitation, true);
+			listen: function($source, ev) {
+				app.get('.now-playing').display(ev.data, true);
 			},
 
-			vote: function($source) {
+			vote: function($source, ev) {
 				var id = $source.data('id');
 				var action = $source.data('action');
 				services.auth.login($.proxy(
@@ -147,6 +146,7 @@
 					},
 					this
 				));
+				ev.stopPropagation();
 			},
 
 			updateVoteLink: function(id, votes, hasVoted) {
@@ -203,7 +203,7 @@
 				this.loadVotes();
 			},
 
-			deleteRecitation: function($source) {
+			deleteRecitation: function($source, ev) {
 				var id = $source.data('id');
 				if (confirm('Delete recitation? This action cannot be rolled back and the recording will be lost forever!'))
 				{
@@ -213,6 +213,7 @@
 							document.location.reload();
 						});
 				}
+				ev.stopPropagation();
 			}
 		};
 	});

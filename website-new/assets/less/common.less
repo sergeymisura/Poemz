@@ -190,9 +190,8 @@ h5.title {
 
 /** Icons **/
 
-.btn-icon {
+.btn-icon-lg {
   .btn();
-  .btn-xs();
   .btn-default();
 
   color: @brand-primary;
@@ -205,6 +204,11 @@ h5.title {
     .btn-primary();
     color: @btn-primary-color;
   }
+}
+
+.btn-icon {
+  .btn-icon-lg();
+  .btn-xs();
 }
 
 textarea.poem-text-control {
@@ -260,5 +264,13 @@ textarea.poem-text-control {
   & > div {
     padding-left: 0;
     padding-right: 0;
+  }
+}
+
+.row-hover {
+  cursor: pointer;
+
+  &:hover{
+    background-color: @table-bg-hover;
   }
 }
