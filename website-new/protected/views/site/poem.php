@@ -8,11 +8,11 @@
 	<div class="row">
 		<div class="col-sm-6 nice-scroll">
 			<div class="row">
-				<div class="col-sm-3">
+				<div class="col-sm-3 col-xs-4">
 					<img class="thumbnail full-width" src="<?= $poem->author->avatarUrl ?>"/>
 				</div>
-				<div class="col-sm-9">
-					<h3 class="view"><?= $this->text($poem->title) ?></h3>
+				<div class="col-sm-9 col-xs-8">
+					<h3 class="view no-margins-xs"><?= $this->text($poem->title) ?></h3>
 					<h3 class="edit"><input type="text" class="form-control poem-title-control" value="<?= $this->text($poem->title) ?>" data-required="value" /></h3>
 					<div>by <a href="<?= $this->createUrl('site/author', array('author_slug' => $poem->author->slug)) ?>"><?= $this->text($poem->author->name) ?></a></div>
 					<br/>
@@ -44,46 +44,11 @@
 				</div>
 			</div>
 			<br/>
-			<div class="recording-fade view">
+			<div class="recording-fade view hidden-xs">
 				<div>
 					<button type="button" class="btn btn-primary btn-lg record-now">Record your version now!</button>
 				</div>
 				<br/>
-				<!--
-				<div>
-					<img src="<?= Yii::app()->baseUrl ?>/assets/img/comments.png" class="pull-left" />
-					<h5 class="pull-left comments-toggle">
-						<a href="#" class="toggle-comments" data-count="<?= $poem->topic->comments_count ?>"><?= $poem->topic->comments_count ?> comments</a>
-					</h5>
-				</div>
-				-->
-				<div class="clearfix"></div>
-				<div class="comments hide-light">
-					<div class="row comment">
-						<div class="col-sm-2 text-center">
-							<img class="thumbnail" src="<?= Yii::app()->baseUrl ?>/assets/img/portrait_placeholder_5.jpg" />
-						</div>
-						<div class="col-sm-10 comment-text">
-							<p><a class="username" href="#">sergey</a> <span class="text-muted small pull-right">May 20, 2013 at 7:45am</span></p>
-							<p class="small">I like Sheikspeer, but robratterman sucks!</p>
-							<p class="small"><a href="#">Reply</a></p>
-						</div>
-					</div>
-					<div class="row comment">
-						<div class="col-sm-2 col-sm-offset-2">
-							<img class="thumbnail" src="<?= Yii::app()->baseUrl ?>/assets/img/portrait_placeholder_3.jpg" />
-						</div>
-						<div class="col-sm-8 comment-text">
-							<p><a class="username" href="#">robratterman</a> <span class="text-muted small pull-right">May 21, 2013 at 3:12am</span></p>
-							<p class="small">It's 'Shakespeare', not 'Sheikspeer', you moron!</p>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-sm-12">
-							<input type="text" placeholder="Post your comment here" class="form-control" />
-						</div>
-					</div>
-				</div>
 			</div>
 		</div>
 		<div class="col-sm-6 nice-scroll">
@@ -173,7 +138,7 @@
 				<div class="recitations" data-controller="recitations" data-source="poems/<?= $poem->id ?>/recitations">
 					<div class="recitations-header">
 						<h4 class="pull-left">poemz recitations</h4>
-
+						<br class="visible-xs"/><br class="visible-xs"/>
 						<ul class="nav nav-tabs nav-right nav-small order">
 							<li><a href="#" data-sort="new">Newest</a></li>
 							<li class="active"><a href="#" data-sort="best">The best</a></li>

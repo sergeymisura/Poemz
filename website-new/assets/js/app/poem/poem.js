@@ -24,9 +24,11 @@
 					loginCompleted: this.loginCompleted
 				});
 
-				$element.find('.nice-scroll').niceScroll({
-					cursorcolor: '#e3e3e3'
-				});
+				if (document.documentElement.clientWidth >= 768) {
+					$element.find('.nice-scroll').niceScroll({
+						cursorcolor: '#e3e3e3'
+					});
+				}
 
 
 			},

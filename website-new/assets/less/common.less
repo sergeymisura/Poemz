@@ -2,28 +2,30 @@
 @color-gray:   #c8c8c8;
 @color-yellow: #f8c015;
 
-html, body {
-  height: 100%;
-}
-
-.column-container {
-  position: absolute;
-  width: 100%;
-  bottom: 0px;
-  top: 80px;
-  overflow-y: hidden;
-  //padding-top: 20px;
-
-  > .container {
+@media (min-width: @screen-sm) {
+  html, body {
     height: 100%;
+  }
 
-    > .row {
+  .column-container {
+    position: absolute;
+    width: 100%;
+    bottom: 0px;
+    top: 80px;
+    overflow-y: hidden;
+    //padding-top: 20px;
+
+    > .container {
       height: 100%;
 
-      > div {
-        padding-top: 20px;
+      > .row {
         height: 100%;
-        overflow-y: auto;
+
+        > div {
+          padding-top: 20px;
+          height: 100%;
+          overflow-y: auto;
+        }
       }
     }
   }
@@ -232,4 +234,31 @@ textarea.poem-text-control {
     background: #55ACEE url(../img/twitter.png) 4px 4px no-repeat;
   }
 
+}
+
+@media (max-width: @screen-xs-max) {
+  .no-margins-xs {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+
+.row.no-gaps {
+  margin-left: 0;
+  margin-top: 0;
+
+  & > div {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+.gaps(@size) {
+  margin-left: 0;
+  margin-right: 0;
+
+  & > div {
+    padding-left: 0;
+    padding-right: 0;
+  }
 }
