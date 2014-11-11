@@ -154,9 +154,12 @@
 									<h4><a href="${ app.urls.user(performer) }">${ performer.username }</a></h4>
 									<p class="text-muted">Recorded ${ ago }</p>
 								</div>
-								<div class="col-sm-2"></div>
-								<div class="col-sm-3 text-right">
+								<div class="col-sm-1"></div>
+								<div class="col-sm-4 text-right">
 									<br/>
+									<a class="btn-icon-lg play-link" href="#" title="Play this recitation">
+										<i class="fa fa-play"></i>
+									</a>
 									<a class="btn-icon-lg delete-link" data-id="${ id }" data-permission="recitation:delete" href="#" title="Delete this recitation">
 										<i class="fa fa-times"></i>
 									</a>

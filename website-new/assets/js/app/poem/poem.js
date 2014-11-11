@@ -11,6 +11,7 @@
 						'created': this.recitationCreated
 					},
 					'.recitation .row-hover': this.listen,
+					'.play-link': this.play,
 					'.btn-toggle-edit': this.toggleEdit,
 					'.btn-reset': this.resetEditing,
 					'.btn-save-poem': this.savePoem,
@@ -118,7 +119,12 @@
 			},
 
 			listen: function($source, ev) {
+				app.get('.now-playing').display(ev.data, false);
+			},
+
+			play: function($source, ev) {
 				app.get('.now-playing').display(ev.data, true);
+				ev.stopPropagation();
 			},
 
 			vote: function($source, ev) {
