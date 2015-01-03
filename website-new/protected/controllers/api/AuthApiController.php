@@ -80,7 +80,6 @@ class AuthApiController extends ApiController
 
 			$user->username = $display_name;
 			$user->slug = Model::slugify($display_name);
-			$user->active = 1;
             $user->save();
 
             $identity = new Identity();
@@ -156,7 +155,6 @@ class AuthApiController extends ApiController
 
 			$user->username = $display_name;
 			$user->slug = Model::slugify($display_name);
-			$user->active = 1;
 			$user->external_avatar_url = $avatar_url;
 			$user->save();
 
@@ -294,6 +292,10 @@ class AuthApiController extends ApiController
 	 */
 	private function authenticated($user)
 	{
+		if ($user->status == User::STATUS_DISABLED)
+		{
+			$this->authFailed();
+		}
 		$session = UserSession::createSession($user);
 		$this->createAuthCookie($session);
 		Visitor::matchVisitor($this->request, $session);
