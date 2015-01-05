@@ -49,7 +49,7 @@
 					<h4 class="modal-title sign-in-only">Sign In</h4>
 					<h4 class="modal-title create-account-only">Create Account</h4>
 				</div>
-				<div class="modal-body">
+				<div class="modal-body login-form">
 					<h4 class="sign-in-only">Please enter your email and password or use your Facebook account</h4>
 					<h4 class="create-account-only">Please fill out the form below or simply use your Facebook account</h4>
 					<div class="row">
@@ -97,6 +97,39 @@
 									<span class="social-button twitter hide">Sign in with Twitter</span>
 								</p>
 							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-body validation-form hide-light">
+					<h4>One last step to complete your registration...</h4>
+					<div class="alert alert-info">
+						Please check your mailbox and enter the verification code from the email we have sent you to the field below.
+					</div>
+					<br/>
+					<div class="row">
+						<div class="col-sm-6 col-sm-offset-3">
+							<form>
+								<div class="form-group">
+									<input type="text" class="form-control" placeholder="Your 'stage name'" />
+									<div class="errors"></div>
+								</div>
+								<div class="form-group">
+									<input type="text" class="form-control" placeholder="Email verification code" />
+									<div class="errors"></div>
+								</div>
+								<div class="form-group">
+									<div class="checkbox">
+										<label>
+											<input type="checkbox" />
+											I agree with the <a href="#">terms of use</a>
+										</label>
+									</div>
+									<div class="errors"></div>
+								</div>
+								<div class="form-group">
+									<button type="button" class="btn btn-primary">Continue</button>
+								</div>
+							</form>
 						</div>
 					</div>
 				</div>

@@ -86,6 +86,8 @@ class AuthApiController extends ApiController
             $identity->provider = Identity::FACEBOOK;
             $identity->user_id = $user->id;
             $identity->uid = $apiResponse->id;
+
+			$this->sendActivationEmail($user);
 		}
         else
         {
@@ -162,6 +164,8 @@ class AuthApiController extends ApiController
 			$identity->provider = Identity::GOOGLE_PLUS;
 			$identity->user_id = $user->id;
 			$identity->uid = $apiResponse->id;
+
+			$this->sendActivationEmail($user);
 		}
 		else
 		{
@@ -248,6 +252,8 @@ class AuthApiController extends ApiController
 		$user->created = User::getDbDate(null, true);
 		$user->save();
 
+		$this->sendActivationEmail($user);
+
 		$this->authenticated($user);
 	}
 
@@ -300,6 +306,25 @@ class AuthApiController extends ApiController
 		$this->createAuthCookie($session);
 		Visitor::matchVisitor($this->request, $session);
 		$this->send(array('session' => $session));
+	}
+
+	/**
+	 * @param   User  $user
+	 */
+	private function sendActivationEmail($user)
+	{
+		$this->layout = '//email-html';
+		$html = $this->render('activation-html', ['user' => $user], true);
+
+		$this->layout = '//email-text';
+		$text = $this->render('activation-text', ['user' => $user], true);
+		Yii::app()->mail->send([
+			'toName' => $user->username,
+			'toAddress' => $user->email,
+			'subject' => 'Welcome to Poemz.org',
+			'text' => $text,
+			'html' => $html
+		]);
 	}
 
 	private function createAuthCookie($session)

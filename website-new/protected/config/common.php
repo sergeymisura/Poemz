@@ -29,6 +29,8 @@ return array(
 			'source'		=> 'backend'
 		),*/
 
+		'mail' => require(__DIR__ . '/mail.php'),
+
 		'http' => array(
 			'class'		=> 'Http'
 		),
