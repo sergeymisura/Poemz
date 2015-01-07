@@ -30,11 +30,19 @@ class UserSession extends UserSessionBase
 
 	public static function getSession($session_id)
 	{
+		/**
+		 * @var  UserSession  $session
+		 */
 		self::cleanup();
 		$session = UserSession::model()->with('user')->findByPk($session_id);
 
 		if ($session != null)
 		{
+			if ($session->user->status != User::STATUS_ACTIVE)
+			{
+				return null;
+			}
+
 			$session->expires = Model::getDbDate(time() + self::SESSION_LIFETIME * 60, true);
 			$session->save();
 		}
