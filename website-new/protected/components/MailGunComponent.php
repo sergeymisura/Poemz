@@ -28,7 +28,7 @@ class MailGunComponent extends CComponent
 
 		try
 		{
-			$http->request(self::BASE_URL . $this->domain . '/messages')
+			$response = $http->request(self::BASE_URL . $this->domain . '/messages')
 				->basicAuth('api', $this->apiKey)
 				->post(
 					[
@@ -42,7 +42,6 @@ class MailGunComponent extends CComponent
 		}
 		catch (HttpCurlException $ex)
 		{
-			var_dump($ex);die();
 			return false;
 		}
 		return true;

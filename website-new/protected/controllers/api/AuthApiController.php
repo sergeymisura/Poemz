@@ -313,6 +313,9 @@ class AuthApiController extends ApiController
 	 */
 	private function sendActivationEmail($user)
 	{
+		$user->activation_code = substr(sha1(time() . rand(100000, 999999) . $user->email), 0, 6);
+		$user->save();
+
 		$this->layout = '//email-html';
 		$html = $this->render('activation-html', ['user' => $user], true);
 
