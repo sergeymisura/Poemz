@@ -24,6 +24,10 @@
 			},
 
 			loginCompleted: function(session) {
+				if (session.user.status == 'new') {
+					app.get('#modal-sign-in').activationMode(session);
+					return;
+				}
 				app.data.session = session;
 				if (_callback) {
 					_callback(session);

@@ -40,6 +40,7 @@
 		"app": {
 			"files": [
 				"js/app/index.js",
+				"js/app/auth-dialogs.js",
 				"js/app/recitations.js",
 				"js/app/front/poems.js",
 				"js/app/poem/poem.js",

@@ -289,6 +289,64 @@ class AuthApiController extends ApiController
 		$this->send();
 	}
 
+	public function actionActivate()
+	{
+		/**
+		 * @var  UserSession  $session
+		 */
+
+		if (!isset($this->payload->session_id))
+		{
+			$this->sendError(400, 'ERR_INVALID', 'Session ID is required');
+		}
+
+		if (!isset($this->payload->activation_code))
+		{
+			$this->sendError(400, 'ERR_INVALID', 'Activation code is required');
+		}
+
+		if (!isset($this->payload->username))
+		{
+			$this->sendError(400, 'ERR_INVALID', 'Username is required');
+		}
+
+		$session = UserSession::model()->with('user')->findByPk($this->payload->session_id);
+
+		if ($session == null || $session->user->status == User::STATUS_DISABLED)
+		{
+			$this->authFailed();
+		}
+
+		if ($session->user->status == User::STATUS_ACTIVE)
+		{
+			$this->sendError(400, 'ERR_ACTIVATED', 'This account is already activated');
+		}
+
+		if ($session->user->activation_code !== $this->payload->activation_code)
+		{
+			$this->sendError(400, 'ERR_INVALID_CODE', 'Invalid activation code');
+		}
+
+		$exists = User::model()->count(
+			'username = :name and id <> :id',
+			[
+				':name' => $this->payload->username,
+				':id' => $session->user->id
+			]
+		);
+		if ($exists)
+		{
+			$this->sendError(400, 'ERR_NAME_TAKEN', 'The name is already taken');
+		}
+
+		$session->user->activation_code = null;
+		$session->user->status = User::STATUS_ACTIVE;
+		$session->user->username = $this->payload->username;
+		$session->user->save();
+
+		$this->authenticated($session->user);
+	}
+
 	/**
 	 * Creates a session, matches the visitor record etc.
 	 *
@@ -302,9 +360,16 @@ class AuthApiController extends ApiController
 		{
 			$this->authFailed();
 		}
+
 		$session = UserSession::createSession($user);
-		$this->createAuthCookie($session);
+
+		if ($user->status == User::STATUS_ACTIVE)
+		{
+			$this->createAuthCookie($session);
+		}
+
 		Visitor::matchVisitor($this->request, $session);
+
 		$this->send(array('session' => $session));
 	}
 

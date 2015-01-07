@@ -15,6 +15,7 @@
 	"POST:api/auth/facebook": "api/authApi/facebook",
 	"POST:api/auth/google-plus": "api/authApi/googlePlus",
 	"POST:api/auth/change-password": "api/authApi/changePassword",
+	"POST:api/auth/activate": "api/authApi/activate",
 
 	"POST:api/recording/upload": "api/recordingApi/upload",
 	"POST:api/recording/keep": "api/recordingApi/keep",
