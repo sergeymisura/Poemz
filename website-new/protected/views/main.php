@@ -144,7 +144,7 @@
 														   data-required="checked"
 														   data-message="You must read and agree to the terms of use"
 														   value="1" />
-													I agree to the <a href="<?= Yii::app()->createUrl('site/terms') ?>">terms of use</a>
+													I agree to the <a href="<?= Yii::app()->createUrl('site/terms') ?>" target="terms">terms of use</a>
 												</label>
 											</div>
 											<div class="errors"></div>
