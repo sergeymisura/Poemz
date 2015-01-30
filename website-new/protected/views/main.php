@@ -207,10 +207,7 @@
 	<br/><br/>
 
 	<script type="text/javascript" language="JavaScript">
-		app = app || {};
-		app.config = {
-			baseUrl: '<?= Yii::app()->baseUrl ?>'
-		};
+		app.config.baseUrl = '<?= Yii::app()->baseUrl ?>';
 		app.data = <?= CJSON::encode($this->page_data) ?>;
 	</script>
 </body>

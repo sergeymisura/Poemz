@@ -23,6 +23,7 @@
 		"js-tools": {
 			"files": [
 				"js/js-tools/app.js",
+				"js/js-tools/init.js",
 				"js/js-tools/services/api.js",
 				"js/js-tools/services/events.js",
 				"js/js-tools/services/deferred.js",
