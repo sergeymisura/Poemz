@@ -86,4 +86,8 @@ class User extends UserBase
 	{
 		return str_replace('http://', '', str_replace('https://', '', $this->website));
 	}
+
+	const STATUS_NEW = 'new';
+	const STATUS_ACTIVE = 'active';
+	const STATUS_DISABLED = 'disabled';
 }

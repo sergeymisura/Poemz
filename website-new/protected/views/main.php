@@ -49,7 +49,7 @@
 					<h4 class="modal-title sign-in-only">Sign In</h4>
 					<h4 class="modal-title create-account-only">Create Account</h4>
 				</div>
-				<div class="modal-body">
+				<div class="modal-body login-form">
 					<h4 class="sign-in-only">Please enter your email and password or use your Facebook account</h4>
 					<h4 class="create-account-only">Please fill out the form below or simply use your Facebook account</h4>
 					<div class="row">
@@ -96,6 +96,66 @@
 									<span class="social-button googleplus">Sign in with Google+</span>
 									<span class="social-button twitter hide">Sign in with Twitter</span>
 								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-body activation-form hide-light">
+					<div data-template="activation">
+						<h4>One last step to complete your registration...</h4>
+						<div class="alert alert-info">
+							We have sent you an email with the activation code. Please
+							check your mailbox and copy the code into the form below.
+						</div>
+						<div class="alert alert-danger activation-error hide-light"></div>
+						<br/>
+						<div class="row">
+							<div class="col-sm-9 col-sm-offset-1">
+								<form class="form-horizontal">
+									<input type="hidden" name="session_id" value="${ id }" />
+									<div class="form-group">
+										<label class="col-sm-5 control-label">Your 'stage' name:</label>
+										<div class="col-sm-7">
+											<input type="text" class="form-control"
+												   placeholder="Your 'stage name'"
+												   value="${ user.username }"
+												   name="username"
+												   data-required="value"
+												/>
+											<div class="errors"></div>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-5 control-label">Activation code:</label>
+										<div class="col-sm-7">
+											<input type="text" class="form-control"
+												   placeholder="Activation code"
+												   name="activation_code"
+												   data-required="value"
+												/>
+											<div class="errors"></div>
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="col-sm-7 col-sm-offset-5">
+											<div class="checkbox">
+												<label>
+													<input type="checkbox"
+														   data-required="checked"
+														   data-message="You must read and agree to the terms of use"
+														   value="1" />
+													I agree to the <a href="<?= Yii::app()->createUrl('site/terms') ?>" target="terms">terms of use</a>
+												</label>
+											</div>
+											<div class="errors"></div>
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="col-sm-7 col-sm-offset-5">
+											<button type="button" class="btn btn-primary btn-activate">Continue</button>
+										</div>
+									</div>
+								</form>
 							</div>
 						</div>
 					</div>

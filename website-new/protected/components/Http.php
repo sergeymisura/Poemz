@@ -2,33 +2,134 @@
 /**
  * Interface for the logger that monitors HTTP cURL requests
  *
- * @package CanDo.Components.Http
- *
+ * @package  CanDo.Components.Http
  */
 interface IHttpLogger
 {
+	/**
+	 * Sets request URL for the log entry
+	 *
+	 * @param   string  $url  Request URL
+	 *
+	 * @return  void
+	 */
 	public function setUrl($url);
+
+	/**
+	 * Sets request method for the log entry
+	 *
+	 * @param   string  $method  Request method
+	 *
+	 * @return  void
+	 */
 	public function setMethod($method);
+
+	/**
+	 * Sets request for the log entry
+	 *
+	 * @param   HttpCurlRequest  $request  Request
+	 *
+	 * @return  void
+	 */
 	public function setRequest($request);
+
+	/**
+	 * Sets response for the log entry
+	 *
+	 * @param   HttpCurlResponse  $response  Response
+	 *
+	 * @return  void
+	 */
 	public function setResponse(HttpCurlResponse $response);
+
+	/**
+	 * Logs error message
+	 *
+	 * @param   string  $message  Error message
+	 *
+	 * @return  void
+	 */
 	public function logError($message);
+
+	/**
+	 * Creates a log entry
+	 *
+	 * @return  void
+	 */
 	public function logResponse();
 }
 
 /**
  * Default implementation of the http logger that does not log anything
  *
- * @package CanDo.Components.Http
+ * @package  CanDo.Components.Http
  *
  */
 class HttpNilLogger implements IHttpLogger
 {
-	public function setUrl($url) {}
-	public function setMethod($method) {}
-	public function setRequest($request) {}
-	public function setResponse(HttpCurlResponse $response) {}
-	public function logError($message) {}
-	public function logResponse() {}
+	/**
+	 * Sets request URL for the log entry
+	 *
+	 * @param   string  $url  Request URL
+	 *
+	 * @return  void
+	 */
+	public function setUrl($url)
+	{
+	}
+
+	/**
+	 * Sets request method for the log entry
+	 *
+	 * @param   string  $method  Request method
+	 *
+	 * @return  void
+	 */
+	public function setMethod($method)
+	{
+	}
+
+	/**
+	 * Sets request for the log entry
+	 *
+	 * @param   HttpCurlRequest  $request  Request
+	 *
+	 * @return  void
+	 */
+	public function setRequest($request)
+	{
+	}
+
+	/**
+	 * Sets response for the log entry
+	 *
+	 * @param   HttpCurlResponse  $response  Response
+	 *
+	 * @return  void
+	 */
+	public function setResponse(HttpCurlResponse $response)
+	{
+	}
+
+	/**
+	 * Logs error message
+	 *
+	 * @param   string  $message  Error message
+	 *
+	 * @return  void
+	 */
+	public function logError($message)
+	{
+	}
+
+	/**
+	 * Creates a log entry
+	 *
+	 * @return  void
+	 */
+	public function logResponse()
+	{
+	}
 }
 
 /**
@@ -46,6 +147,9 @@ class Http extends CComponent
 	 */
 	public $options = array();
 
+	/**
+	 * @var  IHttpLogger  Logger
+	 */
 	private $_logger;
 
 	/**
@@ -68,6 +172,13 @@ class Http extends CComponent
 		$this->_logger = new HttpNilLogger;
 	}
 
+	/**
+	 * Sets the HTTP logger instance
+	 *
+	 * @param   IHttpLogger  $logger  Logger to attach
+	 *
+	 * @return  Http  Returns itself for chaining
+	 */
 	public function logger(IHttpLogger $logger)
 	{
 		$this->_logger = $logger;
@@ -153,12 +264,19 @@ class HttpCurlRequest
 	 */
 	public function __construct($url)
 	{
-		$this->_logger = new HttpNilLogger();
+		$this->_logger = new HttpNilLogger;
 		$this->_url = $url;
 		$this->_ch = curl_init();
 		$this->_headers = array();
 	}
 
+	/**
+	 * Sets the HTTP logger instance
+	 *
+	 * @param   IHttpLogger  $logger  Logger to attach
+	 *
+	 * @return  Http  Returns itself for chaining
+	 */
 	public function logger(IHttpLogger $logger)
 	{
 		$this->_logger = $logger;
@@ -200,7 +318,10 @@ class HttpCurlRequest
 		}
 		else
 		{
-			$data = $this->buildData($data);
+			if (!is_string($data))
+			{
+				$data = $this->buildData($data);
+			}
 		}
 		$this->setOptions(
 			array(
@@ -209,7 +330,23 @@ class HttpCurlRequest
 			)
 		);
 		$this->_logger->setMethod('POST');
-		$this->_logger->setRequest($data);
+		$this->_logger->setRequest($this);
+		return $this->exec();
+	}
+
+	/**
+	 * Magic call to perform custom requests (like $req->delete() for 'DELETE' verb)
+	 *
+	 * @param   string  $name       Lower-case request method
+	 * @param   array   $arguments  Arguments (currently not used)
+	 *
+	 * @return  HttpCurlResponse  Response object
+	 */
+	public function __call($name, $arguments)
+	{
+		$method = strtoupper($name);
+		$this->setOption(CURLOPT_CUSTOMREQUEST, $method);
+		$this->_logger->setMethod($method);
 		return $this->exec();
 	}
 
@@ -252,6 +389,19 @@ class HttpCurlRequest
 	{
 		$this->_headers[$name] = $value;
 		return $this;
+	}
+
+	/**
+	 * Sets HTTP Basic Authorization header
+	 *
+	 * @param   string  $username  User name
+	 * @param   string  $password  Optional password
+	 *
+	 * @return  HttpCurlRequest  Returns the same object to support chain calls
+	 */
+	public function basicAuth($username, $password = '')
+	{
+		return $this->header('Authorization', 'Basic ' . base64_encode($username . ':' . $password));
 	}
 
 	/**
@@ -318,7 +468,8 @@ class HttpCurlResponse
 	/**
 	 * Creates the HTTP response
 	 *
-	 * @param   resource  $ch  Resource handler created by curl_init
+	 * @param   resource     $ch      Resource handler created by curl_init
+	 * @param   IHttpLogger  $logger  Http logger instance
 	 *
 	 * @throws  HttpCurlException
 	 */
@@ -357,7 +508,7 @@ class HttpCurlResponse
 	 */
 	public function httpCode()
 	{
-		return $this->_info['http_code'];
+		return isset($this->_info['http_code']) ? $this->_info['http_code'] : null;
 	}
 
 	/**

@@ -180,4 +180,9 @@ class SiteController extends PageController
 			)
 		);
 	}
+
+	public function actionTerms()
+	{
+		$this->render('terms');
+	}
 }

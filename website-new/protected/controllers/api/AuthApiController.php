@@ -80,13 +80,14 @@ class AuthApiController extends ApiController
 
 			$user->username = $display_name;
 			$user->slug = Model::slugify($display_name);
-			$user->active = 1;
             $user->save();
 
             $identity = new Identity();
             $identity->provider = Identity::FACEBOOK;
             $identity->user_id = $user->id;
             $identity->uid = $apiResponse->id;
+
+			$this->sendActivationEmail($user);
 		}
         else
         {
@@ -156,7 +157,6 @@ class AuthApiController extends ApiController
 
 			$user->username = $display_name;
 			$user->slug = Model::slugify($display_name);
-			$user->active = 1;
 			$user->external_avatar_url = $avatar_url;
 			$user->save();
 
@@ -164,6 +164,8 @@ class AuthApiController extends ApiController
 			$identity->provider = Identity::GOOGLE_PLUS;
 			$identity->user_id = $user->id;
 			$identity->uid = $apiResponse->id;
+
+			$this->sendActivationEmail($user);
 		}
 		else
 		{
@@ -250,6 +252,8 @@ class AuthApiController extends ApiController
 		$user->created = User::getDbDate(null, true);
 		$user->save();
 
+		$this->sendActivationEmail($user);
+
 		$this->authenticated($user);
 	}
 
@@ -285,6 +289,64 @@ class AuthApiController extends ApiController
 		$this->send();
 	}
 
+	public function actionActivate()
+	{
+		/**
+		 * @var  UserSession  $session
+		 */
+
+		if (!isset($this->payload->session_id))
+		{
+			$this->sendError(400, 'ERR_INVALID', 'Session ID is required');
+		}
+
+		if (!isset($this->payload->activation_code))
+		{
+			$this->sendError(400, 'ERR_INVALID', 'Activation code is required');
+		}
+
+		if (!isset($this->payload->username))
+		{
+			$this->sendError(400, 'ERR_INVALID', 'Username is required');
+		}
+
+		$session = UserSession::model()->with('user')->findByPk($this->payload->session_id);
+
+		if ($session == null || $session->user->status == User::STATUS_DISABLED)
+		{
+			$this->authFailed();
+		}
+
+		if ($session->user->status == User::STATUS_ACTIVE)
+		{
+			$this->sendError(400, 'ERR_ACTIVATED', 'This account is already activated');
+		}
+
+		if ($session->user->activation_code !== $this->payload->activation_code)
+		{
+			$this->sendError(400, 'ERR_INVALID_CODE', 'Invalid activation code');
+		}
+
+		$exists = User::model()->count(
+			'username = :name and id <> :id',
+			[
+				':name' => $this->payload->username,
+				':id' => $session->user->id
+			]
+		);
+		if ($exists)
+		{
+			$this->sendError(400, 'ERR_NAME_TAKEN', 'The name is already taken');
+		}
+
+		$session->user->activation_code = null;
+		$session->user->status = User::STATUS_ACTIVE;
+		$session->user->username = $this->payload->username;
+		$session->user->save();
+
+		$this->authenticated($session->user);
+	}
+
 	/**
 	 * Creates a session, matches the visitor record etc.
 	 *
@@ -294,10 +356,43 @@ class AuthApiController extends ApiController
 	 */
 	private function authenticated($user)
 	{
+		if ($user->status == User::STATUS_DISABLED)
+		{
+			$this->authFailed();
+		}
+
 		$session = UserSession::createSession($user);
-		$this->createAuthCookie($session);
+
+		if ($user->status == User::STATUS_ACTIVE)
+		{
+			$this->createAuthCookie($session);
+		}
+
 		Visitor::matchVisitor($this->request, $session);
+
 		$this->send(array('session' => $session));
+	}
+
+	/**
+	 * @param   User  $user
+	 */
+	private function sendActivationEmail($user)
+	{
+		$user->activation_code = substr(sha1(time() . rand(100000, 999999) . $user->email), 0, 6);
+		$user->save();
+
+		$this->layout = '//email-html';
+		$html = $this->render('activation-html', ['user' => $user], true);
+
+		$this->layout = '//email-text';
+		$text = $this->render('activation-text', ['user' => $user], true);
+		Yii::app()->mail->send([
+			'toName' => $user->username,
+			'toAddress' => $user->email,
+			'subject' => 'Welcome to Poemz.org',
+			'text' => $text,
+			'html' => $html
+		]);
 	}
 
 	private function createAuthCookie($session)

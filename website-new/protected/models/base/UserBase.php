@@ -10,7 +10,6 @@
  * @property  string  email Database column
  * @property  string  password_hash Database column
  * @property  mixed   created Database column
- * @property  integer active Database column
  * @property  string  activation_code Database column
  * @property  integer preview_ready Database column
  * @property  string  password_salt Database column
@@ -19,6 +18,7 @@
  * @property  integer avatar_id Database column
  * @property  string  slug Database column
  * @property  string  external_avatar_url Database column
+ * @property  mixed   status Database column
  * @property  Author[] authors Relation
  * @property  Identity[] identities Relation
  * @property  Image[] images Relation
