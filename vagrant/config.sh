@@ -1,6 +1,4 @@
 
-ln -s /usr/bin/nodejs /usr/bin/node
-
 rm -rf /var/www
 ln -s /vagrant/website-new /var/www
 
@@ -27,7 +25,7 @@ mysql -upoemz -pdevdb poemz < /vagrant/vagrant/config/dev-db.sql
 cp /vagrant/vagrant/config/yii-config.php /vagrant/website-new/protected/config/local.php
 
 pushd /vagrant/website-new/protected
-php yii.php db deltas
+php yiic.php db deltas
 popd
 
 rm /etc/mysql/my.cnf
