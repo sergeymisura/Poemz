@@ -87,28 +87,28 @@
 	app.urls = {
 		image: function(id) {
 			if (id == null) {
-				return app.config.baseUrl + '/assets/img/mystery_man.png';
+				return app.config.baseUrl + 'assets/img/mystery_man.png';
 			}
-			return app.config.baseUrl + '/images/' + id + '.jpg';
+			return app.config.baseUrl + 'images/' + id + '.jpg';
 		},
 
 		author: function(author) {
-			return app.config.baseUrl + '/' + author.slug;
+			return app.config.baseUrl + author.slug;
 		},
 
 		poem: function(poem, author) {
 			author = author || poem.author;
-			return app.config.baseUrl + '/' + author.slug + '/' + poem.slug;
+			return app.config.baseUrl + author.slug + '/' + poem.slug;
 		},
 
 		recitation: function(recitation, poem, author) {
 			poem = poem || recitation.poem;
 			author = author || poem.author;
-			return app.config.baseUrl + '/' + author.slug + '/' + poem.slug + '#listen-' + recitation.id;
+			return app.config.baseUrl + author.slug + '/' + poem.slug + '#listen-' + recitation.id;
 		},
 
 		user: function(user) {
-			return app.config.baseUrl + '/users/' + user.slug;
+			return app.config.baseUrl + 'users/' + user.slug;
 		}
 	};
 

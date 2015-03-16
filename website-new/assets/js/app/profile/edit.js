@@ -15,7 +15,7 @@
 
 				$element.find('.fileinput-button').fileupload({
 					dataType: 'json',
-					url: app.config.baseUrl + '/api/users/' + app.data.user.id + '/upload-avatar',
+					url: app.config.baseUrl + 'api/users/' + app.data.user.id + '/upload-avatar',
 					done: $.proxy(this.uploaded, this),
 					dropZone: null
 				});

@@ -20,7 +20,7 @@
 						_recorder = new Recorder(
 							source,
 							{
-								workerPath: app.config.baseUrl + '/assets/js/lib/html5-recorder/recorderWorker.js'
+								workerPath: app.config.baseUrl + 'assets/js/lib/html5-recorder/recorderWorker.js'
 							}
 						);
 						success();
@@ -54,7 +54,7 @@
 						var data = new FormData;
 						data.append('content', blob);
 						$.ajax(
-							app.config.baseUrl + '/api/recording/upload',
+							app.config.baseUrl + 'api/recording/upload',
 							{
 								type: 'POST',
 								data: data,

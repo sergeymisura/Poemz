@@ -144,7 +144,7 @@
 							<li class="active"><a href="#" data-sort="best">The best</a></li>
 						</ul>
 					</div>
-					<div class="recitation-template hide">
+					<div class="recitation-template">
 						<div class="recitation" data-template="recitation">
 							<div class="row row-hover">
 								<div class="col-sm-2 col-xs-4">

@@ -208,6 +208,7 @@
 
 	<script type="text/javascript" language="JavaScript">
 		app.config.baseUrl = '<?= Yii::app()->baseUrl == '' ? '/' : Yii::app()->baseUrl ?>';
+		app.config.catchExceptions = false;
 		app.data = <?= CJSON::encode($this->page_data) ?>;
 	</script>
 </body>

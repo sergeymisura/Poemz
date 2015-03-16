@@ -18,7 +18,7 @@
 
 				$element.find('.fileinput-button').fileupload({
 					dataType: 'json',
-					url: app.config.baseUrl + '/api/recording/upload',
+					url: app.config.baseUrl + 'api/recording/upload',
 					done: $.proxy(this.uploaded, this),
 					send: $.proxy(this.startFileUploading, this),
 					progress: $.proxy(this.uploadingProgress, this),
@@ -129,7 +129,7 @@
 
 			uploaded: function() {
 				this.selectStep('.step5');
-				var $audio = $('<audio />').attr('src', app.config.baseUrl + '/assets/previews/' + app.data.session.user_id + '.mp3');
+				var $audio = $('<audio />').attr('src', app.config.baseUrl + 'assets/previews/' + app.data.session.user_id + '.mp3');
 				$element.find('.preview-container').html('').append($audio);
 				$audio.mediaelementplayer({
 					audioWidth: $element.find('.preview-container').width()
