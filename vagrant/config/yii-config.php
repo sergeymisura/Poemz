@@ -4,8 +4,8 @@ return [
 		'db' => [
 			'class' => 'CDbConnection',
 			'connectionString' => 'mysql:host=localhost;dbname=poemz',
-			'username' => 'peomz',
-			'password' => 'dbpass'
+			'username' => 'poemz',
+			'password' => 'devdb'
 		]
 	],
 	'params' => [
