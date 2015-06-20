@@ -42,8 +42,8 @@
 							$element.find('.more-tab').hide();
 							return;
 						}
-						app.data.recitations = app.data.recitations.concat(response.data.recitations);
-						services.rendering.append(
+
+						services.rendering.render(
 							'recitation',
 							response.data.recitations,
 							{
@@ -51,9 +51,10 @@
 									return app.data.recitations.indexOf(recitation);
 								}
 							},
-							true
+							app.data.recitations.length > 0
 						);
 
+						app.data.recitations = app.data.recitations.concat(response.data.recitations);
 						_index = app.data.recitations.length;
 						$(app).trigger('loadVotes');
 					},
