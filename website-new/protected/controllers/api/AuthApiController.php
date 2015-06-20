@@ -57,37 +57,45 @@ class AuthApiController extends ApiController
 
 		if ($identity == null)
 		{
-			$user = new User;
-			$user->email = $apiResponse->email;
-			$user->created = User::getDbDate(null, true);
-
-            if (isset($apiResponse->username))
-            {
-                $display_name = $apiResponse->username;
-            }
-            else
-            {
-                $display_name = strtolower($apiResponse->first_name . '_' . substr($apiResponse->last_name, 0, 1));
-            }
-			$idx = 0;
-			while (User::model()->countByAttributes(array('username' => $display_name)) > 0)
+			$user = User::model()->findByAttributes(['email' => $apiResponse->email]);
+			$is_new = $user === null;
+			if ($user === null)
 			{
-				$idx++;
-				$display_name = strtolower(
-						$apiResponse->first_name . '_' . substr($apiResponse->last_name, 0, 1)
-					) . '_' . $idx;
-			}
+				$user = new User;
+				$user->email = $apiResponse->email;
+				$user->created = User::getDbDate(null, true);
 
-			$user->username = $display_name;
-			$user->slug = Model::slugify($display_name);
-            $user->save();
+				if (isset($apiResponse->username))
+				{
+					$display_name = $apiResponse->username;
+				}
+				else
+				{
+					$display_name = strtolower($apiResponse->first_name . '_' . substr($apiResponse->last_name, 0, 1));
+				}
+				$idx = 0;
+				while (User::model()->countByAttributes(array('username' => $display_name)) > 0)
+				{
+					$idx++;
+					$display_name = strtolower(
+							$apiResponse->first_name . '_' . substr($apiResponse->last_name, 0, 1)
+						) . '_' . $idx;
+				}
+
+				$user->username = $display_name;
+				$user->slug = Model::slugify($display_name);
+				$user->save();
+			}
 
             $identity = new Identity();
             $identity->provider = Identity::FACEBOOK;
             $identity->user_id = $user->id;
             $identity->uid = $apiResponse->id;
 
-			$this->sendActivationEmail($user);
+			if ($is_new)
+			{
+				$this->sendActivationEmail($user);
+			}
 		}
         else
         {
