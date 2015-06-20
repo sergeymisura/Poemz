@@ -3,7 +3,7 @@
 	app.service('recording', function($element, services) {
 		return {
 			init: function() {
-				var result = services.deferred.create();
+				var result = services.deferred();
 
 				navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia ||
 					navigator.mozGetUserMedia || navigator.msGetUserMedia;

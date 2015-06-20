@@ -38,7 +38,7 @@
 			},
 
 			upload: function(progressCallback) {
-				var result = services.deferred.create();
+				var result = services.deferred();
 				_recorder.exportWAV(this.receivedCallback(result, progressCallback));
 				return result;
 			},
