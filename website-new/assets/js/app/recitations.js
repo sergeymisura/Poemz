@@ -20,7 +20,6 @@
 				_order = order;
 				_index = 0;
 				app.data.recitations = [];
-				$element.find('.recitation-list').html('');
 				$element.find('.more-tab').show();
 				this.loadMore();
 			},
@@ -44,19 +43,17 @@
 							return;
 						}
 						app.data.recitations = app.data.recitations.concat(response.data.recitations);
-						services.rendering(
+						services.rendering.append(
 							'recitation',
 							response.data.recitations,
 							{
 								index: function(recitation) {
 									return app.data.recitations.indexOf(recitation);
 								}
-							}
+							},
+							true
 						);
-						var copy = $($element.find('.recitation-template').html());
-						$element.find('.recitation-list').append($element.find('.recitation-template .recitation-rendered'));
-						$element.find('.recitation-template').html(copy);
-						$element.find('.recitation-list .recitation-rendered').removeClass('recitation-rendered');
+
 						_index = app.data.recitations.length;
 						$(app).trigger('loadVotes');
 					},

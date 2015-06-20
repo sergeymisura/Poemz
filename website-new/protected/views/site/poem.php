@@ -144,7 +144,13 @@
 							<li class="active"><a href="#" data-sort="best">The best</a></li>
 						</ul>
 					</div>
-					<div class="recitation-template">
+
+					<br/>
+
+					<div class="alert alert-warning hide-light no-recordings">
+						No one has recorded this poem yet! Be the first!
+					</div>
+					<div class="recitation-list">
 						<div class="recitation" data-template="recitation">
 							<div class="row row-hover">
 								<div class="col-sm-2 col-xs-4">
@@ -187,13 +193,6 @@
 							</div>
 						</div>
 					</div>
-
-					<br/>
-
-					<div class="alert alert-warning hide-light no-recordings">
-						No one has recorded this poem yet! Be the first!
-					</div>
-					<div class="recitation-list"></div>
 
 					<div class="loading"></div>
 
