@@ -20,6 +20,7 @@
 				_order = order;
 				_index = 0;
 				app.data.recitations = [];
+				services.rendering('recitation', []);
 				$element.find('.more-tab').show();
 				this.loadMore();
 			},
@@ -42,16 +43,14 @@
 							$element.find('.more-tab').hide();
 							return;
 						}
-
-						services.rendering.render(
+						services.rendering.append(
 							'recitation',
 							response.data.recitations,
 							{
 								index: function(recitation) {
 									return app.data.recitations.indexOf(recitation);
 								}
-							},
-							app.data.recitations.length > 0
+							}
 						);
 
 						app.data.recitations = app.data.recitations.concat(response.data.recitations);
