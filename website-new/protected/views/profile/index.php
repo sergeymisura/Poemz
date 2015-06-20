@@ -62,7 +62,12 @@ $own = $this->session ? $user->id == $this->session->user_id : false;
 				<li><a href="#" data-sort="new">Newest</a></li>
 				<li class="active"><a href="#" data-sort="best">The best</a></li>
 			</ul>
-			<div class="recitation-template hide">
+
+			<div class="alert alert-warning hide-light no-recordings">
+				No one has recorded this poem yet! Be the first!
+			</div>
+
+			<div class="recitation-list">
 				<div class="recitation row" data-template="recitation">
 					<div class="col-xs-9">
 						<div class="pull-left">
@@ -83,11 +88,6 @@ $own = $this->session ? $user->id == $this->session->user_id : false;
 					</div>
 				</div>
 			</div>
-
-			<div class="alert alert-warning hide-light no-recordings">
-				No one has recorded this poem yet! Be the first!
-			</div>
-			<div class="recitation-list"></div>
 
 			<div class="loading"></div>
 
