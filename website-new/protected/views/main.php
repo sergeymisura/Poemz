@@ -14,6 +14,8 @@
 	<meta name="google-signin-scope" content="profile https://www.googleapis.com/auth/plus.profile.emails.read" />
 	<meta name="google-signin-cookiepolicy" content="single_host_origin" />
 
+	<link rel="icon" type="image/png" href="<?= Yii::app()->baseUrl ?>/assets/img/favicon.png"/>
+
 	<script src="https://apis.google.com/js/platform.js" async defer></script>
 	<script src="https://apis.google.com/js/client:platform.js" async defer></script>
 </head>
