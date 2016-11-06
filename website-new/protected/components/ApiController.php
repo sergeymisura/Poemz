@@ -34,6 +34,7 @@ class ApiController extends BaseController
 	private function doSend($data)
 	{
 		header('Content-Type: application/json');
+        header('Access-Control-Allow-Origin: http://localhost:3000');
 		if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['callback']))
 		{
 			echo $_GET['callback'] . '(';
