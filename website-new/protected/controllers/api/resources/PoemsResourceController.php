@@ -117,11 +117,11 @@ class PoemsResourceController extends ApiController
 		);
 		if (is_numeric($id))
 		{
-			$conditions['id'] => $id;
+			$conditions['id'] = $id;
 		}
 		else
 		{
-			$conditions['slug'] => $id;
+			$conditions['slug'] = $id;
 		}
 		$poem = Poem::model()->with('author', 'recitations', 'poem_text')->findByAttributes($conditions);
 
