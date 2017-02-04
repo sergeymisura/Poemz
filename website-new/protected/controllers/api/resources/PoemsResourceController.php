@@ -98,7 +98,7 @@ class PoemsResourceController extends ApiController
 	 */
 	public function actionGet($author_id, $id)
 	{
-		$poem = Poem::model()->with('author', 'recitations')->findByPk($id);
+		$poem = Poem::model()->with('author', 'recitations', 'poem_text')->findByPk($id);
 		if ($poem == null)
 		{
 			$this->sendError('404', 'ERR_NOT_FOUND', 'Poem not found');
