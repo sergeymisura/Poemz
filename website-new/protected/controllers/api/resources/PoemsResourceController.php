@@ -98,7 +98,16 @@ class PoemsResourceController extends ApiController
 	 */
 	public function actionGet($author_id, $id)
 	{
-		$this->sendError(501, 'ERR_NOT_IMPLEMENTED', 'The action you are requesting is not implemented');
+		$poem = Poem::model()->with('author', 'recitations')->findByPk($id);
+		if ($poem == null)
+		{
+			$this->sendError('404', 'ERR_NOT_FOUND', 'Poem not found');
+		}
+		$this->send(
+			array(
+				'poem' => $poem
+			)
+		);
 	}
 
 	/**
