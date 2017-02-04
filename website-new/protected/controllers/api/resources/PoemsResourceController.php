@@ -98,11 +98,38 @@ class PoemsResourceController extends ApiController
 	 */
 	public function actionGet($author_id, $id)
 	{
-		$poem = Poem::model()->with('author', 'recitations', 'poem_text')->findByPk($id);
+		if (is_numeric($author_id))
+		{
+			$author = Author::model()->findByPk($author_id);
+		}
+		else
+		{
+			$author = Author::model()->findByAttributes(array('slug' => $author_id));
+		}
+
+		if ($author == null)
+		{
+			$this->sendError('404', 'ERR_NOT_FOUND', 'Author not found');
+		}
+
+		$conditions = array(
+			'author_id' => $author->id
+		);
+		if (is_numeric($id))
+		{
+			$conditions['id'] => $id;
+		}
+		else
+		{
+			$conditions['slug'] => $id;
+		}
+		$poem = Poem::model()->with('author', 'recitations', 'poem_text')->findByAttributes($conditions);
+
 		if ($poem == null)
 		{
 			$this->sendError('404', 'ERR_NOT_FOUND', 'Poem not found');
 		}
+
 		$this->send(
 			array(
 				'poem' => $poem
@@ -150,7 +177,7 @@ class PoemsResourceController extends ApiController
 		$poem->author_id = $author->id;
 		$poem->submitted_by = $this->session->user_id;
 		$poem->title = $this->payload->title;
-		$poem->slug = Model::slugify($poem->title);
+		$poem->slug = Model::slugify($poem->title, 'poem');
 		$poem->first_line = Poem::extractFirstLine($text);
 		$poem->save();
 

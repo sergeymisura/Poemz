@@ -111,7 +111,7 @@ class AuthorsResourceController extends ApiController
 		$author = new Author;
 		$author->submitter_id = $this->session->user_id;
 		$author->name = $this->payload->name;
-		$author->slug = Model::slugify($author->name);
+		$author->slug = Model::slugify($author->name, 'author');
 		$author->pullWikiInfo();
 		$author->save();
 
