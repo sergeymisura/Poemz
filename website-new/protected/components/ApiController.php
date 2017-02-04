@@ -141,6 +141,7 @@ class ApiController extends BaseController
 
 	protected function verifyOrigin()
 	{
+		if (!isset($_SERVER['HTTP_ORIGIN'])) return;
 		$origin = $_SERVER['HTTP_ORIGIN'];
 		if (array_search($origin, \Yii::app()->params) !== false) {
 	    	header('Access-Control-Allow-Origin: ' . $origin);
