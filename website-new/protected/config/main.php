@@ -31,7 +31,12 @@ return CMap::mergeArray(
 			),
 
 			'params' => array(
-				'auth_cookie' => 'poemz_new_auth'
+				'auth_cookie' => 'poemz_new_auth',
+				'origins' => array(
+					'http://localhost:3000',
+					'http://poemz-client-sergeymisura.c9users.io',
+					'https://poemz-client-sergeymisura.c9users.io'
+				),
 			),
 
 		),

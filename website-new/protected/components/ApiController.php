@@ -34,7 +34,7 @@ class ApiController extends BaseController
 	private function doSend($data)
 	{
 		header('Content-Type: application/json');
-        header('Access-Control-Allow-Origin: http://localhost:3000');
+		$this->verifyOrigin();
 		if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['callback']))
 		{
 			echo $_GET['callback'] . '(';
@@ -136,6 +136,14 @@ class ApiController extends BaseController
 		{
 			$this->authFailed();
 			return;
+		}
+	}
+
+	protected function verifyOrigin()
+	{
+		$origin = $_SERVER['HTTP_ORIGIN'];
+		if (array_search($origin, \Yii::app()->params) !== false) {
+	    	header('Access-Control-Allow-Origin: ' . $origin);
 		}
 	}
 }
