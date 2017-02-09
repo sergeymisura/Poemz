@@ -125,6 +125,11 @@ class PoemsResourceController extends ApiController
 		}
 		$poem = Poem::model()->with('author', 'recitations', 'poem_text')->findByAttributes($conditions);
 
+		foreach ($poem->recitations as $recitation)
+		{
+			$recitation->getRelated('performer');
+		}
+
 		if ($poem == null)
 		{
 			$this->sendError('404', 'ERR_NOT_FOUND', 'Poem not found');
