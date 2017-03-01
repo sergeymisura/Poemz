@@ -35,7 +35,11 @@ return CMap::mergeArray(
 				'origins' => array(
 					'http://localhost:3000',
 					'http://poemz-client-sergeymisura.c9users.io',
-					'https://poemz-client-sergeymisura.c9users.io'
+					'https://poemz-client-sergeymisura.c9users.io',
+					'http://poemz-org-v2.herokuapp.com',
+					'https://poemz-org-v2.herokuapp.com',
+					'http://v2.poemz.org',
+					'https://v2.poemz.org',
 				),
 			),
 
