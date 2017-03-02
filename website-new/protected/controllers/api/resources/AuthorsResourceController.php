@@ -54,7 +54,14 @@ class AuthorsResourceController extends ApiController
 		/**
 		 * @var  Author  $author
 		 */
-		$author = Author::model()->findByPk($id);
+		if (is_numeric($id))
+		{
+			$author = Author::model()->findByPk($id);
+		}
+		else
+		{
+			$author = Author::model()->findByAttributes(array('slug' => $id));
+		}
 
 		if ($author == null)
 		{
