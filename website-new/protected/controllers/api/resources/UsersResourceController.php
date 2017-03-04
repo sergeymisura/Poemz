@@ -23,7 +23,24 @@ class UsersResourceController extends ApiController
 	 */
 	public function actionGet($id)
 	{
-		$this->sendError(501, 'ERR_NOT_IMPLEMENTED', 'The action you are requesting is not implemented');
+        /**
+         * @var  User  $user
+         */
+		if (is_numeric($id))
+		{
+			$user = User::model()->findByPk($id);
+		}
+		else
+		{
+        	$user = User::model()->findByAttributes(['slug' => $id]);
+		}
+
+        if ($user == null)
+        {
+            $this->notFound();
+        }
+
+		$this->send(array('user' => $user));
 	}
 
 	/**
