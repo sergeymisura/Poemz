@@ -58,7 +58,14 @@ class RecitationsResourceController extends ApiController
 		/**
 		 * @var  User  $user
 		 */
-		$user = User::model()->findByPk($user_id);
+		if (is_numeric($user_id))
+		{
+			$user = User::model()->findByPk($user_id);
+		}
+		else
+		{
+        	$user = User::model()->findByAttributes(['slug' => $user_id]);
+		}
 
 		if ($user == null)
 		{
