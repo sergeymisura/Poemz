@@ -74,7 +74,9 @@ class RecitationsResourceController extends ApiController
 
 		$order = 'created desc';
 
-		if ($this->request->getQuery('order') == 'best')
+		$requestedOrder = $this->request->getQuery('order');
+
+		if ($requestedOrder == 'best' || $requestedOrder == 'votes')
 		{
 			$order = 'votes desc';
 		}
