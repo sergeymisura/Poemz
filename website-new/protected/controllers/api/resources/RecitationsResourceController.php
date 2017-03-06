@@ -84,7 +84,7 @@ class RecitationsResourceController extends ApiController
 		$count = Recitation::model()->countByAttributes(
 			array(
 				'performer_id' => $user->id
-			),
+			)
 		);
 
 		$recitations = Recitation::model()->with(array('poem.author','topic.comments_count'))->findAllByAttributes(
