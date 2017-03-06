@@ -81,6 +81,12 @@ class RecitationsResourceController extends ApiController
 			$order = 'votes desc';
 		}
 
+		$count = Recitation::model()->countByAttributes(
+			array(
+				'performer_id' => $user->id
+			),
+		);
+
 		$recitations = Recitation::model()->with(array('poem.author','topic.comments_count'))->findAllByAttributes(
 			array(
 				'performer_id' => $user->id
@@ -92,7 +98,7 @@ class RecitationsResourceController extends ApiController
 			)
 		);
 
-		$this->send(array('recitations' => $recitations));
+		$this->send(array('recitations' => $recitations, 'count' => $count));
 	}
 
 	/**
