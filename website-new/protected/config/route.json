@@ -25,6 +25,8 @@
 
 	"GET:api/poems/<list>": "api/resources/poemsResource/mixedList",
 
+	"GET:api/search": "api/searchApi/index",
+
 	"RESOURCE:api/poems/<poem_id>/recitations": "api/resources/recitationsResource",
 	"GET:api/users/<user_id>/recitations": "api/resources/recitationsResource/listByUser",
 	"POST:api/poems/<poem_id>/recitations/<id>/prepare": "api/resources/recitationsResource/prepare",
