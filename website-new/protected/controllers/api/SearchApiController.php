@@ -27,7 +27,7 @@ class SearchApiController extends ApiController
 			)
 		);
 
-		$users = User::model()->findAll(
+		$users = User::model()->with('author')->findAll(
 			'username like :query',
 			array(
 				':query' => '%' . $query . '%'
@@ -39,6 +39,7 @@ class SearchApiController extends ApiController
 				'authors' => $authors,
 				'poems' => $poems,
 				'users' => $users,
+				'query' => $query
 			)
 		);
 	}
