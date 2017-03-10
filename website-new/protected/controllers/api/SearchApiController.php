@@ -20,14 +20,14 @@ class SearchApiController extends ApiController
 			)
 		);
 
-		$poems = Poem::model()->findAll(
+		$poems = Poem::model()->with('author')->findAll(
 			'title like :query or first_line like :query',
 			array(
 				':query' => '%' . $query . '%'
 			)
 		);
 
-		$users = User::model()->with('author')->findAll(
+		$users = User::model()->findAll(
 			'username like :query',
 			array(
 				':query' => '%' . $query . '%'
