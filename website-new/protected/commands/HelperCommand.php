@@ -185,6 +185,24 @@ class HelperCommand extends CConsoleCommand
 		);
 	}
 
+	public function writeMedia()
+	{
+		/**
+		 * @var Recitation[] $recitations
+		 */
+		$recitations = Recitation::model()->findAll();
+		foreach ($recitations as $recitation) {
+			$fileName = __DIR__ . '/../../assets/media/' . $recitation->id . '.mp3';
+			if (!file_exists($fileName)) {
+				file_put_contents($fileName, $recitation->recitation_data->data);
+				echo $recitation->id . ' - OK' . "\n";
+			}
+			else {
+				echo $recitation->id . ' - SKIP' . "\n";
+			}
+		}
+	}
+
 	public function actionExport()
 	{
 		/**
