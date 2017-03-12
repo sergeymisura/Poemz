@@ -194,8 +194,13 @@ class HelperCommand extends CConsoleCommand
 		foreach ($recitations as $recitation) {
 			$fileName = __DIR__ . '/../../assets/media/' . $recitation->id . '.mp3';
 			if (!file_exists($fileName)) {
-				file_put_contents($fileName, $recitation->recitation_data->data);
-				echo $recitation->id . ' - OK' . "\n";
+				if (recitation->recitation_data && recitation->recitation_data->data) {
+					file_put_contents($fileName, $recitation->recitation_data->data);
+					echo $recitation->id . ' - OK' . "\n";
+				}
+				else {
+					echo $recitation->id . ' - NO DATA' . "\n";
+				}
 			}
 			else {
 				echo $recitation->id . ' - SKIP' . "\n";
