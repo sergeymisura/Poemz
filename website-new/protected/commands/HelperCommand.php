@@ -185,7 +185,7 @@ class HelperCommand extends CConsoleCommand
 		);
 	}
 
-	public function writeMedia()
+	public function actionWriteMedia()
 	{
 		/**
 		 * @var Recitation[] $recitations
