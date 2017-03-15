@@ -1,6 +1,12 @@
 <?php
 class HelperCommand extends CConsoleCommand
 {
+
+	public function actionJson()
+	{
+		var_dump(Yii::app()->db->createCommand('show tables')->queryColumn());
+	}
+
 	public function actionBuild()
 	{
 		ClientScript::buildResources(Yii::app()->basePath . '/config/resources.json');
