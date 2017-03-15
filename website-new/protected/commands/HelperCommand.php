@@ -2,9 +2,20 @@
 class HelperCommand extends CConsoleCommand
 {
 
-	public function actionJson()
+	public function actionJson($output)
 	{
-		var_dump(Yii::app()->db->createCommand('show tables')->queryColumn());
+		$tables = Yii::app()->db->createCommand('show tables')->queryColumn();
+		$ignore = array('recitation_data', 'role', 'permission', 'role_permission', 'user_role', 'user_session',
+			'topic', 'post', 'visitor', 'stat');
+
+		foreach ($tables as $table) {
+			$data = array();
+			$data[$table] = Yii::app()->db->createCommand('select * from ' . $table)->queryAll();
+			file_put_contents(
+				$output . '/' . $table . '.json',
+				json_encode($data)
+			);
+		}
 	}
 
 	public function actionBuild()
