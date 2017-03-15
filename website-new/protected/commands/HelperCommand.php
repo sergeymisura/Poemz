@@ -9,6 +9,7 @@ class HelperCommand extends CConsoleCommand
 			'topic', 'post', 'visitor', 'stat');
 
 		foreach ($tables as $table) {
+			if (array_search($table, $ignore) !== false) continue;
 			$data = array();
 			$data[$table] = Yii::app()->db->createCommand('select * from ' . $table)->queryAll();
 			file_put_contents(
